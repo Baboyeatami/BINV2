@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="750" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6e32415-98e3-4d45-8b01-b9cdc48edcdd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<parameter name="DateT" class="java.lang.String"/>
+	<parameter name="DateF" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from barangaystats]]>
+	</queryString>
+	<field name="idBarangayStats" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="InformantNumber" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="totolInformants" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{InformantNumber}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="156" splitType="Stretch">
+			<staticText>
+				<reportElement x="152" y="22" width="261" height="82" uuid="d4924e5a-5c16-46a9-aeaa-b9b79a375a28"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republic of the Philippines
+NATIONAL POLICE COMMISSION
+PHILIPPINE NATIONAL POLICE
+SULOP MUNICIPAL POLICE STATION
+Sulop,Davao del Sur
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="110" width="140" height="21" uuid="01476279-13d1-48cc-b6bf-9b219a798106"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barangay Statistics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="192" y="132" width="176" height="20" uuid="0d9dc8fe-2127-44bf-9a77-a3f41f3bf735"/>
+				<text><![CDATA[Sulop Barangay Intelligence Network]]></text>
+			</staticText>
+			<image>
+				<reportElement x="414" y="22" width="150" height="93" uuid="c5a6c718-a476-4667-a006-286939b7caab"/>
+				<imageExpression><![CDATA["C:\\BIN\\images\\MPS LOGO2.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="72" y="27" width="150" height="83" uuid="0d26c5bc-e272-40a6-bc61-68491e0fa115"/>
+				<imageExpression><![CDATA["C:\\BIN\\images\\pulis.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="40" splitType="Prevent">
+			<staticText>
+				<reportElement x="101" y="20" width="81" height="20" uuid="062869e0-2c0c-4513-967d-2906198b8723"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barangay Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="20" width="124" height="20" uuid="ea645100-c0a6-4132-a37b-a183743c203f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Number of Informants]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="151" y="0" width="271" height="20" uuid="e942be8f-8070-46da-ac3d-be3c8d9eb1b4"/>
+				<textFieldExpression><![CDATA[$P{parameter1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="57" y="0" width="161" height="20" uuid="634f7702-073a-4a82-89a0-fbb59d2520d2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="0" width="124" height="20" uuid="85ed8516-7969-4362-b1fc-e4d7157ca255"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{InformantNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="43" height="20" uuid="715a8601-adc6-46f2-b59d-72c0ea0caebf"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="7f916a67-05fc-44dc-8446-173eda6c36cb"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="130" y="0" width="171" height="20" uuid="83b4a2d9-6e9d-4041-b822-01c9a4c77f48"/>
+				<textFieldExpression><![CDATA[$V{totolInformants}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="130" height="20" uuid="e724f613-f72c-4bc1-a843-4818a761a146"/>
+				<text><![CDATA[Total Number of Informants]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

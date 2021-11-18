@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ffeb0663-58e5-4feb-b267-628f28973239">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <queryString>
+		<![CDATA[SELECT subject,count(*)
+	FROM bin.intel_reports group by subject]]>
+    </queryString>
+    <field name="subject" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="count(*)" class="java.lang.Long"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="79" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="0" width="752" height="79" uuid="bb750c08-b161-4062-9fb6-99f4c1bac3c3"/>
+                <textElement textAlignment="Center">
+                    <font size="36" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Sulop Crime Statistics ]]></text>
+            </staticText>
+        </band>
+    </title>
+    <summary>
+        <band height="400" splitType="Stretch">
+            <pie3DChart>
+                <chart>
+                    <reportElement x="0" y="0" width="752" height="400" uuid="26050f00-1f87-4734-9a59-046569553ae6"/>
+                    <chartTitle/>
+                    <chartSubtitle/>
+                    <chartLegend position="Left">
+                        <font size="18" isBold="true"/>
+                    </chartLegend>
+                </chart>
+                <pieDataset>
+                    <keyExpression><![CDATA[$F{subject}]]></keyExpression>
+                    <valueExpression><![CDATA[$F{count(*)}]]></valueExpression>
+                </pieDataset>
+                <pie3DPlot labelFormat="{1} {0} {2}">
+                    <plot/>
+                    <itemLabel>
+                        <font size="12" isBold="true"/>
+                    </itemLabel>
+                </pie3DPlot>
+            </pie3DChart>
+        </band>
+    </summary>
+</jasperReport>

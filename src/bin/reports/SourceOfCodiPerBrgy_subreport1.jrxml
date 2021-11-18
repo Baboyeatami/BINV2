@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SourceOfCodiPerBrgy_subreport1" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b58256ec-8c28-4667-994a-286a33fc3805">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select S_Codification,B_PAdrress from informant_info where B_PAdrress=$P{ID}]]>
+	</queryString>
+	<field name="S_Codification" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="B_PAdrress" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="B_PAdrress">
+		<groupExpression><![CDATA[$F{B_PAdrress}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="6" y="3" width="549" height="15" uuid="0e9c6133-c57d-42e1-ac90-2aa15ee6e730"/>
+				<textFieldExpression><![CDATA[$F{S_Codification}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="19" width="549" height="1" uuid="7b5d9bc5-83a6-4ee7-a5ac-1cc6e869ee64"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

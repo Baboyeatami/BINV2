@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IAPSReport_subreport1" language="groovy" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="964521d5-7387-4f51-b73f-f7aa546aab0d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[52]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{idChild}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID3" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select *from Child where idChild=50]]>
+	</queryString>
+	<field name="idChild" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Bdate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Father_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="Father_ID">
+		<groupExpression><![CDATA[$F{Father_ID}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="28" y="0" width="226" height="20" uuid="28a73c25-1de8-4586-8867-368936deccf0"/>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="4" width="259" height="20" uuid="d641ead7-f0d5-4e30-8212-abf0727b04a0"/>
+				<textFieldExpression><![CDATA[$F{Bdate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

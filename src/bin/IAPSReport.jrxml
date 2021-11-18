@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="800" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a564dfc1-02cc-4470-8e26-0509d8fbf25c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="244"/>
+	<property name="ireport.y" value="969"/>
+	<queryString>
+		<![CDATA[Select * from  informant_info]]>
+	</queryString>
+	<field name="idInformant_info" class="java.math.BigInteger">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="F_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="M_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="L_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="B_Date" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Age" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nationality" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Religion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Mar_status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Education" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Alias" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Place_Birth" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="P_Adrress" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Per_Adrress" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Zipcode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="S_Codification" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="B_PAdrress" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="B_PreAdress" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Face" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Hair" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Complexion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Eyes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Build" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Body" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Gen_App" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Iden_Char" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Height" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Mel_Service" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Other_Org" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="F_Training" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Employement" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Position" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="D_Recuitment" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="N_Employer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TerminationDate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Mode_Con" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Mob_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="P_Con" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="P_Con_num" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="EntryTime" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="EntryDate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PictureFilePath" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CodeName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Psedonym" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Handlers" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OperationProject" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SpouseName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TINNR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Gender" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Target" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="138" y="2" width="289" height="20" uuid="37d94feb-3923-43b8-82c9-60be9cd7d93b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMATION /ACTION  AGENT PROFILE SHEET]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="294">
+			<textField>
+				<reportElement x="62" y="0" width="100" height="13" uuid="7c45da2c-d513-4cef-9b47-9d760ddf8ff9"/>
+				<textFieldExpression><![CDATA[$F{F_Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="13" uuid="c031353c-8f8d-4c07-b924-300b68cae2f0"/>
+				<text><![CDATA[Action Agent:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="62" height="13" uuid="1df0572c-a784-4abf-8659-5550666dfe88"/>
+				<text><![CDATA[Code Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="62" height="13" uuid="02ce49bb-4810-4d99-9f1a-4abcaeb1fe07"/>
+				<text><![CDATA[Source Code:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="80" height="13" uuid="ce1784d7-d93a-4666-b547-6e9540a090f6"/>
+				<text><![CDATA[Witting Informant:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="141" width="35" height="13" uuid="e6377a60-299b-4d90-a31f-e3692b786f0b"/>
+				<text><![CDATA[Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="161" width="80" height="13" uuid="6b1b4af9-16d3-4960-9fee-d9b943790007"/>
+				<text><![CDATA[Place of Birth:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="141" width="100" height="13" uuid="fbaf3ebf-4c52-424d-8abb-59da046774b6"/>
+				<text><![CDATA[Nickname/Aliases:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="181" width="183" height="13" uuid="60e17375-3fc7-456f-ac24-c98cbdb934b8"/>
+				<text><![CDATA[Highest Educational Atatainment/School:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="201" width="80" height="13" uuid="502ce31e-f324-4503-9439-d1575965c540"/>
+				<text><![CDATA[Present Address:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="232" width="55" height="13" uuid="408ad2d4-fc51-41e7-b024-18f718797a59"/>
+				<text><![CDATA[Occupation:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="201" width="100" height="13" uuid="7a98d464-a9c6-4e03-a2e5-c29b3f5f4fcf"/>
+				<text><![CDATA[Position/Tittle:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="252" width="100" height="13" uuid="a106b1a9-ee1b-4c17-a515-3dd71a89d3d3"/>
+				<text><![CDATA[Name of Spouse:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="272" width="100" height="13" uuid="cacf2022-32fb-4b33-8795-1771168003e5"/>
+				<text><![CDATA[Name of Children:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="232" width="100" height="13" uuid="16074718-0459-488e-97b5-27a9cd10a3bc"/>
+				<text><![CDATA[Birth Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="252" width="100" height="13" uuid="abef4dfb-162c-43c6-a9ae-6de790ce9530"/>
+				<text><![CDATA[Birth Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="141" width="81" height="13" uuid="242f757a-6506-4883-b5bf-a0c3fb49c033"/>
+				<textFieldExpression><![CDATA[$F{F_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="20" width="100" height="20" uuid="22824bcc-68ca-48b2-b68d-c5308035b76e"/>
+				<textFieldExpression><![CDATA[$F{CodeName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="40" width="100" height="13" uuid="5c2d3306-626b-49d6-b4c1-8950be3c1bf1"/>
+				<textFieldExpression><![CDATA[$F{S_Codification}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="161" width="185" height="13" uuid="8fad3c53-984b-404e-8cb2-1a0099bd6bfd"/>
+				<textFieldExpression><![CDATA[$F{Place_Birth}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="160" width="170" height="13" uuid="454ef276-e3f5-487c-b6b2-b2a4991d65f3"/>
+				<textFieldExpression><![CDATA[$F{B_Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="201" width="219" height="13" uuid="8db56c2e-80bb-497a-9f5b-a544b56be908"/>
+				<textFieldExpression><![CDATA[$F{P_Adrress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="252" width="200" height="13" uuid="4415165a-cac6-432c-9319-0318b75db447"/>
+				<textFieldExpression><![CDATA[$F{SpouseName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="232" width="244" height="13" uuid="230aba63-4c9c-407c-b2f5-92dbd262a495"/>
+				<textFieldExpression><![CDATA[$F{Employement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="201" width="120" height="13" uuid="19ac756f-a9f2-41bb-b47d-014c07d96f3a"/>
+				<textFieldExpression><![CDATA[$F{Position}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="232" width="120" height="13" uuid="3485fd5a-aee6-4fc0-a52d-eccbc0f93ff4"/>
+				<textFieldExpression><![CDATA[$F{Education}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="141" width="119" height="13" uuid="03caefde-893e-49f8-a366-56934ddc3082"/>
+				<textFieldExpression><![CDATA[$F{Alias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="141" width="81" height="13" uuid="5a4c8958-2fe9-43ea-b56d-402bdc5477af"/>
+				<textFieldExpression><![CDATA[$F{M_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="141" width="99" height="13" uuid="7b26d863-4c2a-49a4-b051-7776373a8413"/>
+				<textFieldExpression><![CDATA[$F{L_Name}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="330" y="0" width="138" height="121" uuid="3fcb4dbb-a07d-4645-a70b-582edc12d4b2"/>
+				<imageExpression><![CDATA["C:\\Users\\JAMIEXXX3\\Documents\\sample\\"+$F{idInformant_info}+".jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="137" width="523" height="1" uuid="929ff4ab-361a-4479-b59e-6e0521f33c48"/>
+			</line>
+			<staticText>
+				<reportElement x="3" y="116" width="96" height="13" uuid="b540961d-aad7-41f1-b520-bf7a4903b2a4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unwitting Informant]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="154" width="523" height="1" uuid="e78e9e42-4aaa-468d-872d-4fabe45af95d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="173" width="523" height="1" uuid="bfec0908-88b1-4ad8-8ce1-4d178a63e75e"/>
+			</line>
+			<line>
+				<reportElement x="0" y="194" width="523" height="1" uuid="9650189f-48be-477c-be4a-a9a6c5f69722"/>
+			</line>
+			<line>
+				<reportElement x="0" y="213" width="523" height="1" uuid="085722eb-e941-435e-859e-1c79ac85e7c2"/>
+			</line>
+			<line>
+				<reportElement x="0" y="244" width="523" height="1" uuid="5328719e-e021-4cc8-9d57-8ae64ee1cb33"/>
+			</line>
+			<line>
+				<reportElement x="0" y="264" width="523" height="1" uuid="6889a14f-e581-47e5-91db-d154715e3f28"/>
+			</line>
+			<staticText>
+				<reportElement x="303" y="160" width="51" height="13" uuid="7985ad62-d559-48a0-9aad-84ded043a30c"/>
+				<text><![CDATA[Birth Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="183" y="181" width="340" height="13" uuid="9ba487c3-c741-45e1-abf7-2572899d4aba"/>
+				<textFieldExpression><![CDATA[$F{Education}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="218" width="148" height="13" uuid="e30f8256-614b-46ae-b244-373554688eda"/>
+				<text><![CDATA[Name and Address of Employer:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="218" width="376" height="13" uuid="f64d39ce-166c-4ba7-bcfb-691c1aafd169"/>
+				<textFieldExpression><![CDATA[$F{Employement} +"  "+ $F{N_Employer}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="231" width="523" height="1" uuid="0fe870f0-59b1-4cea-bbb7-ff2420862221"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="318" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="13" uuid="46ba3402-4a57-4f25-8303-c5369e14db61"/>
+				<text><![CDATA[Prepared By:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="119" height="13" uuid="5787ca19-4787-4955-8a71-95dce5106a32"/>
+				<text><![CDATA[Information/ Action Agent]]></text>
+			</staticText>
+			<line>
+				<reportElement x="162" y="20" width="137" height="1" uuid="0abc924a-b256-4b5d-8751-64027d2df9c8"/>
+			</line>
+			<staticText>
+				<reportElement x="161" y="25" width="138" height="13" uuid="1720fb59-5f83-4eec-9496-020f7c9c67ed"/>
+				<text><![CDATA[(Signature over Printed name)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="25" width="40" height="13" uuid="afffb768-a3e9-4c6f-89f5-fddd1b9d1aaf"/>
+				<text><![CDATA[(Date)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="331" y="20" width="137" height="1" uuid="551014ec-bce4-4b14-9d5a-bb774d72eebe"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="65" width="119" height="13" uuid="7d30f38a-cf7d-4dd0-b2c5-e23400ae402c"/>
+				<text><![CDATA[Primary Handler:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="65" width="169" height="13" uuid="7d6fb30b-c694-48b1-8ff1-e2cdb575e482"/>
+				<text><![CDATA[PO3 RAMONITO BAUTISTA TELMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="65" width="40" height="13" uuid="14240ee5-4ef3-4831-9506-094048aae2bf"/>
+				<text><![CDATA[(Date)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="331" y="64" width="137" height="1" uuid="8412c293-b1da-430b-822e-d91e210dab74"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="98" width="119" height="13" uuid="941e23c7-176a-417b-91b3-68fd488f58b0"/>
+				<text><![CDATA[Approved by:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="129" width="215" height="14" uuid="d135374e-714b-486b-b126-2b24c567aeea"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PSI IVAN JAVA SAMARAGA   0-23863]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="143" width="119" height="13" uuid="cb5a9b58-2ea7-40ce-bc85-c14ca3274e76"/>
+				<text><![CDATA[Officer In Charge]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="130" width="40" height="13" uuid="9c5fdc7b-42e7-47d6-a5f3-a7b2e5a8b687"/>
+				<text><![CDATA[(Date)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="331" y="129" width="137" height="1" uuid="4d13a49f-516f-4165-b371-467142e198eb"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
