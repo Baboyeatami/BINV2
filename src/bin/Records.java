@@ -117,12 +117,13 @@ public class Records extends javax.swing.JInternalFrame {
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println("QR Verification fuck");
+                QR_Verificator();
             }
         });
 
         menu.add(IntelReport);
         menu.add(QRGenerator);
-        menu.add(QRverificator);
+        // menu.add(QRverificator);
 
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
@@ -227,6 +228,7 @@ public class Records extends javax.swing.JInternalFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        dateFrom2.setDateFormatString("MMMM dd, yyyy");
         dateFrom2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         dateFrom2.setMinSelectableDate(new java.util.Date(-62135737139000L));
 
@@ -236,6 +238,7 @@ public class Records extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("To");
 
+        DateTO2.setDateFormatString("MMMM dd, yyyy");
         DateTO2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bin/images/search2.png"))); // NOI18N
@@ -253,12 +256,12 @@ public class Records extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dateFrom2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dateFrom2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(DateTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DateTO2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
@@ -291,8 +294,8 @@ public class Records extends javax.swing.JInternalFrame {
                         .addComponent(CBSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(174, 174, 174)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
@@ -1578,7 +1581,7 @@ public class Records extends javax.swing.JInternalFrame {
             DBConnection.init();
             JasperDesign Jd = JRXmlLoader.load(System.getProperty("user.dir") + "\\\\reports\\\\Informant_QR.jrxml");
             String S = "%" + this.Search.getText() + "%";
-            String SQL = "SELECT idInformant_info,F_Name,M_Name,L_Name FROM bin.informant_info where idInformant_info='" + id + "'";
+            String SQL = "SELECT idInformant_info,F_Name,M_Name,L_Name,PictureFilePath FROM bin.informant_info where idInformant_info='" + id + "'";
 
             //HashMap m = new HashMap<>();
             // m.put("parameter1", "Covered Period: " + Search.getText());
@@ -1602,12 +1605,13 @@ public class Records extends javax.swing.JInternalFrame {
         if (qR_Verifification == null) {
             qR_Verifification = new QR_Verifification();
             qR_Verifification.setRecord(this);
+            qR_Verifification.TreadRunner = true;
             qR_Verifification.setVisible(true);
 
         } else {
             qR_Verifification.setVisible(true);
             qR_Verifification.setRecord(this);
-
+            qR_Verifification.TreadRunner = true;
         }
 
     }
@@ -1615,7 +1619,7 @@ public class Records extends javax.swing.JInternalFrame {
     void validQR(int id) {
         int numCh1 = 0;
 
-        String[] moves = {"Select Option", "Add Intet Report ", "Update Profile Details", "View Profile Sheet", "View Source Data Card"};
+        String[] moves = {"Select Option", "Add Intet Report ", "View Profile Sheet",};
         JComboBox<?> optionList = new JComboBox<Object>(moves);
         JOptionPane.showMessageDialog(
                 this,

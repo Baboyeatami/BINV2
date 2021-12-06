@@ -39,31 +39,33 @@ import javax.swing.table.DefaultTableModel;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class ViewALLDETAILS extends javax.swing.JFrame {
-    DefaultTableModel model=new DefaultTableModel();
+
+    DefaultTableModel model = new DefaultTableModel();
     String imagePath;
     public int ID;
-      DateFormat df;
-    String date1,dateRec;
+    DateFormat df;
+    String date1, dateRec;
     String dateString;
     Statictics stat;
-    String Date,Time, dateS_Bdate;
-     public boolean isUser;
+    String Date, Time, dateS_Bdate;
+    public boolean isUser;
     //ImageIcon default =new ImageIcon();
-    boolean update=false;
+    boolean update = false;
     AddChild addChild;
     public int childID;
     public File sFileWeb;
     String IPAString;
     String SDCSDString;
+
     /**
      * Creates new form AddNewRecord
      */
     public ViewALLDETAILS() {
         initComponents();
-   model=(DefaultTableModel) jTable2.getModel();
+        model = (DefaultTableModel) jTable2.getModel();
         LoadNameOnlyData();
         RefreshTime();
-       LoadChild();
+        LoadChild();
     }
 
     /**
@@ -1575,161 +1577,140 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         System.out.println(this.getBounds());
-       PictureView.setIcon(null);
-       
+        PictureView.setIcon(null);
+
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void Update_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_ButtonActionPerformed
         // TODO add your handling code here:
-         
-         UPDATEOthers();
-         LogUpdateed();
-         if (rec!=null) {
-             try {
-                 rec.LoadNameOnlyData();
-             } catch (ParseException ex) {
-                 System.out.println(ex);
-             }
+
+        UPDATEOthers();
+        LogUpdateed();
+        if (rec != null) {
+            try {
+                rec.LoadNameOnlyData();
+            } catch (ParseException ex) {
+                System.out.println(ex);
+            }
         }
-         
-        if (stat!=null) {
+
+        if (stat != null) {
             stat.LoadNameToUPDATE_INFOMANT_NUMBER(stat.LoadNames());
             stat.LoadNameOnlyData();
         }
-        
-        
+
     }//GEN-LAST:event_Update_ButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:this
         if (Lname.getText().equals("")) {
-            JOptionPane.showMessageDialog(this,"Last name required to continue");
-        }
-        else{
-        System.out.println(update);
-        try {
-            if (update) {
-                 JFileChooser chooser=new JFileChooser();
-       chooser.showOpenDialog(this);
-        File sFile=chooser.getSelectedFile();
-            BufferedImage bufferedImage=ImageIO.read(sFile);
-            Image image=ImageIO.read(sFile);
-            Image myImage=image.getScaledInstance(161, 151,Image.SCALE_FAST);
-           
-            
-            File sourFile=new File(sFile.getAbsolutePath());
-            //File desFile =new File("C:\\Users\\JAMIEXXX3\\Documents\\sample\\5.jpg");
-      
-            //Files.copy(sourFile.toPath(), desFile.toPath());
-             PictureView.setIcon(new ImageIcon(myImage));
-              DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info");
-    rs=ps.executeQuery();
-    int i=1;
-                while (rs.next()) {                    
-                    i++;
+            JOptionPane.showMessageDialog(this, "Last name required to continue");
+        } else {
+            System.out.println(update);
+            try {
+                if (update) {
+                    JFileChooser chooser = new JFileChooser();
+                    chooser.showOpenDialog(this);
+                    File sFile = chooser.getSelectedFile();
+                    BufferedImage bufferedImage = ImageIO.read(sFile);
+                    Image image = ImageIO.read(sFile);
+                    Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+
+                    File sourFile = new File(sFile.getAbsolutePath());
+                    //File desFile =new File("C:\\Users\\JAMIEXXX3\\Documents\\sample\\5.jpg");
+
+                    //Files.copy(sourFile.toPath(), desFile.toPath());
+                    PictureView.setIcon(new ImageIcon(myImage));
+                    DBConnection.init();
+                    Connection c = DBConnection.getConnection();
+                    PreparedStatement ps;
+                    ResultSet rs;
+                    ps = c.prepareStatement("Select * from  informant_info");
+                    rs = ps.executeQuery();
+                    int i = 1;
+                    while (rs.next()) {
+                        i++;
+                    }
+
+                    File desFile = new File(System.getProperty("user.dir") + "\\BIN_PIC\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+
+                    Files.copy(sourFile.toPath(), desFile.toPath());
+                    PictureView.setIcon(new ImageIcon(myImage));
+                    System.out.println(desFile.getAbsolutePath());
+                    imagePath = desFile.getCanonicalPath();
+                    // String a="\"";
+                    String b = "/";
+                    imagePath = imagePath.replace("\\", b);
+                    System.out.println(imagePath);
+                    ImageFilePath.setText(imagePath);
+
+                    i = 0;
+
+                } else {
+
+                    //    JOptionPane.showOptionDialog(this, " ", "You sure you what to update Profile Photo", WIDTH, WIDTH, null,null , nationalilty);
+                    int a = JOptionPane.showConfirmDialog(this, "Are you sure you want to update the Recent Photo?", "Update Recent Photo", JOptionPane.YES_NO_OPTION);
+                    if (a == 0) {
+
+                        JFileChooser chooser = new JFileChooser();
+                        chooser.showOpenDialog(this);
+                        File sFile = chooser.getSelectedFile();
+                        // BufferedImage bufferedImage=ImageIO.read(sFile);
+                        Image image = ImageIO.read(sFile);
+                        Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+
+                        File sourFile = new File(sFile.getAbsolutePath());
+
+                        PictureView.setIcon(new ImageIcon(myImage));
+
+                        //System.out.println("int i value  "+i+"");
+                        File desFile = new File(System.getProperty("user.dir") + "\\BIN_PIC\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+
+                        Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+                        imagePath = desFile.getCanonicalPath();
+
+                        String b = "/";
+                        imagePath = imagePath.replace("\\", b);
+                        System.out.println(imagePath);
+                        ImageFilePath.setText(imagePath);
+
+                    }
                 }
-        
-   
-         File desFile =new File(System.getProperty("user.dir")+"\\BIN_PIC\\"+f_name.getText()+Lname.getText()+M_Name.getText()+".jpg");
-     
-      
-            Files.copy(sourFile.toPath(), desFile.toPath());
-             PictureView.setIcon(new ImageIcon(myImage));  
-             System.out.println(desFile.getAbsolutePath());
-             imagePath=desFile.getCanonicalPath();
-            // String a="\"";
-             String b="/";
-            imagePath= imagePath.replace("\\",b);
-             System.out.println(imagePath);
-             ImageFilePath.setText(imagePath);
-            
-            
-            
-            
-            
-            
-            
-            i=0;
-                
+
+            } catch (Exception e) {
+
+                System.out.println(e);
+                ImageFilePath.setText(imagePath);
             }
-            else{
-                
-            //    JOptionPane.showOptionDialog(this, " ", "You sure you what to update Profile Photo", WIDTH, WIDTH, null,null , nationalilty);
-                 int a =JOptionPane.showConfirmDialog(this,"Are you sure you want to update the Recent Photo?","Update Recent Photo",JOptionPane.YES_NO_OPTION);
-                if (a==0) {
-                    
-                
-                JFileChooser chooser=new JFileChooser();
-               chooser.showOpenDialog(this);
-            File sFile=chooser.getSelectedFile();
-           // BufferedImage bufferedImage=ImageIO.read(sFile);
-            Image image=ImageIO.read(sFile);
-            Image myImage=image.getScaledInstance(161, 151,Image.SCALE_FAST);
-           
-            
-            File sourFile=new File(sFile.getAbsolutePath());
-           
-             PictureView.setIcon(new ImageIcon(myImage));
-        
-    
-            //System.out.println("int i value  "+i+"");
-             File desFile =new File(System.getProperty("user.dir")+"\\BIN_PIC\\"+f_name.getText()+Lname.getText()+M_Name.getText()+".jpg");
-     
-            Files.copy(sourFile.toPath(), desFile.toPath(),StandardCopyOption.COPY_ATTRIBUTES,StandardCopyOption.REPLACE_EXISTING);
-             imagePath=desFile.getCanonicalPath();
-            
-             String b="/";
-            imagePath= imagePath.replace("\\",b);
-             System.out.println(imagePath);
-             ImageFilePath.setText(imagePath);
-            
-            
-            }
-            }
-       
-           } catch (Exception e) {
-            
-               System.out.println(e);
-                 ImageFilePath.setText(imagePath);
-        }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
-      public  void setpicture() throws IOException{
+    public void setpicture() throws IOException {
         try {
-           
-          
-          
-            Image image=ImageIO.read(sFileWeb);
-            Image myImage=image.getScaledInstance(161, 151,Image.SCALE_FAST);
-           
-            
-            File sourFile=new File(sFileWeb.getAbsolutePath());
-           
-             PictureView.setIcon(new ImageIcon(myImage));
-        
-    
+
+            Image image = ImageIO.read(sFileWeb);
+            Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+
+            File sourFile = new File(sFileWeb.getAbsolutePath());
+
+            PictureView.setIcon(new ImageIcon(myImage));
+
             //System.out.println("int i value  "+i+"");
-             File desFile =new File(System.getProperty("user.dir")+"\\BIN_PIC\\"+f_name.getText()+Lname.getText()+M_Name.getText()+".jpg");
-      
-            Files.copy(sourFile.toPath(), desFile.toPath(),StandardCopyOption.COPY_ATTRIBUTES,StandardCopyOption.REPLACE_EXISTING);
-             imagePath=desFile.getCanonicalPath();
-            
-             String b="/";
-            imagePath= imagePath.replace("\\",b);
-             System.out.println(imagePath);
-             ImageFilePath.setText(imagePath);
-            
-      } catch (IOException e) {
+            File desFile = new File(System.getProperty("user.dir") + "\\BIN_PIC\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+
+            Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+            imagePath = desFile.getCanonicalPath();
+
+            String b = "/";
+            imagePath = imagePath.replace("\\", b);
+            System.out.println(imagePath);
+            ImageFilePath.setText(imagePath);
+
+        } catch (IOException e) {
             System.out.println(e);
         }
-      }
+    }
     private void dateReCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateReCPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_dateReCPropertyChange
@@ -1741,7 +1722,6 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
 
     private void LnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LnameActionPerformed
         // TODO add your handling code here:
-       
 
     }//GEN-LAST:event_LnameActionPerformed
 
@@ -1759,11 +1739,11 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
 
     private void datePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datePropertyChange
         try {
-            Calendar now=  Calendar.getInstance();
+            Calendar now = Calendar.getInstance();
             Calendar bday = Calendar.getInstance();
             //now.setTime(null);
             bday.setTime(date.getDate());
-            int age1=now.get(Calendar.YEAR)-bday.get(Calendar.YEAR);
+            int age1 = now.get(Calendar.YEAR) - bday.get(Calendar.YEAR);
 
             age.setText(String.valueOf(age1));
 
@@ -1776,8 +1756,7 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (cb_maritals_status.getSelectedItem().toString().equals("Single")) {
             Spouse.setText("N/A");
-        }
-        else if (cb_maritals_status.getSelectedItem().toString().equals("Married")) {
+        } else if (cb_maritals_status.getSelectedItem().toString().equals("Married")) {
             if (Spouse.getText().equals("Single")) {
                 Spouse.setText("");
             }
@@ -1797,51 +1776,51 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
         System.out.println("item Selected");
         switch (CbCityMun.getSelectedItem().toString()) {
             case "Santa Cruz":
-            ZipCode.setText("8001");
-            System.out.println("8001");
-            break;
+                ZipCode.setText("8001");
+                System.out.println("8001");
+                break;
             case "Digos":
-            ZipCode.setText("8002");
-            break;
+                ZipCode.setText("8002");
+                break;
             case "Sulop":
-            ZipCode.setText("8009");
-            break;
+                ZipCode.setText("8009");
+                break;
             case "Matanao":
-            ZipCode.setText("8003");
-            break;
+                ZipCode.setText("8003");
+                break;
             case "Magsaysay":
-            ZipCode.setText("8004");
-            break;
+                ZipCode.setText("8004");
+                break;
             case "Bansalan":
-            ZipCode.setText("8005");
-            break;
+                ZipCode.setText("8005");
+                break;
             case "Hagunoy":
-            ZipCode.setText("8006");
-            break;
+                ZipCode.setText("8006");
+                break;
             case "Padada":
-            ZipCode.setText("8007");
-            break;
+                ZipCode.setText("8007");
+                break;
             case "Kiblawan":
-            ZipCode.setText("8008");
-            break;
+                ZipCode.setText("8008");
+                break;
             case "Malalag":
-            ZipCode.setText("8010");
-            break;
+                ZipCode.setText("8010");
+                break;
             case "Santa Maria":
-            ZipCode.setText("8011");
-            break;
+                ZipCode.setText("8011");
+                break;
             case "Malita":
-            ZipCode.setText("8012");
-            break;
+                ZipCode.setText("8012");
+                break;
             case "Don Marcelino":
-            ZipCode.setText("8013");
-            break;
+                ZipCode.setText("8013");
+                break;
             case "Jose Abad Santos":
-            ZipCode.setText("8014");
-            break;
+                ZipCode.setText("8014");
+                break;
             case "Sarangani":
-            ZipCode.setText("8015");
-            break;
+                ZipCode.setText("8015");
+                break;
 
         }
 
@@ -1857,40 +1836,43 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (addChild==null) {
-            addChild=new AddChild(this);
+        if (addChild == null) {
+            addChild = new AddChild(this);
             addChild.ChildName.requestFocus();
-            addChild.ID=Integer.parseInt(InformantID.getText());
-            addChild.isUpdate=false;
+            addChild.ID = Integer.parseInt(InformantID.getText());
+            addChild.isUpdate = false;
             addChild.setADD();
         }
-            addChild.ID=Integer.parseInt(InformantID.getText());
-            addChild.isUpdate=false;
-            addChild.setADD();
+        addChild.ID = Integer.parseInt(InformantID.getText());
+        addChild.isUpdate = false;
+        addChild.setADD();
         if (InformantID.getText().equals("")) {
-            JOptionPane.showMessageDialog(this,"Save new informant to continue");
-        }else{addChild.setVisible(true);}
+            JOptionPane.showMessageDialog(this, "Save new informant to continue");
+        } else {
+            addChild.setVisible(true);
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try {
-          
-            
-            if (addChild==null) {
-                addChild=new AddChild(this);
+
+            if (addChild == null) {
+                addChild = new AddChild(this);
                 addChild.ChildName.requestFocus();
-                addChild.ID=childID;
-                addChild.isUpdate=true;
+                addChild.ID = childID;
+                addChild.isUpdate = true;
                 addChild.setUpdate();
             }
-             addChild.ID=childID;
-            addChild.isUpdate=true;
+            addChild.ID = childID;
+            addChild.isUpdate = true;
             addChild.setUpdate();
             addChild.loadChildDetails();
             if (InformantID.getText().equals("")) {
-                JOptionPane.showMessageDialog(this,"Save new informant to continue");
-            }else{addChild.setVisible(true);}
+                JOptionPane.showMessageDialog(this, "Save new informant to continue");
+            } else {
+                addChild.setVisible(true);
+            }
         } catch (ParseException ex) {
             System.out.println(ex);
         }
@@ -1899,7 +1881,7 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-          childID=Integer.parseInt(String.valueOf(model.getValueAt(jTable2.getSelectedRow(), 0)));
+        childID = Integer.parseInt(String.valueOf(model.getValueAt(jTable2.getSelectedRow(), 0)));
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1911,256 +1893,369 @@ public class ViewALLDETAILS extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (Lname.getText().equals("")) {
-            JOptionPane.showMessageDialog(this,"Last name required to continue");
-        }
-        else{
-//          Webcam web=new Webcam(this);
-  //      web.setVisible(true);
+            JOptionPane.showMessageDialog(this, "Last name required to continue");
+        } else {
+
+            if (capture == null) {
+                capture = new Capture_image();
+                capture.setViewALLDETAILS(this, false);
+                capture.setVisible(true);
+            } else {
+                capture.setVisible(true);
+                capture.setViewALLDETAILS(this, false);
+
+            }
+//
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         try {
             // TODO add your handling code here:
-            int i=JOptionPane.showConfirmDialog(this,"Update Profile Sheet scanned image. Do you want to continue?","Update Profile Sheet",JOptionPane.YES_NO_OPTION);
+            int i = JOptionPane.showConfirmDialog(this, "Update Profile Sheet scanned image. Do you want to continue?", "Update Profile Sheet", JOptionPane.YES_NO_OPTION);
 
-            if (i==0) {
+            if (i == 0) {
 
-                JFileChooser chooser=new JFileChooser();
+                JFileChooser chooser = new JFileChooser();
                 chooser.showOpenDialog(this);
-                File sFile=chooser.getSelectedFile();
+                File sFile = chooser.getSelectedFile();
                 //BufferedImage bufferedImage=ImageIO.read(sFile);
-                Image image=ImageIO.read(sFile);
+                Image image = ImageIO.read(sFile);
                 //Image myImage=image.getScaledInstance(161, 151,Image.SCALE_FAST);
 
-                File sourFile=new File(sFile.getAbsolutePath());
-                File desFile =new File(System.getProperty("user.dir")+"\\\\legacy\\\\"+f_name.getText()+Lname.getText()+M_Name.getText()+"IAPS"+".jpg");
+                File sourFile = new File(sFile.getAbsolutePath());
+                File desFile = new File(System.getProperty("user.dir") + "\\\\legacy\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + "IAPS" + ".jpg");
 
-                    if (desFile.exists()) {
-                        System.out.println("file exist");
-                        Files.copy(sourFile.toPath(), desFile.toPath(),StandardCopyOption.COPY_ATTRIBUTES,StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    else{
+                if (desFile.exists()) {
+                    System.out.println("file exist");
+                    Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+                } else {
 
-                        Files.copy(sourFile.toPath(), desFile.toPath(),StandardCopyOption.COPY_ATTRIBUTES,StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    String imagePath = desFile.getCanonicalPath();
-                    // String a="\"";
-                    String b="/";
-                    IAPS_Loc.setText(imagePath);
-                    imagePath= imagePath.replace("\\",b);
-                        IPAString=imagePath;
-                        System.out.println(imagePath);
-                    }
-                } catch (IOException ex) {
-                    System.out.println(ex);
+                    Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
                 }
+                String imagePath = desFile.getCanonicalPath();
+                // String a="\"";
+                String b = "/";
+                IAPS_Loc.setText(imagePath);
+                imagePath = imagePath.replace("\\", b);
+                IPAString = imagePath;
+                System.out.println(imagePath);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            int i=JOptionPane.showConfirmDialog(this,"Update Source Data Card scanned image. Do you want to continue?","Update Source Data Card",JOptionPane.YES_NO_OPTION);
+            int i = JOptionPane.showConfirmDialog(this, "Update Source Data Card scanned image. Do you want to continue?", "Update Source Data Card", JOptionPane.YES_NO_OPTION);
 
-            if (i==0) {
-                JFileChooser chooser=new JFileChooser();
+            if (i == 0) {
+                JFileChooser chooser = new JFileChooser();
                 chooser.showOpenDialog(this);
-                File sFile=chooser.getSelectedFile();
+                File sFile = chooser.getSelectedFile();
                 //BufferedImage bufferedImage=ImageIO.read(sFile);
-                Image image=ImageIO.read(sFile);
+                Image image = ImageIO.read(sFile);
                 //Image myImage=image.getScaledInstance(161, 151,Image.SCALE_FAST);
 
-                File sourFile=new File(sFile.getAbsolutePath());
-                File desFile =new File(System.getProperty("user.dir")+"\\\\legacy\\\\"+f_name.getText()+Lname.getText()+M_Name.getText()+"SDCSCS"+".jpg");
+                File sourFile = new File(sFile.getAbsolutePath());
+                File desFile = new File(System.getProperty("user.dir") + "\\\\legacy\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + "SDCSCS" + ".jpg");
 
-                    if (desFile.exists()) {
-                        System.out.println("file exist");
-                        Files.copy(sourFile.toPath(), desFile.toPath(),StandardCopyOption.COPY_ATTRIBUTES,StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    else{
+                if (desFile.exists()) {
+                    System.out.println("file exist");
+                    Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+                } else {
 
-                        Files.copy(sourFile.toPath(), desFile.toPath(),StandardCopyOption.COPY_ATTRIBUTES,StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    String imagePath = desFile.getCanonicalPath();
-                    // String a="\"";
-                    String b="/";
-                    SDCSCS_Loc.setText(imagePath);
-                    imagePath= imagePath.replace("\\",b);
-                        SDCSDString=imagePath;
-                        System.out.println(imagePath);
-                    }
-                } catch (IOException ex) {
-                    System.out.println(ex);
+                    Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
                 }
+                String imagePath = desFile.getCanonicalPath();
+                // String a="\"";
+                String b = "/";
+                SDCSCS_Loc.setText(imagePath);
+                imagePath = imagePath.replace("\\", b);
+                SDCSDString = imagePath;
+                System.out.println(imagePath);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
- 
-    public void DeleteChild(){
-    
+
+    public void DeleteChild() {
+
         try {
-            
-  int i=JOptionPane.showConfirmDialog(this,"Child will be deleted. Do you want to continue?","Delete Child",JOptionPane.YES_NO_OPTION);
-            if (i==0) {
-                
-         
-            
-            DBConnection.init();
-            Connection c=DBConnection.getConnection();
-            PreparedStatement ps;
-            ps=c.prepareStatement("Delete from child where idChild=(?)");
 
-            ps.setString(1,String.valueOf(childID));
+            int i = JOptionPane.showConfirmDialog(this, "Child will be deleted. Do you want to continue?", "Delete Child", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
 
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Child Deleted");
+                DBConnection.init();
+                Connection c = DBConnection.getConnection();
+                PreparedStatement ps;
+                ps = c.prepareStatement("Delete from child where idChild=(?)");
+
+                ps.setString(1, String.valueOf(childID));
+
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Child Deleted");
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
 
-    
     }
-    
-   public void LoadRecordsProfile() throws ParseException{
-        try {
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info where idInformant_info='"+ID+"'");
-    rs=ps.executeQuery();
-    
-            if (rs.next()) {
-        
-            this.f_name.setText(rs.getString(2));
-           this.M_Name.setText(rs.getString(3));
-        this.Lname.setText(rs.getString(4));
-        
-        
-        
-        df=new SimpleDateFormat("yyyy-MM-d");
-        // dateString=String.valueOf(df.format(date.getDate()));
-         System.out.println(dateString);
-      Date dateD = null;
-        
-      Date dateR = null;
-       
-        try {
-             dateR=new SimpleDateFormat("yyyy-MM-d").parse(rs.getString(51));
-            dateD = new SimpleDateFormat("yyyy-MM-d").parse(rs.getString(52));
-           
-       //Date myDate=df.parse(dateString);
-        } catch (ParseException ex) {
-            System.out.println(ex);
-        }
-       
-         date.setDate(dateD);
-         dateReC.setDate(dateR);
-         
-          Calendar now=  Calendar.getInstance();
-            Calendar bday = Calendar.getInstance();
-            //now.setTime(null);
-            bday.setTime(date.getDate());
-            int age1=now.get(Calendar.YEAR)-bday.get(Calendar.YEAR);
 
-            age.setText(String.valueOf(age1));
+    Capture_image capture;
+    BufferedImage image_captureImage;
 
-         
-         
-           //this.age.setText(rs.getString(5));
-          this.nationalilty.setText(rs.getString(6));
-         this.religion.setText(rs.getString(7));
-            this.cb_maritals_status.setSelectedItem(rs.getString(8));
-           this.education.setText(rs.getString(9));
-           this.alias.setText(rs.getString(10));
-           this.place_birth.setText(rs.getString(11));
-          this.presentADD.setText(rs.getString(12));
-          this.PermaentADD.setText(rs.getString(13));
-           this.ZipCode.setText(rs.getString(14));
-         this.S_Codification.setText(rs.getString(15));
-         this.Status_Codification.setSelectedItem(rs.getString(16));
-        this.P_Barangay.setSelectedItem(rs.getString(17));
-        this.Permanet_Barangay.setSelectedItem(rs.getString(18));
-         this.face.setText(rs.getString(19));
-          this.Hair.setText(rs.getString(20));
-           this.Complexion.setSelectedItem(rs.getString(21));
-          this.Eyes.setText(rs.getString(22));
-          this.Build.setText(rs.getString(23));
-         this.Body.setText(rs.getString(24));
-           this.Gen_Apprerance.setText(rs.getString(25));
-           this.Inden_char.setText(rs.getString(26));
-           this.Height.setText(rs.getString(27));
-           this.Mil_Services.setText(rs.getString(28));
-          this.Other_Org.setText(rs.getString(29));
-           this.Fore_training.setText(rs.getString(30));
-           this.Employement.setText(rs.getString(31));
-           this.position.setText(rs.getString(32)); 
-           //CityMun.setText(rs.getString(57));
-           CbCityMun.setSelectedItem(rs.getString(57));
-           Province.setText(rs.getString(55));
-           BirthCountry.setText(rs.getString(58));
-           Threat1.setText(rs.getString(56));
-           Type1.setText(rs.getString(59));
-           CriminalRecords.setText(rs.getString(61));
-          //  this.Date_Rec.setText(rs.getString(34));
-            
-            
-            
-            this.Add_emloyer.setText(rs.getString(33));
-           this.Termination_date.setText(rs.getString(34));
-          this.Mode_Contanct.setText(rs.getString(35));
-            this.Mobile_Num.setText(rs.getString(36));
-          this.Email.setText(rs.getString(37));
-           this.ContactPersonm.setText(rs.getString(38));
-            this.Mobile_Contact_Per.setText(rs.getString(39));
-            
-           this.CodeName.setText(rs.getString(43));
-           this.pydonym.setText(rs.getString(44));
-           this.Handler2.setText(rs.getString(45));
-           this.OperationProject.setText(rs.getString(46));
-           this.Spouse.setText(rs.getString(47));
-           this.TIN.setText(rs.getString(48));
-           CBgender.setSelectedItem(rs.getString(49));
-           this.target.setText(rs.getString(50));
-           InformantID.setText(String.valueOf(ID));
-           Category1.setText(rs.getString(60));
-         
-           //IPAString=rs.getString(rs.getString(63));
-          // SDCSDString=rs.getString(rs.getString(64));
-          IAPS_Loc.setText(rs.getString(63));
-          SDCSCS_Loc.setText(rs.getString(64));
-          IPAString=IAPS_Loc.getText();
-          SDCSDString=SDCSCS_Loc.getText();
-          System.out.println(IPAString);
-          System.out.println(SDCSDString); 
-          
-            System.out.println(rs.getString(42));
-            File FImage=new File(rs.getString(42));
-            ImageFilePath.setText(rs.getString(42));
-            
-        try {
-            Image image=ImageIO.read(FImage);
-            Image myImage=image.getScaledInstance(161, 151,Image.SCALE_FAST);
-            PictureView.setIcon(new ImageIcon(myImage));
-        } catch (IOException ex) {
-           PictureView.setText("      No photo available");
-            //JOptionPane.showMessageDialog(this,"No photo available");
-               System.out.println(ex);
-            
-        }
-           jTabbedPane1.setSelectedIndex(0);
-              
+    public Capture_image getCapture() {
+        return capture;
+    }
+
+    public void setImage_captureImage(BufferedImage image_captureImage) {
+        this.image_captureImage = image_captureImage;
+    }
+
+    public void setCapture(Capture_image capture) {
+        this.capture = capture;
+    }
+
+    void Write_image() {
+        if (Lname.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Last name required to continue");
+        } else {
+            try {
+                if (!update) {
+
+                    Image image = image_captureImage;
+                    Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+                    ImageIO.write(image_captureImage, "JPG", new File(System.getProperty("user.dir") + "\\\\BIN_PIC\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg"));
+
+                    File sourFile = new File(System.getProperty("user.dir") + "\\\\BIN_PIC\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+                    //File desFile =new File("C:\\Users\\JAMIEXXX3\\Documents\\sample\\5.jpg");
+
+                    //Files.copy(sourFile.toPath(), desFile.toPath());
+                    DBConnection.init();
+                    Connection c = DBConnection.getConnection();
+                    PreparedStatement ps;
+                    ResultSet rs;
+                    ps = c.prepareStatement("Select * from  informant_info");
+                    rs = ps.executeQuery();
+                    int i = 1;
+                    while (rs.next()) {
+                        i++;
+                    }
+
+                    if (f_name.getText().equals("") && Lname.getText().equals("")) {
+                        JOptionPane.showMessageDialog(this, "To continue supply information before attaching image.");
+                    } else {
+                        PictureView.setIcon(new ImageIcon(myImage));
+                        File desFile = new File(System.getProperty("user.dir") + "\\\\BIN_PIC\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+
+                        if (desFile.exists()) {
+                            System.out.println("file exist");
+                            Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+                            ImageFilePath.setText(imagePath);
+                            System.out.println(desFile.getAbsolutePath());
+                            imagePath = desFile.getCanonicalPath();
+                            // String a="\"";
+                            String b = "/";
+                            imagePath = imagePath.replace("\\", b);
+                            System.out.println(imagePath);
+                            ImageFilePath.setText(imagePath);
+                            i = 0;
+                        } else {
+
+                            Files.copy(sourFile.toPath(), desFile.toPath());
+                            PictureView.setIcon(new ImageIcon(myImage));
+                            System.out.println(desFile.getAbsolutePath());
+                            imagePath = desFile.getCanonicalPath();
+                            // String a="\"";
+                            String b = "/";
+                            imagePath = imagePath.replace("\\", b);
+                            System.out.println(imagePath);
+                            ImageFilePath.setText(imagePath);
+                            i = 0;
+
+                        }
+                    }
+                } else {
+
+                    JOptionPane.showOptionDialog(this, "Updating Profile Photo ", "You sure you what to update Profile Photo", WIDTH, WIDTH, null, null, nationalilty);
+
+                    JFileChooser chooser = new JFileChooser();
+                    chooser.showOpenDialog(this);
+                    File sFile = chooser.getSelectedFile();
+                    // BufferedImage bufferedImage=ImageIO.read(sFile);
+                    Image image = ImageIO.read(sFile);
+                    Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+
+                    File sourFile = new File(sFile.getAbsolutePath());
+
+                    PictureView.setIcon(new ImageIcon(myImage));
+
+                    //System.out.println("int i value  "+i+"");
+                    File desFile = new File(System.getProperty("user.dir") + "\\BIN_PIC\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+
+                    Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+                    imagePath = desFile.getCanonicalPath();
+
+                    ////  PictureView.setIcon(new ImageIcon(myImage));
+                    //  System.out.println(desFile.getAbsolutePath());
+                    // imagePath=desFile.getCanonicalPath();
+                    // String a="\"";
+                    String b = "/";
+                    imagePath = imagePath.replace("\\", b);
+                    System.out.println(imagePath);
+                    ImageFilePath.setText(imagePath);
+
+                    // i=0;
+                }
+
+            } catch (Exception e) {
+
+                System.out.println(e);
+                ImageFilePath.setText(imagePath);
             }
-    
-     
-    
+        }
+
+    }
+
+    public void LoadRecordsProfile() throws ParseException {
+        try {
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = c.prepareStatement("Select * from  informant_info where idInformant_info='" + ID + "'");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                this.f_name.setText(rs.getString(2));
+                this.M_Name.setText(rs.getString(3));
+                this.Lname.setText(rs.getString(4));
+
+                df = new SimpleDateFormat("yyyy-MM-d");
+                // dateString=String.valueOf(df.format(date.getDate()));
+                System.out.println(dateString);
+                Date dateD = null;
+
+                Date dateR = null;
+
+                try {
+                    dateR = new SimpleDateFormat("yyyy-MM-d").parse(rs.getString(51));
+                    dateD = new SimpleDateFormat("yyyy-MM-d").parse(rs.getString(52));
+
+                    //Date myDate=df.parse(dateString);
+                } catch (ParseException ex) {
+                    System.out.println(ex);
+                }
+
+                date.setDate(dateD);
+                dateReC.setDate(dateR);
+
+                Calendar now = Calendar.getInstance();
+                Calendar bday = Calendar.getInstance();
+                //now.setTime(null);
+                bday.setTime(date.getDate());
+                int age1 = now.get(Calendar.YEAR) - bday.get(Calendar.YEAR);
+
+                age.setText(String.valueOf(age1));
+
+                //this.age.setText(rs.getString(5));
+                this.nationalilty.setText(rs.getString(6));
+                this.religion.setText(rs.getString(7));
+                this.cb_maritals_status.setSelectedItem(rs.getString(8));
+                this.education.setText(rs.getString(9));
+                this.alias.setText(rs.getString(10));
+                this.place_birth.setText(rs.getString(11));
+                this.presentADD.setText(rs.getString(12));
+                this.PermaentADD.setText(rs.getString(13));
+                this.ZipCode.setText(rs.getString(14));
+                this.S_Codification.setText(rs.getString(15));
+                this.Status_Codification.setSelectedItem(rs.getString(16));
+                this.P_Barangay.setSelectedItem(rs.getString(17));
+                this.Permanet_Barangay.setSelectedItem(rs.getString(18));
+                this.face.setText(rs.getString(19));
+                this.Hair.setText(rs.getString(20));
+                this.Complexion.setSelectedItem(rs.getString(21));
+                this.Eyes.setText(rs.getString(22));
+                this.Build.setText(rs.getString(23));
+                this.Body.setText(rs.getString(24));
+                this.Gen_Apprerance.setText(rs.getString(25));
+                this.Inden_char.setText(rs.getString(26));
+                this.Height.setText(rs.getString(27));
+                this.Mil_Services.setText(rs.getString(28));
+                this.Other_Org.setText(rs.getString(29));
+                this.Fore_training.setText(rs.getString(30));
+                this.Employement.setText(rs.getString(31));
+                this.position.setText(rs.getString(32));
+                //CityMun.setText(rs.getString(57));
+                CbCityMun.setSelectedItem(rs.getString(57));
+                Province.setText(rs.getString(55));
+                BirthCountry.setText(rs.getString(58));
+                Threat1.setText(rs.getString(56));
+                Type1.setText(rs.getString(59));
+                CriminalRecords.setText(rs.getString(61));
+                //  this.Date_Rec.setText(rs.getString(34));
+
+                this.Add_emloyer.setText(rs.getString(33));
+                this.Termination_date.setText(rs.getString(34));
+                this.Mode_Contanct.setText(rs.getString(35));
+                this.Mobile_Num.setText(rs.getString(36));
+                this.Email.setText(rs.getString(37));
+                this.ContactPersonm.setText(rs.getString(38));
+                this.Mobile_Contact_Per.setText(rs.getString(39));
+
+                this.CodeName.setText(rs.getString(43));
+                this.pydonym.setText(rs.getString(44));
+                this.Handler2.setText(rs.getString(45));
+                this.OperationProject.setText(rs.getString(46));
+                this.Spouse.setText(rs.getString(47));
+                this.TIN.setText(rs.getString(48));
+                CBgender.setSelectedItem(rs.getString(49));
+                this.target.setText(rs.getString(50));
+                InformantID.setText(String.valueOf(ID));
+                Category1.setText(rs.getString(60));
+
+                //IPAString=rs.getString(rs.getString(63));
+                // SDCSDString=rs.getString(rs.getString(64));
+                IAPS_Loc.setText(rs.getString(63));
+                SDCSCS_Loc.setText(rs.getString(64));
+                IPAString = IAPS_Loc.getText();
+                SDCSDString = SDCSCS_Loc.getText();
+                System.out.println(IPAString);
+                System.out.println(SDCSDString);
+
+                System.out.println(rs.getString(42));
+                File FImage = new File(rs.getString(42));
+                ImageFilePath.setText(rs.getString(42));
+
+                try {
+                    Image image = ImageIO.read(FImage);
+                    Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+                    PictureView.setIcon(new ImageIcon(myImage));
+                } catch (IOException ex) {
+                    PictureView.setText("      No photo available");
+                    //JOptionPane.showMessageDialog(this,"No photo available");
+                    System.out.println(ex);
+
+                }
+                jTabbedPane1.setSelectedIndex(0);
+
+            }
+
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
     }
-                                          
-Records rec;
+
+    Records rec;
+
     /**
      * @param args the command line arguments
      */
@@ -2168,7 +2263,7 @@ Records rec;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -2196,168 +2291,126 @@ Records rec;
             }
         });
     }
-    
-    public void ClearField(){
-      this.f_name.setText("");
-           this.M_Name.setText("");
+
+    public void ClearField() {
+        this.f_name.setText("");
+        this.M_Name.setText("");
         this.Lname.setText("");
-         date.cleanup();
-         this.age.setText("");
-          this.nationalilty.setText("");
-         this.religion.setText("");
-            this.cb_maritals_status.setSelectedItem(0);
-           this.education.setText("");
-           this.alias.setText("");
-           this.place_birth.setText("");
-          this.presentADD.setText("");
-          this.PermaentADD.setText("");
-           this.ZipCode.setText("");
-         this.S_Codification.setText("");
-         this.Status_Codification.setSelectedIndex(0);
+        date.cleanup();
+        this.age.setText("");
+        this.nationalilty.setText("");
+        this.religion.setText("");
+        this.cb_maritals_status.setSelectedItem(0);
+        this.education.setText("");
+        this.alias.setText("");
+        this.place_birth.setText("");
+        this.presentADD.setText("");
+        this.PermaentADD.setText("");
+        this.ZipCode.setText("");
+        this.S_Codification.setText("");
+        this.Status_Codification.setSelectedIndex(0);
         this.P_Barangay.setSelectedIndex(0);
         this.Permanet_Barangay.setSelectedIndex(0);
-         this.face.setText("");
-          this.Hair.setText("");
-           this.Complexion.setSelectedIndex(0);
-          this.Eyes.setText("");
-          this.Build.setText("");
-         this.Body.setText("");
-           this.Gen_Apprerance.setText("");
-           this.Inden_char.setText("");
-           this.Height.setText("");
-           this.Mil_Services.setText("");
-          this.Other_Org.setText("");
-           this.Fore_training.setText("");
-           this.Employement.setText("");
-           this.position.setText("");
-            dateReC.cleanup();
-            this.Add_emloyer.setText("");
-           this.Termination_date.setText("");
-          this.Mode_Contanct.setText("");
-            this.Mobile_Num.setText("");
-          this.Email.setText("");
-           this.ContactPersonm.setText("");
-            this.Mobile_Contact_Per.setText("");
-            ImageFilePath.setText("");
-    
+        this.face.setText("");
+        this.Hair.setText("");
+        this.Complexion.setSelectedIndex(0);
+        this.Eyes.setText("");
+        this.Build.setText("");
+        this.Body.setText("");
+        this.Gen_Apprerance.setText("");
+        this.Inden_char.setText("");
+        this.Height.setText("");
+        this.Mil_Services.setText("");
+        this.Other_Org.setText("");
+        this.Fore_training.setText("");
+        this.Employement.setText("");
+        this.position.setText("");
+        dateReC.cleanup();
+        this.Add_emloyer.setText("");
+        this.Termination_date.setText("");
+        this.Mode_Contanct.setText("");
+        this.Mobile_Num.setText("");
+        this.Email.setText("");
+        this.ContactPersonm.setText("");
+        this.Mobile_Contact_Per.setText("");
+        ImageFilePath.setText("");
+
     }
-    
-    public void LoadNameOnlyData(){
-    try{
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+" "+rs.getString(3), rs.getString(27) ,rs.getString(34)});
+
+    public void LoadNameOnlyData() {
+        try {
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = c.prepareStatement("Select * from  informant_info");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString(1), rs.getString(4) + " " + rs.getString(2) + " " + rs.getString(3), rs.getString(27), rs.getString(34)});
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
-   
-    
-    } 
-    catch(Exception e){System.out.println(e);
-    }
-    }
-  /**  
-    public void LoadSerachDataId(){
-      try{
-        model.setRowCount(0);   
-    String S="%"+this.SearchData.getText()+"%";
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info where idInformant_info like '"+S+"'");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+" "+rs.getString(3), rs.getString(27) ,rs.getString(34)});
-    }
-   
-    
-    } 
-    catch(Exception e){System.out.println(e);
-    }
-    
-   
-    }
-     public void LoadSerachDataFname(){
-      try{
-        model.setRowCount(0);   
-    String S="%"+this.SearchData.getText()+"%";
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info where F_Name like '"+S+"'");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+" "+rs.getString(3), rs.getString(27) ,rs.getString(34)});
-    } } 
-    catch(Exception e){System.out.println(e);
-    }}
-public void LoadSerachDataFnameM_Name(){
-      try{
-        model.setRowCount(0);   
-    String S="%"+this.SearchData.getText()+"%";
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info where M_Name like '"+S+"'");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+" "+rs.getString(3), rs.getString(27) ,rs.getString(34)});
-    } } 
-    catch(Exception e){System.out.println(e);
-    }}
-public void LoadSerachDataL_name(){
-      try{
-        model.setRowCount(0);   
-    String S="%"+this.SearchData.getText()+"%";
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info where L_Name like '"+S+"'");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+" "+rs.getString(3), rs.getString(27) ,rs.getString(34)});
-    } } 
-    catch(Exception e){System.out.println(e);
-    }}
-public void LoadSerachDataD_Recuitment(){
-      try{
-        model.setRowCount(0);   
-    String S="%"+this.SearchData.getText()+"%";
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info where D_Recuitment like '"+S+"'");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+" "+rs.getString(3), rs.getString(27) ,rs.getString(34)});
-    } } 
-    catch(Exception e){System.out.println(e);
-    }}
-public void LoadSerachDataIden_Char(){
-      try{
-        model.setRowCount(0);   
-    String S="%"+this.SearchData.getText()+"%";
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  informant_info where Iden_Char like '"+S+"'");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+" "+rs.getString(3), rs.getString(27) ,rs.getString(34)});
-    } } 
-    catch(Exception e){System.out.println(e);
-    }}
-*/
-     
+    /**
+     * public void LoadSerachDataId(){ try{ model.setRowCount(0); String
+     * S="%"+this.SearchData.getText()+"%"; DBConnection.init(); Connection
+     * c=DBConnection.getConnection(); PreparedStatement ps; ResultSet rs;
+     * ps=c.prepareStatement("Select * from informant_info where
+     * idInformant_info like '"+S+"'"); rs=ps.executeQuery(); while(rs.next()){
+     * model.addRow(new Object[]{rs.getString(1),rs.getString(4)+"
+     * "+rs.getString(2)+" "+rs.getString(3), rs.getString(27)
+     * ,rs.getString(34)}); }
+     *
+     *
+     * }
+     * catch(Exception e){System.out.println(e); }
+     *
+     *
+     * }
+     * public void LoadSerachDataFname(){ try{ model.setRowCount(0); String
+     * S="%"+this.SearchData.getText()+"%"; DBConnection.init(); Connection
+     * c=DBConnection.getConnection(); PreparedStatement ps; ResultSet rs;
+     * ps=c.prepareStatement("Select * from informant_info where F_Name like
+     * '"+S+"'"); rs=ps.executeQuery(); while(rs.next()){ model.addRow(new
+     * Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+"
+     * "+rs.getString(3), rs.getString(27) ,rs.getString(34)}); } }
+     * catch(Exception e){System.out.println(e); }} public void
+     * LoadSerachDataFnameM_Name(){ try{ model.setRowCount(0); String
+     * S="%"+this.SearchData.getText()+"%"; DBConnection.init(); Connection
+     * c=DBConnection.getConnection(); PreparedStatement ps; ResultSet rs;
+     * ps=c.prepareStatement("Select * from informant_info where M_Name like
+     * '"+S+"'"); rs=ps.executeQuery(); while(rs.next()){ model.addRow(new
+     * Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+"
+     * "+rs.getString(3), rs.getString(27) ,rs.getString(34)}); } }
+     * catch(Exception e){System.out.println(e); }} public void
+     * LoadSerachDataL_name(){ try{ model.setRowCount(0); String
+     * S="%"+this.SearchData.getText()+"%"; DBConnection.init(); Connection
+     * c=DBConnection.getConnection(); PreparedStatement ps; ResultSet rs;
+     * ps=c.prepareStatement("Select * from informant_info where L_Name like
+     * '"+S+"'"); rs=ps.executeQuery(); while(rs.next()){ model.addRow(new
+     * Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+"
+     * "+rs.getString(3), rs.getString(27) ,rs.getString(34)}); } }
+     * catch(Exception e){System.out.println(e); }} public void
+     * LoadSerachDataD_Recuitment(){ try{ model.setRowCount(0); String
+     * S="%"+this.SearchData.getText()+"%"; DBConnection.init(); Connection
+     * c=DBConnection.getConnection(); PreparedStatement ps; ResultSet rs;
+     * ps=c.prepareStatement("Select * from informant_info where D_Recuitment
+     * like '"+S+"'"); rs=ps.executeQuery(); while(rs.next()){ model.addRow(new
+     * Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+"
+     * "+rs.getString(3), rs.getString(27) ,rs.getString(34)}); } }
+     * catch(Exception e){System.out.println(e); }} public void
+     * LoadSerachDataIden_Char(){ try{ model.setRowCount(0); String
+     * S="%"+this.SearchData.getText()+"%"; DBConnection.init(); Connection
+     * c=DBConnection.getConnection(); PreparedStatement ps; ResultSet rs;
+     * ps=c.prepareStatement("Select * from informant_info where Iden_Char like
+     * '"+S+"'"); rs=ps.executeQuery(); while(rs.next()){ model.addRow(new
+     * Object[]{rs.getString(1),rs.getString(4)+" "+rs.getString(2)+"
+     * "+rs.getString(3), rs.getString(27) ,rs.getString(34)}); } }
+     * catch(Exception e){System.out.println(e); }}
+     */
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField Add_emloyer;
     private javax.swing.JTextField BirthCountry;
@@ -2515,725 +2568,642 @@ public void LoadSerachDataIden_Char(){
     // End of variables declaration//GEN-END:variables
 
     private Connection OpenDatabaseConnection() {
-        Connection c=null;
-     
-     try{
-          Class.forName("com.mysql.jdbc.Driver").newInstance();
-          c=DriverManager.getConnection("jdbc:mysql://localhost:3306/bin","root","root");
-      }
-     catch(Exception e){
-     System.out.println(e);
-     }
-    return c;
-         }
-    
-    
-     
-  
-  
-  public  void LoadDataSelect() throws ParseException{
-    update=true;
-       // jButton4.setEnabled(false);
-        this.LoadRecordsProfile();
-  
-  }
-  
-  SimpleDateFormat dfs ;
-   public void UPDATEOthers(){
-      try {
-          
-          String ComplexionsString;
-            df=new SimpleDateFormat("yyyy-MM-dd");
-            dateString=String.valueOf(df.format(date.getDate()));
-            System.out.println("date "+dateString);
-            
-         dfs = new SimpleDateFormat("MMMMMMMM d, yyyy");
-            dateRec=String.valueOf(df.format(dateReC.getDate()));
-            
-        
-            if (dateSBdate.getDate() == null) {
-            dateS_Bdate="";
-          }else{
-             dateS_Bdate = String.valueOf(dfs.format(dateSBdate.getDate()));  
-            }
-            
-            
-     
-            System.out.println("date "+dateRec);
-            
-            if (dateString.equals("") || dateReC.equals("") || date.getDate()==null || dateReC.getDate()==null) {
-                JOptionPane.showConfirmDialog(this, "Birth date or date of recuitment is empty or invalid");
-          }
-            
-          if (Complexion.getSelectedItem().toString().equals("Select Complexion")) {
-              ComplexionsString="";
-              
-          }else{
-            ComplexionsString=Complexion.getSelectedItem().toString();
-          
-          }
-            
-           
-          
-       
-   int a=JOptionPane.showConfirmDialog(this,"Are you sure you want to update the current informant details?", "Update Informant", JOptionPane.YES_NO_OPTION);
-           
-             if (a==0) {
-             Connection c=OpenDatabaseConnection();
-            PreparedStatement ps;
+        Connection c = null;
 
-             ps=c.prepareStatement("Update  informant_info set idInformant_info=(?),F_Name=(?),M_Name=(?),L_Name=(?),B_Date=(?),Age=(?),Nationality=(?),Religion=(?),Mar_status=(?),Education=(?),Alias=(?),Place_Birth=(?),P_Adrress=(?),Per_Adrress=(?),Zipcode=(?),S_Codification=(?),Status=(?),B_PAdrress=(?),B_PreAdress=(?),Face=(?),Hair=(?),Complexion=(?),Eyes=(?),Build=(?),Body=(?),Gen_App=(?),Iden_Char=(?),Height=(?),Mel_Service=(?),Other_Org=(?),F_Training=(?),Employement=(?),Position=(?),D_Recuitment=(?),N_Employer=(?),TerminationDate=(?),Mode_Con=(?),Mob_no=(?),Email=(?),P_Con=(?),P_Con_num=(?),EntryTime=(?),EntryDate=(?),PictureFilePath=(?),CodeName=(?),Psedonym=(?),Handlers=(?),OperationProject=(?),SpouseName=(?),TINNR=(?),Gender=(?),Target=(?),E_Date=(?),E_Time=(?),CriminalR=(?),Threat=(?),Type=(?),Category=(?),Mun_City=(?),Provice=(?),BirthCounty=(?),Spouse_Bdate=(?),IAPS_loc=(?),SDCSDS_loc=(?) where idInformant_info like(?)");
-         //  +"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"'" + ",'"++"','"++"','"++"','"++"','"++"','"++"','"+)+"','"+"','"++"','"++"')");
-            ps.setString(1,this.InformantID.getText());
-            ps.setString(2, this.f_name.getText());
-            ps.setString(3,this.M_Name.getText());
-            ps.setString(4,this.Lname.getText());
-            ps.setString(5 , dateString);
-            ps.setString(6,this.age.getText());
-            ps.setString(7,this.nationalilty.getText());
-            ps.setString(8,this.religion.getText());
-            ps.setString(9,this.cb_maritals_status.getSelectedItem().toString());
-            ps.setString(10,this.education.getText());
-            ps.setString(11,this.alias.getText());
-            ps.setString(12,this.place_birth.getText());
-            ps.setString(13,this.presentADD.getText());
-            ps.setString(14,this.PermaentADD.getText());
-            ps.setString(15,this.ZipCode.getText());
-            ps.setString(16,this.S_Codification.getText());
-            ps.setString(17,this.Status_Codification.getSelectedItem().toString());
-            ps.setString(18,this.P_Barangay.getSelectedItem().toString());
-            ps.setString(19,this.Permanet_Barangay.getSelectedItem().toString());
-            ps.setString(20,this.face.getText());
-            ps.setString(21,this.Hair.getText());
-            ps.setString(22,ComplexionsString);
-            ps.setString(23,this.Eyes.getText());
-            ps.setString(24,this.Build.getText());
-            ps.setString(25,this.Body.getText());
-            ps.setString(26,this.Gen_Apprerance.getText());
-            ps.setString(27,this.Inden_char.getText());
-            ps.setString(28,this.Height.getText()); 
-            ps.setString(29,this.Mil_Services.getText());
-            ps.setString(30,this.Other_Org.getText());
-            ps.setString(31,this.Fore_training.getText());
-            ps.setString(32,this.Employement.getText());
-            ps.setString(33,this.position.getText()); 
-            ps.setString(34,dateRec);
-            ps.setString(35,this.Add_emloyer.getText());
-            ps.setString(36,this.Termination_date.getText());
-            ps.setString(37,this.Mode_Contanct.getText());
-            ps.setString(38,this.Mobile_Num.getText());
-            ps.setString(39,this.Email.getText());
-            ps.setString(40,this.ContactPersonm.getText());
-            ps.setString(41,this.Mobile_Contact_Per.getText());
-            ps.setString(42,position1.getText());
-            ps.setString(43,this.Date);
-            
-             String updateS =imagePath;
-           // updateS=updateS.replace("\\", "/");
-             System.out.println(imagePath+" hahahha");
-                 System.out.println(ImageFilePath.getText());
-            ps.setString(44,ImageFilePath.getText());
-            
-           
-            ps.setString(45,CodeName.getText());
-            ps.setString(46,this.pydonym.getText());
-            ps.setString(47,this.Handler2.getText());
-            ps.setString(48,this.OperationProject.getText());
-            ps.setString(49,this.Spouse.getText());
-            ps.setString(50,this.TIN.getText());
-            ps.setString(51,this.CBgender.getSelectedItem().toString());
-           
-            ps.setString(52,this.target.getText());
-            ps.setString(53,Date);
-            ps.setString(54,Time);
-             ps.setString(55,CriminalRecords.getText());
-             ps.setString(56, Threat1.getText());
-             ps.setString(57, Type1.getText());
-            ps.setString(58, Category1.getText());
-           ps.setString(59,CbCityMun.getSelectedItem().toString());
-           ps.setString(60, Province.getText());
-             ps.setString(61, BirthCountry.getText());
-           //LoadLatestIDforUppdate();
-             ps.setString(62, dateS_Bdate);
-              ps.setString(63,IPAString);
-                ps.setString(64,SDCSDString);
-            ps.setString(65,String.valueOf(ID));
-            
-            ps.executeUpdate();
-
-            JOptionPane.showMessageDialog(null,"Informant successfully updated!");
-            //ID=0;
-            }
-            
-              
-        } catch (SQLException e) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/bin", "root", "root");
+        } catch (Exception e) {
             System.out.println(e);
         }
-  
-  }
-  
-   public void UPDATEOthersDate(){
-      try {
-          
-          String ComplexionsString;
-            df=new SimpleDateFormat("yyyy-MM-dd");
-            dateString=String.valueOf(df.format(date.getDate()));
-            System.out.println("date "+dateString);
-            
-         dfs = new SimpleDateFormat("MMMMMMMM d, yyyy");
-            dateRec=String.valueOf(df.format(dateReC.getDate()));
-            
-        
-            if (dateSBdate.getDate() == null) {
-            dateS_Bdate="";
-          }else{
-             dateS_Bdate = String.valueOf(dfs.format(dateSBdate.getDate()));  
-            }
-            
-            
-     
-            System.out.println("date "+dateRec);
-            
-            if (dateString.equals("") || dateReC.equals("") || date.getDate()==null || dateReC.getDate()==null) {
-                JOptionPane.showConfirmDialog(this, "Birth date or date of recuitment is empty or invalid");
-          }
-            
-          if (Complexion.getSelectedItem().toString().equals("Select Complexion")) {
-              ComplexionsString="";
-              
-          }else{
-            ComplexionsString=Complexion.getSelectedItem().toString();
-          
-          }
-            
-           
-          
-       
-   //int a=JOptionPane.showConfirmDialog(this,"Are you sure you want to update the current informant details?", "Update Informant", JOptionPane.YES_NO_OPTION);
-   int a=0;        
-             if (a==0) {
-             Connection c=OpenDatabaseConnection();
-            PreparedStatement ps;
-
-             ps=c.prepareStatement("Update  informant_info set idInformant_info=(?),F_Name=(?),M_Name=(?),L_Name=(?),B_Date=(?),Age=(?),Nationality=(?),Religion=(?),Mar_status=(?),Education=(?),Alias=(?),Place_Birth=(?),P_Adrress=(?),Per_Adrress=(?),Zipcode=(?),S_Codification=(?),Status=(?),B_PAdrress=(?),B_PreAdress=(?),Face=(?),Hair=(?),Complexion=(?),Eyes=(?),Build=(?),Body=(?),Gen_App=(?),Iden_Char=(?),Height=(?),Mel_Service=(?),Other_Org=(?),F_Training=(?),Employement=(?),Position=(?),D_Recuitment=(?),N_Employer=(?),TerminationDate=(?),Mode_Con=(?),Mob_no=(?),Email=(?),P_Con=(?),P_Con_num=(?),EntryTime=(?),EntryDate=(?),PictureFilePath=(?),CodeName=(?),Psedonym=(?),Handlers=(?),OperationProject=(?),SpouseName=(?),TINNR=(?),Gender=(?),Target=(?),E_Date=(?),E_Time=(?),CriminalR=(?),Threat=(?),Type=(?),Category=(?),Mun_City=(?),Provice=(?),BirthCounty=(?),Spouse_Bdate=(?),IAPS_loc=(?),SDCSDS_loc=(?) where idInformant_info like(?)");
-         //  +"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"'" + ",'"++"','"++"','"++"','"++"','"++"','"++"','"+)+"','"+"','"++"','"++"')");
-            ps.setString(1,this.InformantID.getText());
-            ps.setString(2, this.f_name.getText());
-            ps.setString(3,this.M_Name.getText());
-            ps.setString(4,this.Lname.getText());
-            ps.setString(5 , dateString);
-            ps.setString(6,this.age.getText());
-            ps.setString(7,this.nationalilty.getText());
-            ps.setString(8,this.religion.getText());
-            ps.setString(9,this.cb_maritals_status.getSelectedItem().toString());
-            ps.setString(10,this.education.getText());
-            ps.setString(11,this.alias.getText());
-            ps.setString(12,this.place_birth.getText());
-            ps.setString(13,this.presentADD.getText());
-            ps.setString(14,this.PermaentADD.getText());
-            ps.setString(15,this.ZipCode.getText());
-            ps.setString(16,this.S_Codification.getText());
-            ps.setString(17,this.Status_Codification.getSelectedItem().toString());
-            ps.setString(18,this.P_Barangay.getSelectedItem().toString());
-            ps.setString(19,this.Permanet_Barangay.getSelectedItem().toString());
-            ps.setString(20,this.face.getText());
-            ps.setString(21,this.Hair.getText());
-            ps.setString(22,ComplexionsString);
-            ps.setString(23,this.Eyes.getText());
-            ps.setString(24,this.Build.getText());
-            ps.setString(25,this.Body.getText());
-            ps.setString(26,this.Gen_Apprerance.getText());
-            ps.setString(27,this.Inden_char.getText());
-            ps.setString(28,this.Height.getText()); 
-            ps.setString(29,this.Mil_Services.getText());
-            ps.setString(30,this.Other_Org.getText());
-            ps.setString(31,this.Fore_training.getText());
-            ps.setString(32,this.Employement.getText());
-            ps.setString(33,this.position.getText()); 
-            ps.setString(34,dateRec);
-            ps.setString(35,this.Add_emloyer.getText());
-            ps.setString(36,this.Termination_date.getText());
-            ps.setString(37,this.Mode_Contanct.getText());
-            ps.setString(38,this.Mobile_Num.getText());
-            ps.setString(39,this.Email.getText());
-            ps.setString(40,this.ContactPersonm.getText());
-            ps.setString(41,this.Mobile_Contact_Per.getText());
-            ps.setString(42,position1.getText());
-            ps.setString(43,this.Date);
-            
-             String updateS =imagePath;
-           // updateS=updateS.replace("\\", "/");
-             System.out.println(imagePath+" hahahha");
-                 System.out.println(ImageFilePath.getText());
-            ps.setString(44,ImageFilePath.getText());
-            
-           
-            ps.setString(45,CodeName.getText());
-            ps.setString(46,this.pydonym.getText());
-            ps.setString(47,this.Handler2.getText());
-            ps.setString(48,this.OperationProject.getText());
-            ps.setString(49,this.Spouse.getText());
-            ps.setString(50,this.TIN.getText());
-            ps.setString(51,this.CBgender.getSelectedItem().toString());
-           
-            ps.setString(52,this.target.getText());
-            ps.setString(53,Date);
-            ps.setString(54,Time);
-             ps.setString(55,CriminalRecords.getText());
-             ps.setString(56, Threat1.getText());
-             ps.setString(57, Type1.getText());
-            ps.setString(58, Category1.getText());
-           ps.setString(59,CbCityMun.getSelectedItem().toString());
-           ps.setString(60, Province.getText());
-             ps.setString(61, BirthCountry.getText());
-           //LoadLatestIDforUppdate();
-             ps.setString(62, dateS_Bdate);
-              ps.setString(63,IPAString);
-                ps.setString(64,SDCSDString);
-            ps.setString(65,String.valueOf(ID));
-            
-            ps.executeUpdate();
-
-          //  JOptionPane.showMessageDialog(null,"Informant successfully updated!");
-            //ID=0;
-                 System.out.println("Age Updated");
-            }
-            
-              
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-  
-  }
-  
-    public void DateandTime(){
-    Calendar cal=  Calendar.getInstance();
-    cal.getTime();
-    SimpleDateFormat date=new SimpleDateFormat("yyyy/MM/d");
-     SimpleDateFormat time=new SimpleDateFormat("hh:mm:ss");
-   
-    Date=(date.format(cal.getTime()));
-    Time=(time.format(cal.getTime()));
+        return c;
     }
-  public void RefreshTime(){
-  TimerTask TT =new TimerTask() {
-      @Override
-      public void run() {
-          DateandTime();
-      }
-  };
-  
-  Timer t =new Timer();
-      t.scheduleAtFixedRate(TT, 1000, 1000);
-  }
-    
-   
-   public void UPDATE_ALL(){
-     try {
-            
-               if (f_name.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "The field first name is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+
+    public void LoadDataSelect() throws ParseException {
+        update = true;
+        // jButton4.setEnabled(false);
+        this.LoadRecordsProfile();
+
+    }
+
+    SimpleDateFormat dfs;
+
+    public void UPDATEOthers() {
+        try {
+
+            String ComplexionsString;
+            df = new SimpleDateFormat("yyyy-MM-dd");
+            dateString = String.valueOf(df.format(date.getDate()));
+            System.out.println("date " + dateString);
+
+            dfs = new SimpleDateFormat("MMMMMMMM d, yyyy");
+            dateRec = String.valueOf(df.format(dateReC.getDate()));
+
+            if (dateSBdate.getDate() == null) {
+                dateS_Bdate = "";
+            } else {
+                dateS_Bdate = String.valueOf(dfs.format(dateSBdate.getDate()));
+            }
+
+            System.out.println("date " + dateRec);
+
+            if (dateString.equals("") || dateReC.equals("") || date.getDate() == null || dateReC.getDate() == null) {
+                JOptionPane.showConfirmDialog(this, "Birth date or date of recuitment is empty or invalid");
+            }
+
+            if (Complexion.getSelectedItem().toString().equals("Select Complexion")) {
+                ComplexionsString = "";
+
+            } else {
+                ComplexionsString = Complexion.getSelectedItem().toString();
+
+            }
+
+            int a = JOptionPane.showConfirmDialog(this, "Are you sure you want to update the current informant details?", "Update Informant", JOptionPane.YES_NO_OPTION);
+
+            if (a == 0) {
+                Connection c = OpenDatabaseConnection();
+                PreparedStatement ps;
+
+                ps = c.prepareStatement("Update  informant_info set idInformant_info=(?),F_Name=(?),M_Name=(?),L_Name=(?),B_Date=(?),Age=(?),Nationality=(?),Religion=(?),Mar_status=(?),Education=(?),Alias=(?),Place_Birth=(?),P_Adrress=(?),Per_Adrress=(?),Zipcode=(?),S_Codification=(?),Status=(?),B_PAdrress=(?),B_PreAdress=(?),Face=(?),Hair=(?),Complexion=(?),Eyes=(?),Build=(?),Body=(?),Gen_App=(?),Iden_Char=(?),Height=(?),Mel_Service=(?),Other_Org=(?),F_Training=(?),Employement=(?),Position=(?),D_Recuitment=(?),N_Employer=(?),TerminationDate=(?),Mode_Con=(?),Mob_no=(?),Email=(?),P_Con=(?),P_Con_num=(?),EntryTime=(?),EntryDate=(?),PictureFilePath=(?),CodeName=(?),Psedonym=(?),Handlers=(?),OperationProject=(?),SpouseName=(?),TINNR=(?),Gender=(?),Target=(?),E_Date=(?),E_Time=(?),CriminalR=(?),Threat=(?),Type=(?),Category=(?),Mun_City=(?),Provice=(?),BirthCounty=(?),Spouse_Bdate=(?),IAPS_loc=(?),SDCSDS_loc=(?) where idInformant_info like(?)");
+                //  +"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"'" + ",'"++"','"++"','"++"','"++"','"++"','"++"','"+)+"','"+"','"++"','"++"')");
+                ps.setString(1, this.InformantID.getText());
+                ps.setString(2, this.f_name.getText());
+                ps.setString(3, this.M_Name.getText());
+                ps.setString(4, this.Lname.getText());
+                ps.setString(5, dateString);
+                ps.setString(6, this.age.getText());
+                ps.setString(7, this.nationalilty.getText());
+                ps.setString(8, this.religion.getText());
+                ps.setString(9, this.cb_maritals_status.getSelectedItem().toString());
+                ps.setString(10, this.education.getText());
+                ps.setString(11, this.alias.getText());
+                ps.setString(12, this.place_birth.getText());
+                ps.setString(13, this.presentADD.getText());
+                ps.setString(14, this.PermaentADD.getText());
+                ps.setString(15, this.ZipCode.getText());
+                ps.setString(16, this.S_Codification.getText());
+                ps.setString(17, this.Status_Codification.getSelectedItem().toString());
+                ps.setString(18, this.P_Barangay.getSelectedItem().toString());
+                ps.setString(19, this.Permanet_Barangay.getSelectedItem().toString());
+                ps.setString(20, this.face.getText());
+                ps.setString(21, this.Hair.getText());
+                ps.setString(22, ComplexionsString);
+                ps.setString(23, this.Eyes.getText());
+                ps.setString(24, this.Build.getText());
+                ps.setString(25, this.Body.getText());
+                ps.setString(26, this.Gen_Apprerance.getText());
+                ps.setString(27, this.Inden_char.getText());
+                ps.setString(28, this.Height.getText());
+                ps.setString(29, this.Mil_Services.getText());
+                ps.setString(30, this.Other_Org.getText());
+                ps.setString(31, this.Fore_training.getText());
+                ps.setString(32, this.Employement.getText());
+                ps.setString(33, this.position.getText());
+                ps.setString(34, dateRec);
+                ps.setString(35, this.Add_emloyer.getText());
+                ps.setString(36, this.Termination_date.getText());
+                ps.setString(37, this.Mode_Contanct.getText());
+                ps.setString(38, this.Mobile_Num.getText());
+                ps.setString(39, this.Email.getText());
+                ps.setString(40, this.ContactPersonm.getText());
+                ps.setString(41, this.Mobile_Contact_Per.getText());
+                ps.setString(42, position1.getText());
+                ps.setString(43, this.Date);
+
+                String updateS = imagePath;
+                // updateS=updateS.replace("\\", "/");
+                System.out.println(imagePath + " hahahha");
+                System.out.println(ImageFilePath.getText());
+                ps.setString(44, ImageFilePath.getText());
+
+                ps.setString(45, CodeName.getText());
+                ps.setString(46, this.pydonym.getText());
+                ps.setString(47, this.Handler2.getText());
+                ps.setString(48, this.OperationProject.getText());
+                ps.setString(49, this.Spouse.getText());
+                ps.setString(50, this.TIN.getText());
+                ps.setString(51, this.CBgender.getSelectedItem().toString());
+
+                ps.setString(52, this.target.getText());
+                ps.setString(53, Date);
+                ps.setString(54, Time);
+                ps.setString(55, CriminalRecords.getText());
+                ps.setString(56, Threat1.getText());
+                ps.setString(57, Type1.getText());
+                ps.setString(58, Category1.getText());
+                ps.setString(59, CbCityMun.getSelectedItem().toString());
+                ps.setString(60, Province.getText());
+                ps.setString(61, BirthCountry.getText());
+                //LoadLatestIDforUppdate();
+                ps.setString(62, dateS_Bdate);
+                ps.setString(63, IPAString);
+                ps.setString(64, SDCSDString);
+                ps.setString(65, String.valueOf(ID));
+
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Informant successfully updated!");
+                //ID=0;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void UPDATEOthersDate() {
+        try {
+
+            String ComplexionsString;
+            df = new SimpleDateFormat("yyyy-MM-dd");
+            dateString = String.valueOf(df.format(date.getDate()));
+            System.out.println("date " + dateString);
+
+            dfs = new SimpleDateFormat("MMMMMMMM d, yyyy");
+            dateRec = String.valueOf(df.format(dateReC.getDate()));
+
+            if (dateSBdate.getDate() == null) {
+                dateS_Bdate = "";
+            } else {
+                dateS_Bdate = String.valueOf(dfs.format(dateSBdate.getDate()));
+            }
+
+            System.out.println("date " + dateRec);
+
+            if (dateString.equals("") || dateReC.equals("") || date.getDate() == null || dateReC.getDate() == null) {
+                JOptionPane.showConfirmDialog(this, "Birth date or date of recuitment is empty or invalid");
+            }
+
+            if (Complexion.getSelectedItem().toString().equals("Select Complexion")) {
+                ComplexionsString = "";
+
+            } else {
+                ComplexionsString = Complexion.getSelectedItem().toString();
+
+            }
+
+            //int a=JOptionPane.showConfirmDialog(this,"Are you sure you want to update the current informant details?", "Update Informant", JOptionPane.YES_NO_OPTION);
+            int a = 0;
+            if (a == 0) {
+                Connection c = OpenDatabaseConnection();
+                PreparedStatement ps;
+
+                ps = c.prepareStatement("Update  informant_info set idInformant_info=(?),F_Name=(?),M_Name=(?),L_Name=(?),B_Date=(?),Age=(?),Nationality=(?),Religion=(?),Mar_status=(?),Education=(?),Alias=(?),Place_Birth=(?),P_Adrress=(?),Per_Adrress=(?),Zipcode=(?),S_Codification=(?),Status=(?),B_PAdrress=(?),B_PreAdress=(?),Face=(?),Hair=(?),Complexion=(?),Eyes=(?),Build=(?),Body=(?),Gen_App=(?),Iden_Char=(?),Height=(?),Mel_Service=(?),Other_Org=(?),F_Training=(?),Employement=(?),Position=(?),D_Recuitment=(?),N_Employer=(?),TerminationDate=(?),Mode_Con=(?),Mob_no=(?),Email=(?),P_Con=(?),P_Con_num=(?),EntryTime=(?),EntryDate=(?),PictureFilePath=(?),CodeName=(?),Psedonym=(?),Handlers=(?),OperationProject=(?),SpouseName=(?),TINNR=(?),Gender=(?),Target=(?),E_Date=(?),E_Time=(?),CriminalR=(?),Threat=(?),Type=(?),Category=(?),Mun_City=(?),Provice=(?),BirthCounty=(?),Spouse_Bdate=(?),IAPS_loc=(?),SDCSDS_loc=(?) where idInformant_info like(?)");
+                //  +"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"'" + ",'"++"','"++"','"++"','"++"','"++"','"++"','"+)+"','"+"','"++"','"++"')");
+                ps.setString(1, this.InformantID.getText());
+                ps.setString(2, this.f_name.getText());
+                ps.setString(3, this.M_Name.getText());
+                ps.setString(4, this.Lname.getText());
+                ps.setString(5, dateString);
+                ps.setString(6, this.age.getText());
+                ps.setString(7, this.nationalilty.getText());
+                ps.setString(8, this.religion.getText());
+                ps.setString(9, this.cb_maritals_status.getSelectedItem().toString());
+                ps.setString(10, this.education.getText());
+                ps.setString(11, this.alias.getText());
+                ps.setString(12, this.place_birth.getText());
+                ps.setString(13, this.presentADD.getText());
+                ps.setString(14, this.PermaentADD.getText());
+                ps.setString(15, this.ZipCode.getText());
+                ps.setString(16, this.S_Codification.getText());
+                ps.setString(17, this.Status_Codification.getSelectedItem().toString());
+                ps.setString(18, this.P_Barangay.getSelectedItem().toString());
+                ps.setString(19, this.Permanet_Barangay.getSelectedItem().toString());
+                ps.setString(20, this.face.getText());
+                ps.setString(21, this.Hair.getText());
+                ps.setString(22, ComplexionsString);
+                ps.setString(23, this.Eyes.getText());
+                ps.setString(24, this.Build.getText());
+                ps.setString(25, this.Body.getText());
+                ps.setString(26, this.Gen_Apprerance.getText());
+                ps.setString(27, this.Inden_char.getText());
+                ps.setString(28, this.Height.getText());
+                ps.setString(29, this.Mil_Services.getText());
+                ps.setString(30, this.Other_Org.getText());
+                ps.setString(31, this.Fore_training.getText());
+                ps.setString(32, this.Employement.getText());
+                ps.setString(33, this.position.getText());
+                ps.setString(34, dateRec);
+                ps.setString(35, this.Add_emloyer.getText());
+                ps.setString(36, this.Termination_date.getText());
+                ps.setString(37, this.Mode_Contanct.getText());
+                ps.setString(38, this.Mobile_Num.getText());
+                ps.setString(39, this.Email.getText());
+                ps.setString(40, this.ContactPersonm.getText());
+                ps.setString(41, this.Mobile_Contact_Per.getText());
+                ps.setString(42, position1.getText());
+                ps.setString(43, this.Date);
+
+                String updateS = imagePath;
+                // updateS=updateS.replace("\\", "/");
+                System.out.println(imagePath + " hahahha");
+                System.out.println(ImageFilePath.getText());
+                ps.setString(44, ImageFilePath.getText());
+
+                ps.setString(45, CodeName.getText());
+                ps.setString(46, this.pydonym.getText());
+                ps.setString(47, this.Handler2.getText());
+                ps.setString(48, this.OperationProject.getText());
+                ps.setString(49, this.Spouse.getText());
+                ps.setString(50, this.TIN.getText());
+                ps.setString(51, this.CBgender.getSelectedItem().toString());
+
+                ps.setString(52, this.target.getText());
+                ps.setString(53, Date);
+                ps.setString(54, Time);
+                ps.setString(55, CriminalRecords.getText());
+                ps.setString(56, Threat1.getText());
+                ps.setString(57, Type1.getText());
+                ps.setString(58, Category1.getText());
+                ps.setString(59, CbCityMun.getSelectedItem().toString());
+                ps.setString(60, Province.getText());
+                ps.setString(61, BirthCountry.getText());
+                //LoadLatestIDforUppdate();
+                ps.setString(62, dateS_Bdate);
+                ps.setString(63, IPAString);
+                ps.setString(64, SDCSDString);
+                ps.setString(65, String.valueOf(ID));
+
+                ps.executeUpdate();
+
+                //  JOptionPane.showMessageDialog(null,"Informant successfully updated!");
+                //ID=0;
+                System.out.println("Age Updated");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void DateandTime() {
+        Calendar cal = Calendar.getInstance();
+        cal.getTime();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+        SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
+
+        Date = (date.format(cal.getTime()));
+        Time = (time.format(cal.getTime()));
+    }
+
+    public void RefreshTime() {
+        TimerTask TT = new TimerTask() {
+            @Override
+            public void run() {
+                DateandTime();
+            }
+        };
+
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(TT, 1000, 1000);
+    }
+
+    public void UPDATE_ALL() {
+        try {
+
+            if (f_name.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "The field first name is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 f_name.requestFocus();
-            }
-            
-            else if (M_Name.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field middle name is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (M_Name.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field middle name is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 M_Name.requestFocus();
-            }
-            
-              else if (Lname.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field last name is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (Lname.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field last name is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 Lname.requestFocus();
-            }
-            
-             else if (age.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field age is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (age.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field age is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 age.requestFocus();
-            }
-             
-             else if (nationalilty.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field nationality name is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (nationalilty.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field nationality name is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 nationalilty.requestFocus();
-            }
-             else if (religion.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field religion is empty","Empty field",JOptionPane.WARNING_MESSAGE);
-               religion.requestFocus();
-            }
-             else if (cb_maritals_status.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field nationality name is Empty","Empty field",JOptionPane.WARNING_MESSAGE);
-            cb_maritals_status.requestFocus();
-            }
-            else if (education.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field education is Empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (religion.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field religion is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
+                religion.requestFocus();
+            } else if (cb_maritals_status.getSelectedItem().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field nationality name is Empty", "Empty field", JOptionPane.WARNING_MESSAGE);
+                cb_maritals_status.requestFocus();
+            } else if (education.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field education is Empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 education.requestFocus();
-            }
-             else if (alias.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field alias name is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (alias.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field alias name is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 alias.requestFocus();
-            }
-             else if (place_birth.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field place of birth is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (place_birth.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field place of birth is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 place_birth.requestFocus();
-            }
-             else if (presentADD.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field present address is empty","Empty field",JOptionPane.WARNING_MESSAGE);
-               presentADD.requestFocus();
-            }
-            else if (presentADD.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field present Aaddress is empty","Empty field",JOptionPane.WARNING_MESSAGE);
-               presentADD.requestFocus();
-            }
-            else if (PermaentADD.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field permanent address is empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-               PermaentADD.requestFocus();
-            }
-            else if (presentADD.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field present address is empty","Empty field",JOptionPane.WARNING_MESSAGE);
-               presentADD.requestFocus();
-            }
-            else if (ZipCode.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field zipcode is Empty","Empty field",JOptionPane.WARNING_MESSAGE);
-              ZipCode.requestFocus();
-            }
-            else if (P_Barangay.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(this, "The field present barangay is Empty","Empty field",JOptionPane.WARNING_MESSAGE);
-              P_Barangay.requestFocus();
-            }
-            else if (Permanet_Barangay.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(this, "the field ermanent barangay is empty","Empty field",JOptionPane.WARNING_MESSAGE);
+            } else if (presentADD.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field present address is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
+                presentADD.requestFocus();
+            } else if (presentADD.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field present Aaddress is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
+                presentADD.requestFocus();
+            } else if (PermaentADD.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field permanent address is empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                PermaentADD.requestFocus();
+            } else if (presentADD.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field present address is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
+                presentADD.requestFocus();
+            } else if (ZipCode.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field zipcode is Empty", "Empty field", JOptionPane.WARNING_MESSAGE);
+                ZipCode.requestFocus();
+            } else if (P_Barangay.getSelectedItem().equals("")) {
+                JOptionPane.showMessageDialog(this, "The field present barangay is Empty", "Empty field", JOptionPane.WARNING_MESSAGE);
+                P_Barangay.requestFocus();
+            } else if (Permanet_Barangay.getSelectedItem().equals("")) {
+                JOptionPane.showMessageDialog(this, "the field ermanent barangay is empty", "Empty field", JOptionPane.WARNING_MESSAGE);
                 Permanet_Barangay.requestFocus();
-            }
-            else if (S_Codification.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Source Codification is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                     S_Codification.requestFocus();
-            }
-            else if (Status_Codification.getSelectedItem().equals("Select Status")) {
-                JOptionPane.showMessageDialog(this, "the Field Source Codification is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                     Status_Codification.requestFocus();
-            } 
-             else if (face.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Face in the Desription Tab  is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);
-                   face.requestFocus();
-            }
-             else if (Hair.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Hair in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                   Hair.requestFocus();
-            }
-             
-            else if (Complexion.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Complexion in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                  Complexion.requestFocus();
-            }
-              else if (Eyes.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Hair in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                      Eyes.requestFocus();
-            }
-             else if (Build.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Build in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                      Build.requestFocus();
-            }
-            else if (Body.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Hair in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                     Body.requestFocus();
-            }
-            else if (Gen_Apprerance.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field General Apperance in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                     Gen_Apprerance.requestFocus();
-            }
-             else if (Inden_char.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Indentifiying Charterristics in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                     Inden_char.requestFocus();
-            }
-              else if (Height.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Height in the Desription Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(1);    
-                     Height.requestFocus();
-            }
-              else if (Mil_Services.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Military Services in the Affiiliation-Skills- EmployementTab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                     Mil_Services.requestFocus();
-            }
-              else if (Other_Org.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Other Ogranization in the Affiiliation-Skills- EmployementTab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                     Other_Org.requestFocus();
-            }
-               else if (Fore_training.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Foreing Training in the Affiiliation-Skills- Employement Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                     Fore_training.requestFocus();
-            }
-                 else if (Employement.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Employment  in the Affiiliation-Skills- EmployementTab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                     Employement.requestFocus();
-            }
-            else if (position.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Employment Positon in the Affiiliation-Skills- Employement Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                    position.requestFocus();
-            }
-             else if (dateRec.equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Date of Recuitment  in the Affiiliation-Skills- Employement Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                   dateReC.requestFocus();
-            }
-             else if (Add_emloyer.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Address of Employer  in the Affiiliation-Skills- Employement Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                     Add_emloyer.requestFocus();
-            }
-            else if (Termination_date.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field Termination Date in the Affiiliation-Skills- EmployementTab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                     Termination_date.requestFocus();
-            }
-           else if (Mode_Contanct.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Mode of Contact  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(4);    
-                     Mode_Contanct.requestFocus();
-            }
-           else if (Mobile_Num.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Mobile Number  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(4);    
-                    Mobile_Num.requestFocus();
-            }
-          else if (Email.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Email in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(4);    
-                     Email.requestFocus();
-            }
-          else if (ContactPersonm.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Contact Person  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(4);    
-                     ContactPersonm.requestFocus();
-            }
-            else if (Mobile_Contact_Per.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Mobile number of Person to Contact in case of Emergency  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(4);    
-                   Mobile_Contact_Per.requestFocus();
-            }
-            
-             else if (Mobile_Contact_Per.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Mobile number of Person to Contact in case of Emergency  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(4);    
-                   Mobile_Contact_Per.requestFocus();
-            }
-              else if (CodeName.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Code Name of Description in case of Emergency  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                   CodeName.requestFocus();
-            }
-            else if (pydonym.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Pydonym of  Description in case of Emergency  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                  pydonym.requestFocus();
-            }
-            else if (Handler2.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Handler number of of Description  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                   Handler2.requestFocus();
-            }
-            else if (OperationProject.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Operation  in the Description  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(2);    
-                   OperationProject.requestFocus();
-            }
-            else if (Spouse.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "the Field  Spouse of Person Basic Information  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(0);    
-                  Spouse.requestFocus();
-            }
-            else if (CBgender.getSelectedItem().equals("Select Gender")) {
-                JOptionPane.showMessageDialog(this, "the Field  Gender of Basic Infomation  in the Contact Information  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(0);    
-                     CBgender.requestFocus();
-            }
-            else if (target.getText().equals("Select Gender")) {
-                JOptionPane.showMessageDialog(this, "the Field Target  in the Description  Tab is Empty","Empty Field",JOptionPane.WARNING_MESSAGE);
-                   this.jTabbedPane1.setSelectedIndex(4);    
-                     target.requestFocus();
-            } 
-           
-            
-             
+            } else if (S_Codification.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Source Codification is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                S_Codification.requestFocus();
+            } else if (Status_Codification.getSelectedItem().equals("Select Status")) {
+                JOptionPane.showMessageDialog(this, "the Field Source Codification is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                Status_Codification.requestFocus();
+            } else if (face.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Face in the Desription Tab  is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                face.requestFocus();
+            } else if (Hair.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Hair in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Hair.requestFocus();
+            } else if (Complexion.getSelectedItem().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Complexion in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Complexion.requestFocus();
+            } else if (Eyes.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Hair in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Eyes.requestFocus();
+            } else if (Build.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Build in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Build.requestFocus();
+            } else if (Body.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Hair in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Body.requestFocus();
+            } else if (Gen_Apprerance.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field General Apperance in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Gen_Apprerance.requestFocus();
+            } else if (Inden_char.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Indentifiying Charterristics in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Inden_char.requestFocus();
+            } else if (Height.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Height in the Desription Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(1);
+                Height.requestFocus();
+            } else if (Mil_Services.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Military Services in the Affiiliation-Skills- EmployementTab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                Mil_Services.requestFocus();
+            } else if (Other_Org.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Other Ogranization in the Affiiliation-Skills- EmployementTab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                Other_Org.requestFocus();
+            } else if (Fore_training.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Foreing Training in the Affiiliation-Skills- Employement Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                Fore_training.requestFocus();
+            } else if (Employement.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Employment  in the Affiiliation-Skills- EmployementTab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                Employement.requestFocus();
+            } else if (position.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Employment Positon in the Affiiliation-Skills- Employement Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                position.requestFocus();
+            } else if (dateRec.equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Date of Recuitment  in the Affiiliation-Skills- Employement Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                dateReC.requestFocus();
+            } else if (Add_emloyer.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Address of Employer  in the Affiiliation-Skills- Employement Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                Add_emloyer.requestFocus();
+            } else if (Termination_date.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field Termination Date in the Affiiliation-Skills- EmployementTab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                Termination_date.requestFocus();
+            } else if (Mode_Contanct.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Mode of Contact  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(4);
+                Mode_Contanct.requestFocus();
+            } else if (Mobile_Num.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Mobile Number  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(4);
+                Mobile_Num.requestFocus();
+            } else if (Email.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Email in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(4);
+                Email.requestFocus();
+            } else if (ContactPersonm.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Contact Person  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(4);
+                ContactPersonm.requestFocus();
+            } else if (Mobile_Contact_Per.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Mobile number of Person to Contact in case of Emergency  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(4);
+                Mobile_Contact_Per.requestFocus();
+            } else if (Mobile_Contact_Per.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Mobile number of Person to Contact in case of Emergency  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(4);
+                Mobile_Contact_Per.requestFocus();
+            } else if (CodeName.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Code Name of Description in case of Emergency  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                CodeName.requestFocus();
+            } else if (pydonym.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Pydonym of  Description in case of Emergency  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                pydonym.requestFocus();
+            } else if (Handler2.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Handler number of of Description  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                Handler2.requestFocus();
+            } else if (OperationProject.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Operation  in the Description  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(2);
+                OperationProject.requestFocus();
+            } else if (Spouse.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "the Field  Spouse of Person Basic Information  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(0);
+                Spouse.requestFocus();
+            } else if (CBgender.getSelectedItem().equals("Select Gender")) {
+                JOptionPane.showMessageDialog(this, "the Field  Gender of Basic Infomation  in the Contact Information  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(0);
+                CBgender.requestFocus();
+            } else if (target.getText().equals("Select Gender")) {
+                JOptionPane.showMessageDialog(this, "the Field Target  in the Description  Tab is Empty", "Empty Field", JOptionPane.WARNING_MESSAGE);
+                this.jTabbedPane1.setSelectedIndex(4);
+                target.requestFocus();
+            } else {
 
-            else{   
-                
-             df=new SimpleDateFormat("yyyy-MM-dd");
-            dateString=String.valueOf(df.format(date.getDate()));
-            System.out.println(dateString);
-             dateRec=String.valueOf(df.format(date.getDate()));
-            System.out.println(dateRec);
-             int a=JOptionPane.showOptionDialog(this,"Are you sure you what to Update the current Informant Records", "Update Intelegence", WIDTH, WIDTH, null, null , nationalilty);
-           
-             if (a==0) {
-             Connection c=OpenDatabaseConnection();
-            PreparedStatement ps;
+                df = new SimpleDateFormat("yyyy-MM-dd");
+                dateString = String.valueOf(df.format(date.getDate()));
+                System.out.println(dateString);
+                dateRec = String.valueOf(df.format(date.getDate()));
+                System.out.println(dateRec);
+                int a = JOptionPane.showOptionDialog(this, "Are you sure you what to Update the current Informant Records", "Update Intelegence", WIDTH, WIDTH, null, null, nationalilty);
 
-            ps=c.prepareStatement("Update  informant_info set idInformant_info=(?),F_Name=(?),M_Name=(?),L_Name=(?),B_Date=(?),Age=(?),Nationality=(?),Religion=(?),Mar_status=(?),Education=(?),Alias=(?),Place_Birth=(?),P_Adrress=(?),Per_Adrress=(?),Zipcode=(?),S_Codification=(?),Status=(?),B_PAdrress=(?),B_PreAdress=(?),Face=(?),Hair=(?),Complexion=(?),Eyes=(?),Build=(?),Body=(?),Gen_App=(?),Iden_Char=(?),Height=(?),Mel_Service=(?),Other_Org=(?),F_Training=(?),Employement=(?),Position=(?),D_Recuitment=(?),N_Employer=(?),TerminationDate=(?),Mode_Con=(?),Mob_no=(?),Email=(?),P_Con=(?),P_Con_num=(?),EntryTime=(?),EntryDate=(?),PictureFilePath=(?),CodeName=(?),Psedonym=(?),Handlers=(?),OperationProject=(?),SpouseName=(?),TINNR=(?),Gender=(?),Target=(?) where idInformant_info like(?)");
-         //  +"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"'" + ",'"++"','"++"','"++"','"++"','"++"','"++"','"+)+"','"+"','"++"','"++"')");
-            ps.setString(1,this.InformantID.getText());
-            ps.setString(2, this.f_name.getText());
-            ps.setString(3,this.M_Name.getText());
-            ps.setString(4,this.Lname.getText());
-            ps.setString(5,dateString);
-            ps.setString(6,this.age.getText());
-            ps.setString(7,this.nationalilty.getText());
-            ps.setString(8,this.religion.getText());
-            ps.setString(9,this.cb_maritals_status.getSelectedItem().toString());
-            ps.setString(10,this.education.getText());
-            ps.setString(11,this.alias.getText());
-            ps.setString(12,this.place_birth.getText());
-            ps.setString(13,this.presentADD.getText());
-            ps.setString(14,this.PermaentADD.getText());
-            ps.setString(15,this.ZipCode.getText());
-            ps.setString(16,this.S_Codification.getText());
-            ps.setString(17,this.Status_Codification.getSelectedItem().toString());
-            ps.setString(18,this.P_Barangay.getSelectedItem().toString());
-            ps.setString(19,this.Permanet_Barangay.getSelectedItem().toString());
-            ps.setString(20,this.face.getText());
-            ps.setString(21,this.Hair.getText());
-            ps.setString(22,this.Complexion.getSelectedItem().toString());
-            ps.setString(23,this.Eyes.getText());
-            ps.setString(24,this.Build.getText());
-            ps.setString(25,this.Body.getText());
-            ps.setString(26,this.Gen_Apprerance.getText());
-            ps.setString(27,this.Inden_char.getText());
-            ps.setString(28,this.Height.getText()); 
-            ps.setString(29,this.Mil_Services.getText());
-            ps.setString(30,this.Other_Org.getText());
-            ps.setString(31,this.Fore_training.getText());
-            ps.setString(32,this.Employement.getText());
-            ps.setString(33,this.position.getText()); 
-            ps.setString(34,dateRec);
-            ps.setString(35,this.Add_emloyer.getText());
-            ps.setString(36,this.Termination_date.getText());
-            ps.setString(37,this.Mode_Contanct.getText());
-            ps.setString(38,this.Mobile_Num.getText());
-            ps.setString(39,this.Email.getText());
-            ps.setString(40,this.ContactPersonm.getText());
-            ps.setString(41,this.Mobile_Contact_Per.getText());
-            ps.setString(42,this.Time);
-            ps.setString(43,this.Date);
-            
-             String updateS =imagePath;
-           // updateS=updateS.replace("\\", "/");
-             System.out.println(imagePath+" hahahha");
-                 System.out.println(ImageFilePath.getText());
-            ps.setString(44,ImageFilePath.getText());
-            
-           
-            ps.setString(45,CodeName.getText().toString());
-            ps.setString(46,this.pydonym.getText());
-            ps.setString(47,this.Handler2.getText());
-            ps.setString(48,this.OperationProject.getText());
-            ps.setString(49,this.Spouse.getText());
-            ps.setString(50,this.TIN.getText());
-            ps.setString(51,this.CBgender.getSelectedItem().toString());
-           
-            ps.setString(52,this.target.getText());
-           
-           
-            ps.setString(53,this.InformantID.getText());
-            
-            ps.executeUpdate();
+                if (a == 0) {
+                    Connection c = OpenDatabaseConnection();
+                    PreparedStatement ps;
 
-            JOptionPane.showMessageDialog(null,"Succefully Updated Informant");
-            
+                    ps = c.prepareStatement("Update  informant_info set idInformant_info=(?),F_Name=(?),M_Name=(?),L_Name=(?),B_Date=(?),Age=(?),Nationality=(?),Religion=(?),Mar_status=(?),Education=(?),Alias=(?),Place_Birth=(?),P_Adrress=(?),Per_Adrress=(?),Zipcode=(?),S_Codification=(?),Status=(?),B_PAdrress=(?),B_PreAdress=(?),Face=(?),Hair=(?),Complexion=(?),Eyes=(?),Build=(?),Body=(?),Gen_App=(?),Iden_Char=(?),Height=(?),Mel_Service=(?),Other_Org=(?),F_Training=(?),Employement=(?),Position=(?),D_Recuitment=(?),N_Employer=(?),TerminationDate=(?),Mode_Con=(?),Mob_no=(?),Email=(?),P_Con=(?),P_Con_num=(?),EntryTime=(?),EntryDate=(?),PictureFilePath=(?),CodeName=(?),Psedonym=(?),Handlers=(?),OperationProject=(?),SpouseName=(?),TINNR=(?),Gender=(?),Target=(?) where idInformant_info like(?)");
+                    //  +"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"','"++"'" + ",'"++"','"++"','"++"','"++"','"++"','"++"','"+)+"','"+"','"++"','"++"')");
+                    ps.setString(1, this.InformantID.getText());
+                    ps.setString(2, this.f_name.getText());
+                    ps.setString(3, this.M_Name.getText());
+                    ps.setString(4, this.Lname.getText());
+                    ps.setString(5, dateString);
+                    ps.setString(6, this.age.getText());
+                    ps.setString(7, this.nationalilty.getText());
+                    ps.setString(8, this.religion.getText());
+                    ps.setString(9, this.cb_maritals_status.getSelectedItem().toString());
+                    ps.setString(10, this.education.getText());
+                    ps.setString(11, this.alias.getText());
+                    ps.setString(12, this.place_birth.getText());
+                    ps.setString(13, this.presentADD.getText());
+                    ps.setString(14, this.PermaentADD.getText());
+                    ps.setString(15, this.ZipCode.getText());
+                    ps.setString(16, this.S_Codification.getText());
+                    ps.setString(17, this.Status_Codification.getSelectedItem().toString());
+                    ps.setString(18, this.P_Barangay.getSelectedItem().toString());
+                    ps.setString(19, this.Permanet_Barangay.getSelectedItem().toString());
+                    ps.setString(20, this.face.getText());
+                    ps.setString(21, this.Hair.getText());
+                    ps.setString(22, this.Complexion.getSelectedItem().toString());
+                    ps.setString(23, this.Eyes.getText());
+                    ps.setString(24, this.Build.getText());
+                    ps.setString(25, this.Body.getText());
+                    ps.setString(26, this.Gen_Apprerance.getText());
+                    ps.setString(27, this.Inden_char.getText());
+                    ps.setString(28, this.Height.getText());
+                    ps.setString(29, this.Mil_Services.getText());
+                    ps.setString(30, this.Other_Org.getText());
+                    ps.setString(31, this.Fore_training.getText());
+                    ps.setString(32, this.Employement.getText());
+                    ps.setString(33, this.position.getText());
+                    ps.setString(34, dateRec);
+                    ps.setString(35, this.Add_emloyer.getText());
+                    ps.setString(36, this.Termination_date.getText());
+                    ps.setString(37, this.Mode_Contanct.getText());
+                    ps.setString(38, this.Mobile_Num.getText());
+                    ps.setString(39, this.Email.getText());
+                    ps.setString(40, this.ContactPersonm.getText());
+                    ps.setString(41, this.Mobile_Contact_Per.getText());
+                    ps.setString(42, this.Time);
+                    ps.setString(43, this.Date);
+
+                    String updateS = imagePath;
+                    // updateS=updateS.replace("\\", "/");
+                    System.out.println(imagePath + " hahahha");
+                    System.out.println(ImageFilePath.getText());
+                    ps.setString(44, ImageFilePath.getText());
+
+                    ps.setString(45, CodeName.getText().toString());
+                    ps.setString(46, this.pydonym.getText());
+                    ps.setString(47, this.Handler2.getText());
+                    ps.setString(48, this.OperationProject.getText());
+                    ps.setString(49, this.Spouse.getText());
+                    ps.setString(50, this.TIN.getText());
+                    ps.setString(51, this.CBgender.getSelectedItem().toString());
+
+                    ps.setString(52, this.target.getText());
+
+                    ps.setString(53, this.InformantID.getText());
+
+                    ps.executeUpdate();
+
+                    JOptionPane.showMessageDialog(null, "Succefully Updated Informant");
+
+                }
             }
-            }
-              
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println(e);
         }
-   
-   }
-   public void LogUpdateed(){
- 
+
+    }
+
+    public void LogUpdateed() {
+
         try {
-            Calendar cal=  Calendar.getInstance();
-            String Time,Date;
-           SimpleDateFormat date=new SimpleDateFormat("yyyy/MM/d");
-          SimpleDateFormat time=new SimpleDateFormat("hh:mm:ss");
-          Date=date.format(cal.getTime());
-           Time=time.format(cal.getTime());
-            
+            Calendar cal = Calendar.getInstance();
+            String Time, Date;
+            SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+            SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
+            Date = date.format(cal.getTime());
+            Time = time.format(cal.getTime());
+
             DBConnection.init();
-            Connection c=DBConnection.getConnection();
+            Connection c = DBConnection.getConnection();
             PreparedStatement ps;
             ResultSet rs;
             //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
-            ps=c.prepareStatement("Insert into logs(Act,Time,Date)values"+"('Updated Informant ID "+ID+"','"+Time+"','"+Date+"')");
+            ps = c.prepareStatement("Insert into logs(Act,Time,Date)values" + "('Updated Informant ID " + ID + "','" + Time + "','" + Date + "')");
             ps.execute();
             System.out.println("logged update");
             // ps=c.prepareStatement("Select * from  informant_info");
         } catch (SQLException ex) {
             System.out.println(ex);
         }
- 
- }
-   
-   
-    public void LoadChild(){
-  
+
+    }
+
+    public void LoadChild() {
+
         try {
             model.setRowCount(0);
             DBConnection.init();
-            Connection c=DBConnection.getConnection();
+            Connection c = DBConnection.getConnection();
             PreparedStatement ps;
             ResultSet rs;
-            ps=c.prepareStatement("Select * from  child  where Father_ID like '"+InformantID.getText()+"'");
-            rs=ps.executeQuery();
-             String date="";
-            while(rs.next()){
+            ps = c.prepareStatement("Select * from  child  where Father_ID like '" + InformantID.getText() + "'");
+            rs = ps.executeQuery();
+            String date = "";
+            while (rs.next()) {
                 if (rs.getString(3).equals("0001-01-01")) {
-                   date="";
+                    date = "";
+                } else {
+                    date = rs.getString(3);
                 }
-                else{
-                date=rs.getString(3);
-                }
-                model.addRow(new Object[]{rs.getString(1),rs.getString(2),date});
-                
-                
-            }     } catch (SQLException ex) {
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), date});
+
+            }
+        } catch (SQLException ex) {
             System.out.println(ex);
-  
-}
-}
-    
-    
-    public void LogUpdatedINFO(){
-   try {
-            Calendar cal=  Calendar.getInstance();
-            String Time,Date;
-            SimpleDateFormat date=new SimpleDateFormat("yyyy/MM/d");
-          SimpleDateFormat time=new SimpleDateFormat("HH:mm:ss");
-          Date=date.format(cal.getTime());
-           Time=time.format(cal.getTime());
-            
+
+        }
+    }
+
+    public void LogUpdatedINFO() {
+        try {
+            Calendar cal = Calendar.getInstance();
+            String Time, Date;
+            SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+            SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
+            Date = date.format(cal.getTime());
+            Time = time.format(cal.getTime());
+
             DBConnection.init();
-            Connection c=DBConnection.getConnection();
+            Connection c = DBConnection.getConnection();
             PreparedStatement ps;
             ResultSet rs;
             //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
-            ps=c.prepareStatement("Insert into logs(Act,Time,Date)values"+"('Profile Update ID "+ID+"','"+Time+"','"+Date+"')");
+            ps = c.prepareStatement("Insert into logs(Act,Time,Date)values" + "('Profile Update ID " + ID + "','" + Time + "','" + Date + "')");
             ps.execute();
-            
+
             System.out.println("");
             // ps=c.prepareStatement("Select * from  informant_info");
         } catch (SQLException ex) {
             System.out.println(ex);
         }
- }
+    }
 }

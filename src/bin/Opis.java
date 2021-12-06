@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Opis extends javax.swing.JFrame {
-Boolean load,isUser;
+
+    Boolean load, isUser;
 
     /**
      * Creates new form Opis
@@ -253,7 +254,7 @@ Boolean load,isUser;
         // TODO add your handling code here:
         System.out.println(getBounds());
         dispose();
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -273,7 +274,7 @@ Boolean load,isUser;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -300,56 +301,55 @@ Boolean load,isUser;
             }
         });
     }
-    
-    
-     public void SaveInfo(){
+
+    public void SaveInfo() {
         try {
-            DBConnection.init();                      
-            Connection c =DBConnection.getConnection();
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
             PreparedStatement ps;
             ResultSet rs;
-           
-            
-            ps=c.prepareStatement("Insert into opisinfo (region,op_add,telephone,oic,rank,h_e,)values"+"('"+this.Regiona.getText()+"','"+this.OpAddd.getText()+"','"+this.Telphone.getText()+"','"+OIC.getText()+"','"+this.Ranke.getText()+"','"+this.HighetEducation.getText()+"'')");
-            ps.execute(); 
+
+            ps = c.prepareStatement("Insert into opisinfo (region,op_add,telephone,oic,rank,h_e,)values" + "('" + this.Regiona.getText() + "','" + this.OpAddd.getText() + "','" + this.Telphone.getText() + "','" + OIC.getText() + "','" + this.Ranke.getText() + "','" + this.HighetEducation.getText() + "'')");
+            ps.execute();
             JOptionPane.showMessageDialog(this, "Office info Save");
         } catch (Exception ex) {
             System.out.println(ex);
         }
-     }
-     
-   public void UpdateOpis(){
-   
-        try {                      
-            DBConnection.init();
-            Connection c =DBConnection.getConnection();
-            PreparedStatement ps;
-            ResultSet rs;
-            
-            ps=c.prepareStatement("Update opisinfo  set region=(?),op_add=(?),telephone=(?),oic=(?),rank=(?),h_e=(?) where idOpisInfo=(?)");
-            ps.setString(1,Regiona.getText());
-            ps.setString(2,OpAddd.getText());
-            ps.setString(3,Telphone.getText());    
-            ps.setString(4,OIC.getText());
-            ps.setString(5,Ranke.getText());         
-            ps.setString(6,HighetEducation.getText()); 
-            ps.setString(7,"1");
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(this,"Office Informantion Updated");
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }}
-   
-   public void Loaddata(){
+    }
+
+    public void UpdateOpis() {
+
         try {
             DBConnection.init();
-            Connection c =DBConnection.getConnection();
+            Connection c = DBConnection.getConnection();
             PreparedStatement ps;
             ResultSet rs;
-            
-            ps=c.prepareStatement("Select * from  opisinfo  where idOpisInfo ='1'");
-            rs=ps.executeQuery();
-            
+
+            ps = c.prepareStatement("Update opisinfo  set region=(?),op_add=(?),telephone=(?),oic=(?),rank_=(?),h_e=(?) where idOpisInfo=(?)");
+            ps.setString(1, Regiona.getText());
+            ps.setString(2, OpAddd.getText());
+            ps.setString(3, Telphone.getText());
+            ps.setString(4, OIC.getText());
+            ps.setString(5, Ranke.getText().toString());
+            ps.setString(6, HighetEducation.getText());
+            ps.setString(7, "1");
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Office Informantion Updated");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void Loaddata() {
+        try {
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            ps = c.prepareStatement("Select * from  opisinfo  where idOpisInfo ='1'");
+            rs = ps.executeQuery();
+
             if (rs.next()) {
                 Regiona.setText(rs.getString(2));
                 OpAddd.setText(rs.getString(3));
@@ -357,18 +357,17 @@ Boolean load,isUser;
                 OIC.setText(rs.getString(5));
                 Ranke.setText(rs.getString(6));
                 HighetEducation.setText(rs.getString(7));
-                 if (rs.getString(1).equals("1")) {
+                if (rs.getString(1).equals("1")) {
                     System.out.println("office info kay");
                     jButton1.setEnabled(false);
                 }
-                
-                          
+
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-   
-   }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField HighetEducation;

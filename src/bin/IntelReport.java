@@ -228,7 +228,16 @@ public class IntelReport extends javax.swing.JFrame {
             Boolean Status = ps.execute();
 
             if (!Status) {
-                JOptionPane.showMessageDialog(this, "Intel Report is Posted...");
+                JOptionPane.showMessageDialog(this, "Intel Report Added", "New Intel", JOptionPane.INFORMATION_MESSAGE);
+                int a = JOptionPane.showConfirmDialog(this, "Do you want to add new Intel Report to this Informant? ", "New Intel Report", JOptionPane.YES_NO_OPTION);
+                if (a == 0) {
+                    this.IntelReport.setText("");
+                    date.setDate(null);
+                    subject_combo.setSelectedIndex(0);
+                } else {
+                    this.dispose();
+                }
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(IntelReport.class.getName()).log(Level.SEVERE, null, ex);

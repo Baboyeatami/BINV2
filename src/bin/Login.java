@@ -5,12 +5,17 @@
  */
 package bin;
 
+import static bin.MainForm.TEMPLATE_PROPERTY;
+import com.digitalpersona.onetouch.DPFPGlobal;
+import com.digitalpersona.onetouch.DPFPTemplate;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +35,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        onLoad();
         login.requestFocus();
         //loginBut.requestFocusInWindow();
     }
@@ -244,6 +250,36 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
+    VerificationForm verificationForm;
+    public static String TEMPLATE_PROPERTY = "template";
+    private DPFPTemplate template;
+
+    public DPFPTemplate getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(DPFPTemplate template) {
+        DPFPTemplate old = this.template;
+        this.template = template;
+        firePropertyChange(TEMPLATE_PROPERTY, old, template);
+    }
+
+    private void onLoad() {
+
+        try {
+            FileInputStream stream = new FileInputStream(System.getProperty("user.dir") + "\\lib\\credentials.fpt");
+            byte[] data = new byte[stream.available()];
+            stream.read(data);
+            stream.close();
+            DPFPTemplate t = DPFPGlobal.getTemplateFactory().createTemplate();
+            t.deserialize(data);
+            setTemplate(t);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), "Fingerprint loading", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
     public final void LoadNameOnlyData() {
         try {
 
@@ -257,14 +293,25 @@ public class Login extends javax.swing.JFrame {
             while (rs.next()) {
 
                 if (rs.getString(5).equals(pass) && rs.getString(6).equals(User) && rs.getString(9).equals("admin")) {
-                    System.out.println("Admin login");
+                    System.out.println(System.getProperty("user.dir"));
+                    if (verificationForm == null) {
+                        verificationForm = new VerificationForm(this);
 
-                    main = new MainFrame();
-                    main.isUser = false;
-                    main.User.setText(login.getText());
-                    main.setVisible(true);
-                    LogLOGIN();
-                    dispose();
+                        verificationForm.setVisible(true);
+                    } else {
+                        verificationForm.setVisible(true);
+                    }
+
+                    if (verificationForm.getResult()) {
+                        System.out.println("Admin login");
+                        main = new MainFrame();
+                        main.isUser = false;
+                        main.User.setText(login.getText());
+                        main.setVisible(true);
+                        LogLOGIN();
+                        dispose();
+                    }
+
                 } else if (rs.getString(5).equals(pass) && rs.getString(6).equals(User) && rs.getString(9).equals("user")) {
                     System.out.println("User login");
 

@@ -55,7 +55,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
     DateFormat df;
     boolean isPrinted = false;
     boolean isUser;
-    private String Barangay_Name;
+    private String Barangay_Name, SQLString;
 
     /**
      * Creates new form BarangayDetails
@@ -96,7 +96,6 @@ public class BarangayIntelReport extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         BarangayName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -116,15 +115,18 @@ public class BarangayIntelReport extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Barangay Intellegence Report");
+        setBackground(new java.awt.Color(51, 51, 51));
         setBounds(new java.awt.Rectangle(305, 122, 0, 0));
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTable1.setBackground(new java.awt.Color(51, 51, 51));
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Subject", "Barangay", "Intel Report", "Date of Report"
+                "ID", "Subject", "Barangay", "Intel Report", "Date (YYYY-MM-DD"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,18 +140,6 @@ public class BarangayIntelReport extends javax.swing.JFrame {
         BarangayName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bin/images/print.png"))); // NOI18N
-        jButton5.setText("Print List");
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton5.setMaximumSize(new java.awt.Dimension(100, 41));
-        jButton5.setPreferredSize(new java.awt.Dimension(100, 41));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bin/images/Close.png"))); // NOI18N
@@ -204,7 +194,6 @@ public class BarangayIntelReport extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
@@ -214,8 +203,6 @@ public class BarangayIntelReport extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +229,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
             }
         });
 
-        dateFrom.setDateFormatString("yyyy/MM/d ");
+        dateFrom.setDateFormatString("yyyy-MM-dd ");
         dateFrom.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         dateFrom.setMinSelectableDate(new java.util.Date(-62135737139000L));
 
@@ -252,7 +239,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("To");
 
-        DateTO.setDateFormatString("yyyy/MM/d ");
+        DateTO.setDateFormatString("yyyy-MM-dd ");
         DateTO.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -301,7 +288,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
         });
 
         Screteria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Screteria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Subject", "Illegal Drugs", "Illegal Gambling", "Illegal Firearms", "Threat Groups", "Political Matter", "Social Matter ", "Environmental Issue", "Health Matter", "MWP", "OWP", "Other Criminal Offenses", "Others " }));
+        Screteria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Subjects", "Illegal Drugs", "Illegal Gambling", "Illegal Firearms", "Threat Groups", "Political Matter", "Social Matter ", "Environmental Issue", "Health Matter", "MWP", "OWP", "Other Criminal Offenses", "Others " }));
         Screteria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ScreteriaActionPerformed(evt);
@@ -406,24 +393,10 @@ public class BarangayIntelReport extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try {
-            // TODO add your handling code here:
-            LoadIntelReport();
-        } catch (SQLException ex) {
-            Logger.getLogger(BarangayIntelReport.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // TODO add your handling code here:
+        LoadSearch_Data();
 
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (!isPrinted) {
-            Print();
-        } else if (isPrinted) {
-            PrintCoreveredDate();
-            LogPrinnBarangayList();
-        }
-
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void SearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_SearchCaretUpdate
         // TODO add your handling code here:
@@ -468,7 +441,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         int numCh1 = 1;
-        String[] moves = {"Select ALL", "Balasinon", "Buguis", "Carre", "Clib", "Harada Butai", "Katipunan", "Kiblagon", "Labon", "Laperas", "Lapla", "Litos", "Luparan", "Mckinley", "New Cebu", "Osmeña", "Palili", "Parame", "Poblacion", "Roxas", "Solongvale", "Tagolilong", "Tala-o", "Talas", "Tanwalang", "Waterfall"};
+        String[] moves = {"All Barangays", "Balasinon", "Buguis", "Carre", "Clib", "Harada Butai", "Katipunan", "Kiblagon", "Labon", "Laperas", "Lapla", "Litos", "Luparan", "Mckinley", "New Cebu", "Osmeña", "Palili", "Parame", "Poblacion", "Roxas", "Solongvale", "Tagolilong", "Tala-o", "Talas", "Tanwalang", "Waterfall"};
         JComboBox<?> optionList = new JComboBox<Object>(moves);
         JOptionPane.showMessageDialog(
                 this,
@@ -479,11 +452,31 @@ public class BarangayIntelReport extends javax.swing.JFrame {
         numCh1 = optionList.getSelectedIndex();
         BarangayName.setText(optionList.getSelectedItem().toString()
         );
+
         System.out.println(moves[numCh1]);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        Data_Visualization();
+        int numCh1 = 1;
+        String[] moves = {"Visualize All Data", "Visualize Selected Data"};
+        JComboBox<?> optionList = new JComboBox<Object>(moves);
+        JOptionPane.showMessageDialog(
+                this,
+                optionList,
+                "Visualization options ",
+                JOptionPane.YES_NO_CANCEL_OPTION
+        );
+        numCh1 = optionList.getSelectedIndex();
+
+        System.out.println(moves[numCh1]);
+
+        if (numCh1 == 0) {
+            Data_Visualization();
+        } else {
+            Data_Visualization(SQLString);
+
+        }
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
@@ -561,6 +554,32 @@ public class BarangayIntelReport extends javax.swing.JFrame {
 
             String SQL = "SELECT subject,count(*) FROM bin.intel_reports group by subject";
 
+            JRDesignQuery JQ = new JRDesignQuery();
+            JQ.setText(SQL);
+            Jd.setQuery(JQ);
+            JR = JasperCompileManager.compileReport(Jd);
+            JP = JasperFillManager.fillReport(JR, null, DBConnection.getConnection());
+            // JasperViewer.viewReport(JP, rootPaneCheckingEnabled, Locale.FRENCH);
+
+            JasperViewer.viewReport(JP, false, Locale.ENGLISH);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+            System.out.println(e);
+        }
+
+    }
+
+    public void Data_Visualization(String SQL) {
+        try {
+            JasperReport JR;
+            JasperPrint JP;
+
+            // String Q="%"+this.txtSearch.getText() +"%";
+            // String Source="C:\\Users\\JAMIEXXX3\\Documents\\NetBeansProjects\\Phonelist\\src\\Forms\\report1.jrxml";
+            DBConnection.init();
+            JasperDesign Jd = JRXmlLoader.load(System.getProperty("user.dir") + "\\\\reports\\\\CrimeDataVisualization.jrxml");
+
+            //String SQL = "SELECT subject,count(*) FROM bin.intel_reports group by subject";
             JRDesignQuery JQ = new JRDesignQuery();
             JQ.setText(SQL);
             Jd.setQuery(JQ);
@@ -808,7 +827,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
 
             if (Screteria.getSelectedIndex() == 0 && BarangayName.getText().toString() == "") {
                 JOptionPane.showMessageDialog(this, "Pleaase select a search option", "Search Creteria", JOptionPane.INFORMATION_MESSAGE);
-            } else if (Screteria.getSelectedIndex() != 0 && dateFrom.getDate() != null && DateTO.getDate() != null && BarangayName.getText() != "") {
+            } else if (Screteria.getSelectedIndex() != 0 && dateFrom.getDate() != null && DateTO.getDate() != null && BarangayName.getText() != "" && Search.getText() != null) {
 
                 df = new SimpleDateFormat("yyyy/MM/d ");
                 dateF = String.valueOf(df.format(dateFrom.getDate()));
@@ -819,9 +838,43 @@ public class BarangayIntelReport extends javax.swing.JFrame {
                 System.out.println(dateT + "  to");
 
                 ps = c.prepareStatement("Select * from   intel_reports where subject ='" + Screteria.getSelectedItem().toString() + "' and Barangay='" + BarangayName.getText().toString() + "' and Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "'");
+                SQLString = "SELECT subject,count(*) FROM bin.intel_reports where subject ='" + Screteria.getSelectedItem().toString() + "' and Barangay='" + BarangayName.getText().toString() + "' and Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "'  group by subject";
+
+            } else if (Screteria.getSelectedIndex() == 0 && dateFrom.getDate() != null && DateTO.getDate() != null && BarangayName.getText() != "All Barangays" && Search.getText() != null) {
+
+                df = new SimpleDateFormat("yyyy/MM/d ");
+                dateF = String.valueOf(df.format(dateFrom.getDate()));
+                dateT = String.valueOf(df.format(DateTO.getDate()));
+                //Date myDateFrom = df.parse(dateF);s
+                //Date myDateTO = df.parse(dateT);
+                System.out.println(dateF + "  from");
+                System.out.println(dateT + "  to");
+
+                ps = c.prepareStatement("Select * from   intel_reports where   Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "' and Barangay='" + BarangayName.getText().toString() + "'");
+
+                SQLString = "SELECT subject,count(*) from   intel_reports where   Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "'  and Barangay='" + BarangayName.getText().toString() + "' group by subject";
+
+            } else if (Screteria.getSelectedIndex() == 0 && dateFrom.getDate() != null && DateTO.getDate() != null && BarangayName.getText() == "All Barangays") {
+                System.out.println("Test Mode ");
+                df = new SimpleDateFormat("yyyy/MM/d ");
+                dateF = String.valueOf(df.format(dateFrom.getDate()));
+                dateT = String.valueOf(df.format(DateTO.getDate()));
+                //Date myDateFrom = df.parse(dateF);r
+                //Date myDateTO = df.parse(dateT);
+                System.out.println(dateF + "  from");
+                System.out.println(dateT + "  to");
+
+                ps = c.prepareStatement("Select * from   intel_reports where  Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "'");
+
+                SQLString = "SELECT subject,count(*)  from   intel_reports where Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "' group by subject";
+
+            } else if (Screteria.getSelectedIndex() == 0 && BarangayName.getText() == "All Barangays" || BarangayName.getText() == "") {
+
+                ps = c.prepareStatement("Select * from   intel_reports where  Intel_report like '" + S + "'");
+                SQLString = "SELECT subject,count(*)  from   intel_reports where  Intel_report like '" + S + "' group by subject";
 
             } else if (Screteria.getSelectedIndex() != 0 && dateFrom.getDate() != null && DateTO.getDate() != null) {
-
+                System.out.println("test mode 2");
                 df = new SimpleDateFormat("yyyy/MM/d ");
                 dateF = String.valueOf(df.format(dateFrom.getDate()));
                 dateT = String.valueOf(df.format(DateTO.getDate()));
@@ -831,6 +884,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
                 System.out.println(dateT + "  to");
 
                 ps = c.prepareStatement("Select * from   intel_reports where subject ='" + Screteria.getSelectedItem().toString() + "' and Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "'");
+                SQLString = "SELECT subject,count(*)  from   intel_reports where subject ='" + Screteria.getSelectedItem().toString() + "' and Intel_report like '" + S + "' and date between '" + dateF + "' and '" + dateT + "' group by subject";
 
             } else if (Screteria.getSelectedIndex() != 0 && BarangayName.getText() != "") {
 
@@ -849,6 +903,7 @@ public class BarangayIntelReport extends javax.swing.JFrame {
                 ps = c.prepareStatement("Select * from   intel_reports where  Intel_report like '" + S + "'");
 
             }
+
             // ps = c.prepareStatement("Select * from  informant_info where B_PAdrress ='" + B_name + "' and Alias like '" + S + "'");
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -1167,7 +1222,6 @@ public class BarangayIntelReport extends javax.swing.JFrame {
     private javax.swing.JTextField Search;
     private javax.swing.ButtonGroup buttonGroup1;
     private com.toedter.calendar.JDateChooser dateFrom;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

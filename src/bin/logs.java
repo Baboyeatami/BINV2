@@ -1,6 +1,5 @@
 package bin;
 
-
 import bin.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,20 +20,20 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class logs extends javax.swing.JInternalFrame {
-    DefaultTableModel model=new DefaultTableModel();
+
+    DefaultTableModel model = new DefaultTableModel();
 
     /**
      * Creates new form logs
      */
     public logs() {
         initComponents();
-        model=(DefaultTableModel) jTable1.getModel();
+        model = (DefaultTableModel) jTable1.getModel();
         LoadNameOnlyData();
     }
 
@@ -61,10 +60,9 @@ public class logs extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Activity", "Time ", "Date"
+                "ID", "Activity", "Time ", "Date(YYYY-MM-DD))"
             }
         ));
-        jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
         date.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -146,7 +144,7 @@ public class logs extends javax.swing.JInternalFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -173,147 +171,153 @@ public class logs extends javax.swing.JInternalFrame {
             }
         });
     }
- public void LogSave(){
- 
-        try {
-            Calendar cal=  Calendar.getInstance();
-            String Time,Date;
-            SimpleDateFormat date=new SimpleDateFormat("yyyy/MM/d");
-          SimpleDateFormat time=new SimpleDateFormat("hh:mm:s");
-          Date=date.format(cal.getTime());
-           Time=time.format(cal.getTime());
-            
-            DBConnection.init();
-            Connection c=DBConnection.getConnection();
-            PreparedStatement ps;
-            ResultSet rs;
-            //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
-            ps=c.prepareStatement("Insert into logs(Act,Time,Date)values"+"('add Informant ID','"+Time+"','"+Date+"')");
-            ps.execute();
-            // ps=c.prepareStatement("Select * from  informant_info");
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
- 
- }
- public void LogSUpdate(){}
- public void LogLOGIN(){
-   try {
-            Calendar cal=  Calendar.getInstance();
-            String Time,Date;
-            SimpleDateFormat date=new SimpleDateFormat("yyyy/MM/d");
-          SimpleDateFormat time=new SimpleDateFormat("hh:mm:s");
-          Date=date.format(cal.getTime());
-           Time=time.format(cal.getTime());
-            
-            DBConnection.init();
-            Connection c=DBConnection.getConnection();
-            PreparedStatement ps;
-            ResultSet rs;
-            //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
-            ps=c.prepareStatement("Insert into logs(Act,Time,Date)values"+"('add Informant ID','"+Time+"','"+Date+"')");
-            ps.execute();
-            // ps=c.prepareStatement("Select * from  informant_info");
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
- }
- public void LogLOGUUT(){
-   try {
-            Calendar cal=  Calendar.getInstance();
-            String Time,Date;
-           SimpleDateFormat date=new SimpleDateFormat("yyyy/MM/d");
-          SimpleDateFormat time=new SimpleDateFormat("hh:mm:s");
-          Date=date.format(cal.getTime());
-           Time=time.format(cal.getTime());
-            
-            DBConnection.init();
-            Connection c=DBConnection.getConnection();
-            PreparedStatement ps;
-            ResultSet rs;
-            //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
-            ps=c.prepareStatement("Insert into logs(Act,Time,Date)values"+"('add Informant ID','"+Time+"','"+Date+"')");
-            ps.execute();
-            // ps=c.prepareStatement("Select * from  informant_info");
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
- }
- public void LogIAPS(){
-     Calendar cal=  Calendar.getInstance();
-     String Time,Date;
-     SimpleDateFormat date=new SimpleDateFormat("yyyy/MM/d");
-     SimpleDateFormat time=new SimpleDateFormat("hh:mm:s");
-     Date=date.format(cal.getTime());
-     Time=time.format(cal.getTime());
-     DBConnection.init();
-     Connection c=DBConnection.getConnection();
-     PreparedStatement ps;
-     ResultSet rs;
-     
- }
- public void LogSDS(){}
- public void LogABS(){}
-      
- public void DateandTime(){
 
-    Calendar cal=  Calendar.getInstance();
-     String Time,Date;
-    SimpleDateFormat date=new SimpleDateFormat("MMMM/dd/yyyy");
-     SimpleDateFormat time=new SimpleDateFormat("hh:mm:s");
-     Date=date.format(cal.getTime());
-     Time=time.format(cal.getTime());
-   
+    public void LogSave() {
+
+        try {
+            Calendar cal = Calendar.getInstance();
+            String Time, Date;
+            SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+            SimpleDateFormat time = new SimpleDateFormat("hh:mm:s");
+            Date = date.format(cal.getTime());
+            Time = time.format(cal.getTime());
+
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
+            ps = c.prepareStatement("Insert into logs(Act,Time,Date)values" + "('add Informant ID','" + Time + "','" + Date + "')");
+            ps.execute();
+            // ps=c.prepareStatement("Select * from  informant_info");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
     }
-  
-  public void LoadNameOnlyData(){
-    try{
-     model.setRowCount(0);
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  logs order by idlogs DESC");
-    rs=ps.executeQuery();
-    while(rs.next()){
-    model.addRow(new Object[]{rs.getString(1),rs.getString(2), rs.getString(3) ,rs.getString(4)});
+
+    public void LogSUpdate() {
     }
-   
-    
-    } 
-    catch(Exception e){System.out.println(e);
+
+    public void LogLOGIN() {
+        try {
+            Calendar cal = Calendar.getInstance();
+            String Time, Date;
+            SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+            SimpleDateFormat time = new SimpleDateFormat("hh:mm:s");
+            Date = date.format(cal.getTime());
+            Time = time.format(cal.getTime());
+
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
+            ps = c.prepareStatement("Insert into logs(Act,Time,Date)values" + "('add Informant ID','" + Time + "','" + Date + "')");
+            ps.execute();
+            // ps=c.prepareStatement("Select * from  informant_info");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
+
+    public void LogLOGUUT() {
+        try {
+            Calendar cal = Calendar.getInstance();
+            String Time, Date;
+            SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+            SimpleDateFormat time = new SimpleDateFormat("hh:mm:s");
+            Date = date.format(cal.getTime());
+            Time = time.format(cal.getTime());
+
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
+            ps = c.prepareStatement("Insert into logs(Act,Time,Date)values" + "('add Informant ID','" + Time + "','" + Date + "')");
+            ps.execute();
+            // ps=c.prepareStatement("Select * from  informant_info");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void LogIAPS() {
+        Calendar cal = Calendar.getInstance();
+        String Time, Date;
+        SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+        SimpleDateFormat time = new SimpleDateFormat("hh:mm:s");
+        Date = date.format(cal.getTime());
+        Time = time.format(cal.getTime());
+        DBConnection.init();
+        Connection c = DBConnection.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
+
+    }
+
+    public void LogSDS() {
+    }
+
+    public void LogABS() {
+    }
+
+    public void DateandTime() {
+
+        Calendar cal = Calendar.getInstance();
+        String Time, Date;
+        SimpleDateFormat date = new SimpleDateFormat("MMMM/dd/yyyy");
+        SimpleDateFormat time = new SimpleDateFormat("hh:mm:s");
+        Date = date.format(cal.getTime());
+        Time = time.format(cal.getTime());
+
+    }
+
+    public void LoadNameOnlyData() {
+        try {
+            model.setRowCount(0);
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = c.prepareStatement("Select * from  logs order by idlogs DESC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
     DateFormat df;
-    String dateF,dateT;
-  
+    String dateF, dateT;
+
     private void LoadshowCoveredPeriod() {
-         try{
-                df = new SimpleDateFormat("yyyy-MM-d ");
+        try {
+            df = new SimpleDateFormat("yyyy-MM-d ");
             dateF = String.valueOf(df.format(date.getDate()));
-          //  dateT = String.valueOf(df.format(DateTO2.getDate()));
+            //  dateT = String.valueOf(df.format(DateTO2.getDate()));
             //Date myDateFrom = df.parse(dateF);
             //Date myDateTO = df.parse(dateT);
-             
-             
-     model.setRowCount(0);
-    DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from  logs  where Date ='"+dateF+"'  order by idlogs DESC");
-    rs=ps.executeQuery();
-    while(rs.next()){
-        model.addRow(new Object[]{rs.getString(1),rs.getString(2), rs.getString(3) ,rs.getString(4)});
+
+            model.setRowCount(0);
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = c.prepareStatement("Select * from  logs  where Date ='" + dateF + "'  order by idlogs DESC");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
+            }
+
+        } catch (Exception e) {//System.out.println(e);
+        }
+
     }
-   
-    
-    } 
-    catch(Exception e){//System.out.println(e);
-    }
-        
-         }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JButton jButton1;

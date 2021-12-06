@@ -1,10 +1,18 @@
 package bin;
 
+import static bin.MainForm.TEMPLATE_PROPERTY;
+import com.digitalpersona.onetouch.DPFPTemplate;
 import java.awt.HeadlessException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -12,15 +20,17 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class adminPass extends javax.swing.JFrame {
+
     private String currentpass;
     private String newpass;
     AdminUpdate adminUpdate;
+    private DPFPTemplate template;
+
     /**
      * Creates new form adminPass
      */
@@ -29,10 +39,37 @@ public class adminPass extends javax.swing.JFrame {
     }
 
     adminPass(AdminUpdate aThis) {
-        this.adminUpdate=aThis;
-         initComponents();
-         
-         }
+        this.adminUpdate = aThis;
+        initComponents();
+
+    }
+
+    public void setTemplate(DPFPTemplate template) {
+        DPFPTemplate old = this.template;
+        this.template = template;
+        firePropertyChange(TEMPLATE_PROPERTY, old, template);
+        System.out.println("templete set ok");
+
+        onSave();
+    }
+
+    public DPFPTemplate getTemplate() {
+        return template;
+    }
+
+    void onSave() {
+        if (!Files.exists(Paths.get(System.getProperty("user.dir") + "\\lib\\credentials.fpt"))) {
+            try {
+                FileOutputStream stream = new FileOutputStream(System.getProperty("user.dir") + "\\lib\\credentials.fpt");
+                stream.write(getTemplate().serialize());
+                stream.close();
+                System.out.println("fingerPrint saved");
+            } catch (IOException ex) {
+                Logger.getLogger(adminPass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +89,7 @@ public class adminPass extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        EnrollBiometric = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Change Password");
@@ -95,14 +133,21 @@ public class adminPass extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Password");
 
+        EnrollBiometric.setText("Enroll Biometric Details");
+        EnrollBiometric.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnrollBiometricActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,14 +162,16 @@ public class adminPass extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Verifiypass, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(Verifiypass, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(EnrollBiometric, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,10 +192,12 @@ public class adminPass extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(Verifiypass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EnrollBiometric, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -158,29 +207,38 @@ public class adminPass extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if ("".equals(passCurrent.getText()) && passNew.getText().equals("") && Verifiypass.getText().equals("") || "".equals(passCurrent.getText()) || passNew.getText().equals("") || Verifiypass.getText().equals("")) {
-            JOptionPane.showMessageDialog(this,"Empty Fields. Please suppy fields to continue.");
-        }
-        else{
-        if (VerifyINput()) {
-            if (Verifiypass.getText().equals(passNew.getText())) {
-                 newpass=passNew.getText();
-                 adminUpdate.SetnewPass(newpass);
-                 adminUpdate.setVisible(true);
-                 Clear();
-                 dispose();
-            }else{
-              JOptionPane.showMessageDialog(this,"Password mismatch");
+            JOptionPane.showMessageDialog(this, "Empty Fields. Please suppy fields to continue.");
+        } else {
+            if (VerifyINput()) {
+                if (Verifiypass.getText().equals(passNew.getText())) {
+                    newpass = passNew.getText();
+                    adminUpdate.SetnewPass(newpass);
+                    adminUpdate.setVisible(true);
+                    Clear();
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Password mismatch");
+                }
             }
-        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         adminUpdate.setVisible(true);
-         System.out.println(getBounds());
+        System.out.println(getBounds());
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+    EnrollmentForm enrollmentForm;
+    private void EnrollBiometricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollBiometricActionPerformed
+        if (enrollmentForm == null) {
+            enrollmentForm = new EnrollmentForm(this);
+            enrollmentForm.setVisible(true);
+        } else {
+            enrollmentForm.setVisible(true);
+
+        }
+    }//GEN-LAST:event_EnrollBiometricActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,7 +247,7 @@ public class adminPass extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -218,6 +276,7 @@ public class adminPass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EnrollBiometric;
     private javax.swing.JPasswordField Verifiypass;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -242,37 +301,36 @@ public class adminPass extends javax.swing.JFrame {
     public void setCurrentpass(String currentpass) {
         this.currentpass = currentpass;
     }
-    
-    
-      public boolean VerifyINput(){
-     try {
-          DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from useracc where idUserAcc='1'");
-    rs=ps.executeQuery();
-         if (rs.next()) {
-             if (rs.getString(5).equals(passCurrent.getText())) {
-                 System.out.println("Password Match");
-                  return true;
-                  
-             }else{
-             JOptionPane.showMessageDialog(this,"Password mismatch");
-             }
-      
-         }
-       
-     } catch (SQLException | NumberFormatException | HeadlessException e) {
-         System.out.println(e);
-     }
+
+    public boolean VerifyINput() {
+        try {
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = c.prepareStatement("Select * from useracc where idUserAcc='1'");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getString(5).equals(passCurrent.getText())) {
+                    System.out.println("Password Match");
+                    return true;
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Password mismatch");
+                }
+
+            }
+
+        } catch (SQLException | NumberFormatException | HeadlessException e) {
+            System.out.println(e);
+        }
         return false;
- 
- }
-      
-      public void Clear(){
-      passCurrent.setText("");
-      passNew.setText("");
-      Verifiypass.setText("");
-      }
+
+    }
+
+    public void Clear() {
+        passCurrent.setText("");
+        passNew.setText("");
+        Verifiypass.setText("");
+    }
 }

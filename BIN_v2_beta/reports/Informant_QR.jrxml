@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="612" pageHeight="396" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="abad9fca-d72e-4d05-b62d-8121285d8365">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <queryString>
+		<![CDATA[SELECT idInformant_info,F_Name,M_Name,L_Name FROM bin.informant_info where idInformant_info =20;]]>
+    </queryString>
+    <field name="idInformant_info" class="java.math.BigInteger">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="F_Name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="M_Name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="L_Name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <columnHeader>
+        <band height="22">
+            <staticText>
+                <reportElement x="0" y="0" width="288" height="20" uuid="92d3f980-e1f5-462c-8fd6-2bffcfd7189b"/>
+                <textElement>
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[BIN IDENTIFICATION RECEIPT]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="210" splitType="Stretch">
+            <image onErrorType="Blank">
+                <reportElement x="25" y="24" width="176" height="161" uuid="87175dc1-802d-465d-af85-58fb10fd7227"/>
+                <imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+new com.google.zxing.qrcode.QRCodeWriter().encode(
+$F{idInformant_info}.toString(),
+com.google.zxing.BarcodeFormat.QR_CODE, 300, 300))]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="222" y="94" width="74" height="20" uuid="e7f2ab4a-c602-4f30-9def-7bf77c32300e"/>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <text><![CDATA[First Name:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="296" y="94" width="239" height="20" uuid="0446fb54-e686-480f-bfc4-6569712dfafe"/>
+                <textElement>
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{F_Name}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="207" y="114" width="99" height="20" uuid="b67fa7ee-5779-4caf-b0eb-56e2dc1b7699"/>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <text><![CDATA[Middle Name:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="296" y="114" width="239" height="20" uuid="8e3609c0-d088-4cb0-bb5e-8d8b4ed19802"/>
+                <textElement>
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{M_Name}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="222" y="134" width="74" height="20" uuid="67bec698-3f63-401b-9fee-8c9f2d5ebdc4"/>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <text><![CDATA[Last Name:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="296" y="134" width="239" height="20" uuid="360c6223-544b-4325-9071-5846ee7b3d45"/>
+                <textElement>
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{L_Name}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

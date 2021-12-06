@@ -21,7 +21,7 @@
                 <textElement textAlignment="Center">
                     <font size="36" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Sulop Crime Statistics ]]></text>
+                <text><![CDATA[Sulop Intel Reports]]></text>
             </staticText>
         </band>
     </title>

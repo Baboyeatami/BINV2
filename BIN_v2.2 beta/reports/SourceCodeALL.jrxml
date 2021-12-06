@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="936" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="37c5cb02-8000-4f9a-99da-1651b825483f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\JAMIEXXX3\\Documents\\NetBeansProjects\\BIN\\src\\bin\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from barangaystats]]>
+	</queryString>
+	<field name="idBarangayStats" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="InformantNumber" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="107" splitType="Stretch">
+			<image>
+				<reportElement x="404" y="14" width="150" height="85" uuid="7897a643-b031-4131-912a-db108a23b479"/>
+				<imageExpression><![CDATA["C:\\BIN\\images\\MPS LOGO2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="152" y="10" width="261" height="82" uuid="237b8f2b-5e8f-4c84-9fed-bc4c98c18f99"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republic of the Philippines
+NATIONAL POLICE COMMISSION
+PHILIPPINE NATIONAL POLICE
+SULOP MUNICIPAL POLICE STATION
+Sulop,Davao del Sur
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="81" y="18" width="150" height="80" uuid="802d43f8-a214-45d4-bb0e-3d42e7263f76"/>
+				<imageExpression><![CDATA["C:\\BIN\\images\\pulis.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="164" y="5" width="250" height="20" uuid="c1b7eae1-2f19-4ffa-8a96-6b3c0a1d5d6d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parameter1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement x="18" y="10" width="119" height="20" uuid="c1e819db-ec76-463b-b332-5585dd888965"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name & Barangay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="10" width="140" height="20" uuid="05cb69bd-03e1-437e-8670-5d6877977ea7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Source of Codification]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<subreport>
+				<reportElement x="3" y="5" width="567" height="28" uuid="50c4da58-362e-4e90-a4d1-cd229db99c2a"/>
+				<subreportParameter name="ID">
+					<subreportParameterExpression><![CDATA[$F{Name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SourceOfCodiPerBrgy_subreport1_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="408" y="27" width="100" height="20" uuid="f8edb9ef-fa29-4fff-8830-fd412dbe2142"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

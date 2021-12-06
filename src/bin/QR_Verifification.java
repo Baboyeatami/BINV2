@@ -29,6 +29,7 @@ public class QR_Verifification extends javax.swing.JFrame implements Runnable, T
     private Webcam webcam = null;
     String InformantID;
     Records record;
+    public Boolean TreadRunner = true;
 
     public Records getRecord() {
         return record;
@@ -131,6 +132,7 @@ public class QR_Verifification extends javax.swing.JFrame implements Runnable, T
     // End of variables declaration//GEN-END:variables
 
     private void initWebcam() {
+
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
@@ -142,13 +144,15 @@ public class QR_Verifification extends javax.swing.JFrame implements Runnable, T
         jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
 
         executor.execute(this);
+
     }
 
     @Override
     public void run() {
-        do {
+        while (true) {
             try {
                 Thread.sleep(100);
+                System.out.println("JAmie Jamie Jamie Thread");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -177,7 +181,7 @@ public class QR_Verifification extends javax.swing.JFrame implements Runnable, T
                 QR_verify_data(result.getText());
 
             }
-        } while (true);
+        }
     }
 
     private void QR_verify_data(String id) {
@@ -194,7 +198,9 @@ public class QR_Verifification extends javax.swing.JFrame implements Runnable, T
                 record.validQR(Integer.parseInt(rs.getString(1)));
                 System.out.println(rs.getString(1) + " QR data validated");
                 result_field.setText(null);
-                dispose();
+                TreadRunner = false;
+                //webcam.close();
+                this.dispose();
 
             } else {
                 JOptionPane.showMessageDialog(this, "QR data Invalid");

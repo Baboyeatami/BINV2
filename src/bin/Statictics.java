@@ -65,8 +65,7 @@ public class Statictics extends javax.swing.JFrame {
             }
         });
 
-        menu.add(IntelReport);
-
+        // menu.add(IntelReport);
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

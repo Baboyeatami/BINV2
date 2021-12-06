@@ -73,7 +73,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
         // RefreshTime();
 
         jButton10.setEnabled(false);
-        CriminalRecords.setWrapStyleWord(true);
+        //CriminalRecords.setWrapStyleWord(true);
 
     }
 
@@ -156,17 +156,13 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
         jLabel64 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         Handler = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        CriminalRecords = new javax.swing.JTextArea();
-        jLabel67 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         PictureView = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         ImageFilePath = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        Take_Photo = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -348,9 +344,9 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
         jLabel12.setText("*Fields required");
 
-        jLabel2.setText("*Profile Sheet");
+        jLabel2.setText("Profile Sheet");
 
-        jLabel3.setText("*Source Data Card");
+        jLabel3.setText("Source Data Card");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -714,23 +710,6 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        CriminalRecords.setColumns(20);
-        CriminalRecords.setLineWrap(true);
-        CriminalRecords.setRows(5);
-        jScrollPane3.setViewportView(CriminalRecords);
-
-        jLabel67.setText("Intelligence Report");
-
-        jButton5.setText("Add Intel Report");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -740,26 +719,14 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel67)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -771,12 +738,6 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel67)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5))
@@ -791,7 +752,6 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
         jDesktopPane1.setMaximumSize(new java.awt.Dimension(161, 151));
         jDesktopPane1.setMinimumSize(new java.awt.Dimension(161, 151));
 
-        PictureView.setText("jLabel50");
         PictureView.setMaximumSize(new java.awt.Dimension(161, 151));
         PictureView.setMinimumSize(new java.awt.Dimension(161, 151));
         PictureView.setPreferredSize(new java.awt.Dimension(161, 151));
@@ -821,11 +781,11 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton8.setText("Take Photo");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        Take_Photo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Take_Photo.setText("Take Photo");
+        Take_Photo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                Take_PhotoActionPerformed(evt);
             }
         });
 
@@ -850,7 +810,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Take_Photo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(53, 53, 53))
         );
         jPanel6Layout.setVerticalGroup(
@@ -861,7 +821,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton8)
+                .addComponent(Take_Photo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1174,19 +1134,137 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
         }
 
     }
+    Capture_image capture;
+    BufferedImage image_captureImage;
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if (Lname.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Last name required to continue");
+    public Capture_image getCapture() {
+        return capture;
+    }
+
+    public void setImage_captureImage(BufferedImage image_captureImage) {
+        this.image_captureImage = image_captureImage;
+    }
+
+    public void setCapture(Capture_image capture) {
+        this.capture = capture;
+    }
+
+    private void Take_PhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Take_PhotoActionPerformed
+        if (capture == null) {
+            capture = new Capture_image();
+            capture.setLegacy_Final(this, true);
+            capture.setVisible(true);
         } else {
-//        Webcam web=new Webcam(this);
-            //      web.setVisible(true);
+            capture.setVisible(true);
+            capture.setLegacy_Final(this, true);
+
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_Take_PhotoActionPerformed
 
     private void dateReCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateReCPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_dateReCPropertyChange
+
+    void Write_image() {
+        if (Lname.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Last name required to continue");
+        } else {
+            try {
+                if (!update) {
+
+                    Image image = image_captureImage;
+                    Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+                    ImageIO.write(image_captureImage, "JPG", new File(System.getProperty("user.dir") + "\\\\BIN_PIC\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg"));
+
+                    File sourFile = new File(System.getProperty("user.dir") + "\\\\BIN_PIC\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+                    //File desFile =new File("C:\\Users\\JAMIEXXX3\\Documents\\sample\\5.jpg");
+
+                    //Files.copy(sourFile.toPath(), desFile.toPath());
+                    DBConnection.init();
+                    Connection c = DBConnection.getConnection();
+                    PreparedStatement ps;
+                    ResultSet rs;
+                    ps = c.prepareStatement("Select * from  informant_info");
+                    rs = ps.executeQuery();
+                    int i = 1;
+                    while (rs.next()) {
+                        i++;
+                    }
+
+                    if (f_name.getText().equals("") && Lname.getText().equals("")) {
+                        JOptionPane.showMessageDialog(this, "To continue supply information before attaching image.");
+                    } else {
+                        PictureView.setIcon(new ImageIcon(myImage));
+                        File desFile = new File(System.getProperty("user.dir") + "\\\\BIN_PIC\\\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+
+                        if (desFile.exists()) {
+                            System.out.println("file exist");
+                            Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+                            ImageFilePath.setText(imagePath);
+                            System.out.println(desFile.getAbsolutePath());
+                            imagePath = desFile.getCanonicalPath();
+                            // String a="\"";
+                            String b = "/";
+                            imagePath = imagePath.replace("\\", b);
+                            System.out.println(imagePath);
+                            ImageFilePath.setText(imagePath);
+                            i = 0;
+                        } else {
+
+                            Files.copy(sourFile.toPath(), desFile.toPath());
+                            PictureView.setIcon(new ImageIcon(myImage));
+                            System.out.println(desFile.getAbsolutePath());
+                            imagePath = desFile.getCanonicalPath();
+                            // String a="\"";
+                            String b = "/";
+                            imagePath = imagePath.replace("\\", b);
+                            System.out.println(imagePath);
+                            ImageFilePath.setText(imagePath);
+                            i = 0;
+
+                        }
+                    }
+                } else {
+
+                    JOptionPane.showOptionDialog(this, "Updating Profile Photo ", "You sure you what to update Profile Photo", WIDTH, WIDTH, null, null, nationalilty);
+
+                    JFileChooser chooser = new JFileChooser();
+                    chooser.showOpenDialog(this);
+                    File sFile = chooser.getSelectedFile();
+                    // BufferedImage bufferedImage=ImageIO.read(sFile);
+                    Image image = ImageIO.read(sFile);
+                    Image myImage = image.getScaledInstance(161, 151, Image.SCALE_FAST);
+
+                    File sourFile = new File(sFile.getAbsolutePath());
+
+                    PictureView.setIcon(new ImageIcon(myImage));
+
+                    //System.out.println("int i value  "+i+"");
+                    File desFile = new File(System.getProperty("user.dir") + "\\BIN_PIC\\" + f_name.getText() + Lname.getText() + M_Name.getText() + ".jpg");
+
+                    Files.copy(sourFile.toPath(), desFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+                    imagePath = desFile.getCanonicalPath();
+
+                    ////  PictureView.setIcon(new ImageIcon(myImage));
+                    //  System.out.println(desFile.getAbsolutePath());
+                    // imagePath=desFile.getCanonicalPath();
+                    // String a="\"";
+                    String b = "/";
+                    imagePath = imagePath.replace("\\", b);
+                    System.out.println(imagePath);
+                    ImageFilePath.setText(imagePath);
+
+                    // i=0;
+                }
+
+            } catch (Exception e) {
+
+                System.out.println(e);
+                ImageFilePath.setText(imagePath);
+            }
+        }
+
+    }
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -1374,14 +1452,6 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_LnameCaretUpdate
 
     IntelReport intelReport;
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (intelReport == null) {
-            intelReport = new IntelReport();
-            intelReport.setVisible(true);
-        } else {
-            intelReport.setVisible(true);
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     public void LoadRecordsProfile() {
         try {
@@ -1547,7 +1617,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
         BirthCountry.setText("Philippines");
         Province.setText("Davao del Sur");
         InformantID.setText("");
-        CriminalRecords.setText("");
+        //CriminalRecords.setText("");
         date.cleanup();
         this.age.setText("");
 
@@ -1669,7 +1739,6 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox CBgender;
     private javax.swing.JTextField Category;
     private javax.swing.JComboBox CbCityMun;
-    private javax.swing.JTextArea CriminalRecords;
     private javax.swing.JTextField Handler;
     private javax.swing.JLabel IAPS_Loc;
     private javax.swing.JTextField ImageFilePath;
@@ -1684,6 +1753,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
     private javax.swing.JLabel SDCSCS_Loc;
     private javax.swing.JTextField S_Codification;
     private javax.swing.JComboBox Status_Codification;
+    private javax.swing.JButton Take_Photo;
     private javax.swing.JTextField Threat;
     private javax.swing.JTextField Type;
     private javax.swing.JTextField ZipCode;
@@ -1698,9 +1768,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
@@ -1735,7 +1803,6 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1745,7 +1812,6 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField nationalilty;
     private javax.swing.JTextField place_birth;
@@ -2002,7 +2068,8 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "The field Birth Country is empty supply field to continue.. ", "Empty field", JOptionPane.WARNING_MESSAGE);
                 BirthCountry.requestFocus();
                 this.jTabbedPane1.setSelectedIndex(0);
-            } else if (IPAString == null || IAPS_Loc.getText().equals("")) {
+            } /*
+            else if (IPAString == null || IAPS_Loc.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "PLease attach the scanned Informant Profile Sheet  to continue.", "Empty Profile sheet", JOptionPane.WARNING_MESSAGE);
                 BirthCountry.requestFocus();
                 this.jTabbedPane1.setSelectedIndex(0);
@@ -2010,7 +2077,8 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "PLease attach the scanned Informant Source Data Card and Summary to continue.", "Empty Source data card", JOptionPane.WARNING_MESSAGE);
                 BirthCountry.requestFocus();
                 this.jTabbedPane1.setSelectedIndex(0);
-            } else if (dateReC.getDate() == null) {
+            }
+             */ else if (dateReC.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "The field Date of Recruitment is empty", "Empty Date of Recruitment", JOptionPane.WARNING_MESSAGE);
                 BirthCountry.requestFocus();
                 this.jTabbedPane1.setSelectedIndex(0);
@@ -2045,7 +2113,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                     Date myDateRec = df.parse(dateRec);
                     System.out.println(dateRec);
 
-                    ps = c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Alias,Place_Birth,Zipcode,S_Codification,Status,B_PAdrress,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Threat,Type,Category,Handlers,IAPS_loc,SDCSDS_loc,CriminalR,Position,P_Adrress)values" + "('" + this.f_name.getText() + "','" + this.M_Name.getText() + "','" + this.Lname.getText() + "','" + dateString + "','" + this.age.getText() + "','" + this.nationalilty.getText() + "','" + this.religion.getText() + "','" + this.cb_maritals_status.getSelectedItem().toString() + "','" + this.alias.getText() + "','" + this.place_birth.getText() + "','" + this.ZipCode.getText() + "','" + this.S_Codification.getText() + "','" + this.Status_Codification.getSelectedItem().toString() + "','" + this.P_Barangay.getSelectedItem().toString() + "','" + this.CBgender.getSelectedItem().toString() + "','" + imagePath + "','" + Time + "','" + Date + "','" + dateRec + "','" + Province.getText() + "','" + CbCityMun.getSelectedItem().toString() + "','" + BirthCountry.getText() + "','" + Date + "','" + Time + "','" + Mode_Contanct.getText() + "','" + Mobile_Num.getText() + "','" + Threat.getText() + "','" + Type.getText() + "','" + Category.getText() + "','" + Handler.getText() + "','" + IPAString + "','" + SDCSDString + "','" + CriminalRecords.getText() + "','" + position.getText() + "','" + presentADD.getText() + "')");
+                    ps = c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Alias,Place_Birth,Zipcode,S_Codification,Status,B_PAdrress,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Threat,Type,Category,Handlers,IAPS_loc,SDCSDS_loc,CriminalR,Position,P_Adrress)values" + "('" + this.f_name.getText() + "','" + this.M_Name.getText() + "','" + this.Lname.getText() + "','" + dateString + "','" + this.age.getText() + "','" + this.nationalilty.getText() + "','" + this.religion.getText() + "','" + this.cb_maritals_status.getSelectedItem().toString() + "','" + this.alias.getText() + "','" + this.place_birth.getText() + "','" + this.ZipCode.getText() + "','" + this.S_Codification.getText() + "','" + this.Status_Codification.getSelectedItem().toString() + "','" + this.P_Barangay.getSelectedItem().toString() + "','" + this.CBgender.getSelectedItem().toString() + "','" + imagePath + "','" + Time + "','" + Date + "','" + dateRec + "','" + Province.getText() + "','" + CbCityMun.getSelectedItem().toString() + "','" + BirthCountry.getText() + "','" + Date + "','" + Time + "','" + Mode_Contanct.getText() + "','" + Mobile_Num.getText() + "','" + Threat.getText() + "','" + Type.getText() + "','" + Category.getText() + "','" + Handler.getText() + "','" + IPAString + "','" + SDCSDString + "','Raffy Bayots','" + position.getText() + "','" + presentADD.getText() + "')");
                     ps.execute();
                     System.out.println(ImageFilePath.getText());
 
@@ -2123,7 +2191,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
                 // ps.setString(52,this.target.getText());
                 ps.setString(24, Date);
                 ps.setString(25, Time);
-                ps.setString(26, CriminalRecords.getText());
+                ps.setString(26, "RAffy Bayot");
                 ps.setString(27, Threat.getText());
                 ps.setString(28, Type.getText());
                 ps.setString(29, Category.getText());
@@ -2228,7 +2296,7 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
             //   ps.setString(52,this.target.getText());
             ps.setString(53, Date);
             ps.setString(54, Time);
-            ps.setString(55, CriminalRecords.getText());
+            ps.setString(55, "Raffy Bayot");
             ps.setString(56, Threat.getText());
             ps.setString(57, Type.getText());
             ps.setString(58, Category.getText());
@@ -2475,4 +2543,9 @@ public class Legacy_Final extends javax.swing.JInternalFrame {
         }
 
     }
+
+    void CaptureImage(String LastName, String FName, String Mname) {
+
+    }
+
 }
