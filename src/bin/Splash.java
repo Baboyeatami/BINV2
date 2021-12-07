@@ -9,24 +9,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.collections.PredicateUtils;
 
-
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public final class Splash extends javax.swing.JFrame {
- Splash a;
- Login log;
+
+    Splash a;
+    Login log;
+
     /**
      * Creates new form Splash
      */
     public Splash() {
         initComponents();
-         a=this;
-         log=new Login();
+        a = this;
+        log = new Login();
         timerS();
-       //
-       
+        //
+
     }
 
     /**
@@ -65,7 +66,7 @@ public final class Splash extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -92,32 +93,32 @@ public final class Splash extends javax.swing.JFrame {
             }
         });
     }
-    
-   
-    
-    public void timerS(){
-     Thread timer=new Thread(){
-           int val = 0;
-         @Override
-         public void run() {
-          for (int val = 0; val <= 5; val++) {
-              jProgressBar1.setValue(val);
+
+    public void timerS() {
+        Thread timer = new Thread() {
+            int val = 0;
+
+            @Override
+            public void run() {
+                for (int val = 0; val <= 5; val++) {
+                    jProgressBar1.setValue(val);
                     System.out.println(val);
-                    if (val==5) {
-                    log.setVisible(true);
-                    a.dispose();
-                    
-              }
-                
+                    if (val == 5) {
+                        log.setVisible(true);
+                        a.dispose();
+
+                    }
+
                     try {
                         Thread.sleep(350);
                     } catch (InterruptedException ex) {
                         System.out.println(ex);
                     }
-                }}
-            } ;
-     
-     timer.start();
+                }
+            }
+        };
+
+        timer.start();
 
     }
 

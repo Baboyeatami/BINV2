@@ -26,18 +26,28 @@ public class Login extends javax.swing.JFrame {
 
     String User, pass;
     MainFrame main;
-    public boolean ChangeUser = false, userlog = false;
+    public boolean ChangeUser = false, userlog = false, Verification = false;
     String status = "";
     Splash splash;
+    MainForm mainForm;
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        onLoad();
+        // onLoad();
         login.requestFocus();
         //loginBut.requestFocusInWindow();
+        if (mainForm == null) {
+            mainForm = new MainForm();
+            //mainForm.setVisible(false);
+            mainForm.onLoad();
+
+        } else {
+            mainForm.onLoad();
+
+        }
     }
 
     public Login(MainFrame mainFrame) {
@@ -294,44 +304,55 @@ public class Login extends javax.swing.JFrame {
 
                 if (rs.getString(5).equals(pass) && rs.getString(6).equals(User) && rs.getString(9).equals("admin")) {
                     System.out.println(System.getProperty("user.dir"));
-                    if (verificationForm == null) {
-                        verificationForm = new VerificationForm(this);
-
-                        verificationForm.setVisible(true);
-                    } else {
-                        verificationForm.setVisible(true);
-                    }
-
-                    if (verificationForm.getResult()) {
+                    mainForm.onVerify();
+                    Verification = mainForm.getResult();
+                    //verificationForm = null;
+                    if (Verification) {
                         System.out.println("Admin login");
                         main = new MainFrame();
                         main.isUser = false;
+                        main.mainForm = mainForm;
                         main.User.setText(login.getText());
                         main.setVisible(true);
                         LogLOGIN();
-                        dispose();
+                        this.setVisible(false);
+                        System.out.println("is mainform here?" + (mainForm == null));
+
+                    } else {
+                        System.out.println(mainForm.getResult());
                     }
 
                 } else if (rs.getString(5).equals(pass) && rs.getString(6).equals(User) && rs.getString(9).equals("user")) {
                     System.out.println("User login");
+                    String user = rs.getString("Fname") + rs.getString("Mname") + rs.getString("Lname") + "_" + rs.getString("Username");
+                    System.out.println(user);
+                    mainForm.onLoad_user(user);
+                    mainForm.onVerify();
 
-                    main = new MainFrame();
-                    main.isUser = true;
-                    main.jButton1.setEnabled(false);
-                    main.jButton6.setEnabled(true);
-                    main.jButton7.setEnabled(false);
-                    main.jMenuItem2.setEnabled(false);
-                    // main.jMenuItem11.setEnabled(false);
-                    //  main.jMenuItem5.setEnabled(false);
-                    main.jMenu2.setVisible(false);
-                    // main.op.jButton3.setEnabled(false);
-                    // main.op.jButton1.setEnabled(false);
-                    // main.jButton3.setEnabled(false);
-                    //main.jMenuItem3.setEnabled(false);
-                    main.User.setText(login.getText());
-                    main.setVisible(true);
-                    LogLOGIN();
-                    dispose();
+                    Verification = mainForm.getResult();
+
+                    if (Verification) {
+
+                        main = new MainFrame();
+                        main.isUser = true;
+                        main.mainForm = mainForm;
+                        main.jButton1.setEnabled(false);
+                        main.jButton6.setEnabled(true);
+                        main.jButton7.setEnabled(false);
+                        main.jMenuItem2.setEnabled(false);
+                        // main.jMenuItem11.setEnabled(false);
+                        //  main.jMenuItem5.setEnabled(false);
+                        main.jMenu2.setVisible(false);
+                        // main.op.jButton3.setEnabled(false);
+                        // main.op.jButton1.setEnabled(false);
+                        // main.jButton3.setEnabled(false);
+                        //main.jMenuItem3.setEnabled(false);
+                        main.User.setText(login.getText());
+                        main.setVisible(true);
+                        LogLOGIN();
+                        dispose();
+
+                    }
                 }
 
             }
@@ -357,45 +378,60 @@ public class Login extends javax.swing.JFrame {
                     System.out.println("Admin login");
 
                     // main=new MainFrame();
-                    main.isUser = false;
-                    main.User.setText(login.getText());
-                    main.jButton1.setEnabled(true);
-                    main.jButton6.setEnabled(true);
-                    main.jButton7.setEnabled(true);
-                    main.jMenuItem2.setEnabled(true);
+                    main.mainForm.onLoad();
+                    main.mainForm.onVerify();
+                    Verification = main.mainForm.getResult();
+                    //verificationForm = null;
+                    if (Verification) {
+                        main.isUser = false;
+                        main.User.setText(login.getText());
+                        main.jButton1.setEnabled(true);
+                        main.jButton6.setEnabled(true);
+                        main.jButton7.setEnabled(true);
+                        main.jMenuItem2.setEnabled(true);
 //            main.jMenuItem5.setEnabled(true);
-                    main.jMenu2.setVisible(true);
-                    LogLOGIN();
-                    main.setVisible(true);
-                    main.setEnabled(true);
-                    login.setText(null);
-                    password.setText(null);
+                        main.jMenu2.setVisible(true);
+                        LogLOGIN();
+                        main.setVisible(true);
+                        main.setEnabled(true);
+                        login.setText(null);
+                        password.setText(null);
 
-                    dispose();
+                        dispose();
+                    }
                 } else if (rs.getString(5).equals(pass) && rs.getString(6).equals(User) && rs.getString(9).equals("user")) {
                     System.out.println("User login");
 
                     // main=new MainFrame();
-                    main.isUser = true;
-                    main.jButton1.setEnabled(false);
-                    main.jButton6.setEnabled(true);
-                    main.jButton7.setEnabled(false);
-                    main.jMenuItem2.setEnabled(false);
-                    // main.jMenuItem11.setEnabled(false);
-                    // main.jMenuItem5.setEnabled(false);
-                    // main.op.jButton3.setEnabled(false);
-                    //main.op.jButton1.setEnabled(false);
-                    main.jMenu2.setVisible(false);
-                    // main.jButton3.setEnabled(false);
-                    LogLOGIN();
-                    //main.jMenuItem3.setEnabled(false);
-                    main.User.setText(login.getText());
-                    main.setEnabled(true);
-                    login.setText(null);
-                    password.setText(null);
-                    main.setVisible(true);
+                    String user = rs.getString("Fname") + rs.getString("Mname") + rs.getString("Lname") + "_" + rs.getString("Username");
+                    System.out.println(user);
+                    main.mainForm.onLoad_user(user);
+                    main.mainForm.onVerify();
 
-                    dispose();
+                    Verification = main.mainForm.getResult();
+
+                    if (Verification) {
+                        main.isUser = true;
+                        main.jButton1.setEnabled(false);
+                        main.jButton6.setEnabled(true);
+                        main.jButton7.setEnabled(false);
+                        main.jMenuItem2.setEnabled(false);
+                        // main.jMenuItem11.setEnabled(false);
+                        // main.jMenuItem5.setEnabled(false);
+                        // main.op.jButton3.setEnabled(false);
+                        //main.op.jButton1.setEnabled(false);
+                        main.jMenu2.setVisible(false);
+                        // main.jButton3.setEnabled(false);
+                        LogLOGIN();
+                        //main.jMenuItem3.setEnabled(false);
+                        main.User.setText(login.getText());
+                        main.setEnabled(true);
+                        login.setText(null);
+                        password.setText(null);
+                        main.setVisible(true);
+
+                        dispose();
+                    }
                 }
 
             }

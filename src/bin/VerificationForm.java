@@ -9,6 +9,7 @@ public class VerificationForm extends CaptureForm {
 
     private DPFPVerification verificator = DPFPGlobal.getVerificationFactory().createVerification();
     private boolean result;
+    MainForm mainform;
 
     VerificationForm(Frame owner) {
         super(owner);
@@ -17,8 +18,9 @@ public class VerificationForm extends CaptureForm {
     @Override
     protected void init() {
         super.init();
-        this.setTitle("Fingerprint Enrollment");
+        this.setTitle("Fingerprint verification");
         updateStatus(0);
+        setBounds(857, 169, 612, 396);
     }
 
     @Override
@@ -32,13 +34,17 @@ public class VerificationForm extends CaptureForm {
         if (features != null) {
             // Compare the feature set with our template
             DPFPVerificationResult result
-                    = verificator.verify(features, ((Login) getOwner()).getTemplate());
+                    = verificator.verify(features, ((MainForm) getOwner()).getTemplate());
             updateStatus(result.getFalseAcceptRate());
             if (result.isVerified()) {
+
                 makeReport("The fingerprint was VERIFIED.");
                 this.result = true;
-                JOptionPane.showMessageDialog(this, "Biometric Credentials Accepted!...");
-                dispose();
+                mainform.result = true;
+                this.result = false;
+                this.setVisible(false);
+
+                //JOptionPane.showMessageDialog(this, "Biometric Credentials Accepted!...");
             } else {
                 makeReport("The fingerprint was NOT VERIFIED.");
                 this.result = false;
@@ -53,7 +59,7 @@ public class VerificationForm extends CaptureForm {
 
     private void updateStatus(int FAR) {
         // Show "False accept rate" value
-        setStatus(String.format("False Accept Rate (FAR) = %1$s", FAR));
+        setStatus("Sulop MPS BINIS Finger Print Reader");
     }
 
 }

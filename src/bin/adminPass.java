@@ -49,7 +49,6 @@ public class adminPass extends javax.swing.JFrame {
         this.template = template;
         firePropertyChange(TEMPLATE_PROPERTY, old, template);
         System.out.println("templete set ok");
-
         onSave();
     }
 
@@ -60,6 +59,7 @@ public class adminPass extends javax.swing.JFrame {
     void onSave() {
         if (!Files.exists(Paths.get(System.getProperty("user.dir") + "\\lib\\credentials.fpt"))) {
             try {
+
                 FileOutputStream stream = new FileOutputStream(System.getProperty("user.dir") + "\\lib\\credentials.fpt");
                 stream.write(getTemplate().serialize());
                 stream.close();
@@ -133,7 +133,7 @@ public class adminPass extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Password");
 
-        EnrollBiometric.setText("Enroll Biometric Details");
+        EnrollBiometric.setText("Update  Biometric Details");
         EnrollBiometric.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EnrollBiometricActionPerformed(evt);
@@ -192,12 +192,12 @@ public class adminPass extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(Verifiypass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EnrollBiometric, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addComponent(EnrollBiometric, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(20, 20, 20))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,15 +229,21 @@ public class adminPass extends javax.swing.JFrame {
         System.out.println(getBounds());
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-    EnrollmentForm enrollmentForm;
-    private void EnrollBiometricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollBiometricActionPerformed
-        if (enrollmentForm == null) {
-            enrollmentForm = new EnrollmentForm(this);
-            enrollmentForm.setVisible(true);
-        } else {
-            enrollmentForm.setVisible(true);
 
+    MainForm mainForm;
+    private void EnrollBiometricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnrollBiometricActionPerformed
+
+        mainForm.onLoad();
+        mainForm.onVerify();
+
+        if (mainForm.getResult()) {
+            if (mainForm != null) {
+                mainForm.updatedAdmin = true;
+                mainForm.onEnroll();
+                mainForm.onSave();
+            }
         }
+
     }//GEN-LAST:event_EnrollBiometricActionPerformed
 
     /**

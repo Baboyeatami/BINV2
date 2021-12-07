@@ -20,19 +20,17 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class AdminUpdate extends javax.swing.JFrame {
-adminPass adminpass;
-int ID;
-private String newPASS,Username;
+
+    adminPass adminpass;
+    int ID;
+    private String newPASS, Username;
+
     /**
      * Creates new form AdminUpdate
      */
     public AdminUpdate() {
         initComponents();
     }
-    
-  
-
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,19 +153,23 @@ private String newPASS,Username;
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
-
+    MainForm mainForm;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (adminpass==null) {
-            adminpass=new adminPass(this);
+        if (adminpass == null) {
+            adminpass = new adminPass(this);
+            adminpass.mainForm = mainForm;
+            //mainForm = null;
         }
         adminpass.setVisible(true);
+        adminpass.mainForm = mainForm;
+        // mainForm = null;
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-          if (adminpass!=null) {
+        if (adminpass != null) {
             adminpass.dispose();
         }
         System.out.println(getBounds());
@@ -176,22 +178,21 @@ private String newPASS,Username;
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (newPASS==null || newPASS=="") {
-        JOptionPane.showMessageDialog(this,"Password empty. Please supply Password to continue","Invalid Password",JOptionPane.ERROR_MESSAGE);
-         
-        }
-        else if (UsernameT.getText() == null || UsernameT.getText().equals("")) {
-           JOptionPane.showMessageDialog(this,"Username empty. Please supply username to continue","Invalid Username",JOptionPane.ERROR_MESSAGE);
-         
-        }else{
-         int a=JOptionPane.showConfirmDialog(this,"Are you sure you want to update the administrator Username and Password?","Update Administrator",JOptionPane.YES_NO_OPTION);
-            if (a==0) {
-              UpdateADMIN();
-               
+        if (newPASS == null || newPASS == "") {
+            JOptionPane.showMessageDialog(this, "Password empty. Please supply Password to continue", "Invalid Password", JOptionPane.ERROR_MESSAGE);
+
+        } else if (UsernameT.getText() == null || UsernameT.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Username empty. Please supply username to continue", "Invalid Username", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int a = JOptionPane.showConfirmDialog(this, "Are you sure you want to update the administrator Username and Password?", "Update Administrator", JOptionPane.YES_NO_OPTION);
+            if (a == 0) {
+                UpdateADMIN();
+
             }
-         }
-{
-        
+        }
+        {
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -202,7 +203,7 @@ private String newPASS,Username;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -230,74 +231,70 @@ private String newPASS,Username;
         });
     }
 
-    
-    public boolean VerifyINput(){
-     try {
-          DBConnection.init();
-    Connection c=DBConnection.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-    ps=c.prepareStatement("Select * from useracc where idUserAcc='1'");
-    rs=ps.executeQuery();
-         if (rs.next()) {
-            return true;
-         }
-     } catch (SQLException | NumberFormatException | HeadlessException e) {
-         System.out.println(e);
-     }
-        return false;
- }
-    
- public void SetnewPass(String s){
- newPASS=s;
- jPasswordField1.setText(newPASS);
- }
- 
- 
-  public void UpdateADMIN(){
+    public boolean VerifyINput() {
         try {
             DBConnection.init();
-            Connection c=DBConnection.getConnection();
+            Connection c = DBConnection.getConnection();
             PreparedStatement ps;
             ResultSet rs;
-            
-            ps=c.prepareStatement("Update useracc  set Pass=(?),Username=(?) where idUserAcc like(?)");
-           
-             ps.setString(1,newPASS);
-             ps.setString(2,UsernameT.getText());
-             ps.setString(3, "1");
-             ps.executeUpdate();
-             
-             JOptionPane.showMessageDialog(this, "Administrator Updated!");
-             dispose();
-         
+            ps = c.prepareStatement("Select * from useracc where idUserAcc='1'");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException | NumberFormatException | HeadlessException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public void SetnewPass(String s) {
+        newPASS = s;
+        jPasswordField1.setText(newPASS);
+    }
+
+    public void UpdateADMIN() {
+        try {
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+
+            ps = c.prepareStatement("Update useracc  set Pass=(?),Username=(?) where idUserAcc like(?)");
+
+            ps.setString(1, newPASS);
+            ps.setString(2, UsernameT.getText());
+            ps.setString(3, "1");
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Administrator Updated!");
+            dispose();
+
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-  
-  }
-  
-  public void LoadAdminprofile(){
-    try {
-        DBConnection.init();
-        Connection c=DBConnection.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
-        ps=c.prepareStatement("Select * from useracc where idUserAcc='1'");
-        rs=ps.executeQuery();
-        if (rs.next()) {
-           UsernameT.setText(rs.getString(6));
-            jPasswordField1.setText(rs.getString(5));
-            newPASS=jPasswordField1.getText();
-        }
-        
-        
-    } catch (SQLException ex) {
-        System.out.println(ex);
+
     }
-  
-  
-  }
+
+    public void LoadAdminprofile() {
+        try {
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = c.prepareStatement("Select * from useracc where idUserAcc='1'");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                UsernameT.setText(rs.getString(6));
+                jPasswordField1.setText(rs.getString(5));
+                newPASS = jPasswordField1.getText();
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField UsernameT;
     private javax.swing.JButton jButton2;
@@ -309,4 +306,3 @@ private String newPASS,Username;
     private javax.swing.JPasswordField jPasswordField1;
     // End of variables declaration//GEN-END:variables
 }
-

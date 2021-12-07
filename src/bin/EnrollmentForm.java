@@ -11,6 +11,7 @@ public class EnrollmentForm extends CaptureForm {
 
     EnrollmentForm(Frame owner) {
         super(owner);
+
     }
 
     @Override
@@ -18,6 +19,7 @@ public class EnrollmentForm extends CaptureForm {
         super.init();
         this.setTitle("Fingerprint Enrollment");
         updateStatus();
+        setVisible(true);
     }
 
     @Override
@@ -38,7 +40,7 @@ public class EnrollmentForm extends CaptureForm {
             switch (enroller.getTemplateStatus()) {
                 case TEMPLATE_STATUS_READY:	// report success and stop capturing
                     stop();
-                    ((adminPass) getOwner()).setTemplate(enroller.getTemplate());
+                    ((MainForm) getOwner()).setTemplate(enroller.getTemplate());
 
                     setPrompt("Click Close, and then click Fingerprint Verification.");
                     break;

@@ -527,6 +527,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (user == null) {
             user = new Users();
+            user.mainForm = mainForm;
         }
         user.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -702,17 +703,26 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (users == null) {
             users = new Users();
+            user.mainForm = mainForm;
         }
         users.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
-
+    MainForm mainForm;
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
+        //System.out.println("is mainform log here?" + (log == null));
+        // log.mainForm.onVerify();
+
+        System.out.println("is mainform here?" + (mainForm == null));
+        //mainForm.onVerify();
         if (adminUpdate == null) {
             adminUpdate = new AdminUpdate();
+            adminUpdate.mainForm = mainForm;
 
         }
         adminUpdate.LoadAdminprofile();
+        adminUpdate.mainForm = mainForm;
+        // mainForm = null;
         adminUpdate.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 

@@ -199,7 +199,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="2015 Sulop Municipal Police Station. All rights reserved"/>
+        <Property name="text" type="java.lang.String" value="2021 Sulop Municipal Police Station. All rights reserved"/>
       </Properties>
     </Component>
   </SubComponents>
