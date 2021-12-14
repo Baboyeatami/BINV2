@@ -59,6 +59,7 @@ public class Records extends javax.swing.JInternalFrame {
     String dateF, dateT;
     Legacy_Update leg_up;
     int ID = 0;
+    int UserID;
     Boolean isPrinted = false, isAll = true, isInfomant = false, isLegacy = false;
     public boolean isUser;
     String dateRec;
@@ -1617,58 +1618,17 @@ public class Records extends javax.swing.JInternalFrame {
     }
 
     void validQR(int id) {
-        int numCh1 = 0;
-
-        String[] moves = {"Select Option", "Add Intet Report ", "View Profile Sheet",};
-        JComboBox<?> optionList = new JComboBox<Object>(moves);
-        JOptionPane.showMessageDialog(
-                this,
-                optionList,
-                "Select Action",
-                JOptionPane.YES_NO_CANCEL_OPTION
-        );
-        numCh1 = optionList.getSelectedIndex();
-
-        if (numCh1 == 0) {
-            JOptionPane.showMessageDialog(this, "Please Select Action");
-        } else if (numCh1 == 1) {
-
-        } else if (numCh1 == 2) {
-
-            try {
-                // TODO add your handling code here:
-                if (view == null) {
-                    view = new ViewALLDETAILS();
-                }
-                if (id <= 0) {
-                    JOptionPane.showMessageDialog(this, "Please choose an informant", "Select IAPS profile", JOptionPane.ERROR_MESSAGE);
-                } else {
-
-                    view.ID = id;
-                    if (isUser) {
-                        view.Update_Button.setEnabled(false);
-                        view.jButton3.setEnabled(false);
-                        view.jButton1.setEnabled(false);
-                        view.jButton7.setEnabled(false);
-                        view.jButton2.setEnabled(false);
-                        view.jButton5.setEnabled(false);
-                        view.jButton4.setEnabled(false);
-                        view.jButton8.setEnabled(false);
-                    }
-                    view.LoadRecordsProfile();
-                    view.UPDATEOthersDate();
-                    view.LoadChild();
-                    view.setVisible(true);
-                }
-            } catch (HeadlessException | ParseException e) {
-                System.out.println(e);
-                JOptionPane.showMessageDialog(this, "Please choose an informant", "Select IAPS profile", JOptionPane.ERROR_MESSAGE);
-
-            }
-
-        } else if (numCh1 == 3) {
-
+        if (intelReport == null) {
+            intelReport = new IntelReport();
+            intelReport.UserID = UserID;
+            intelReport.Set_informantID(id);
+            intelReport.setVisible(true);
+        } else {
+            intelReport.Set_informantID(id);
+            intelReport.setVisible(true);
         }
+
+        System.out.println(" Add Intel Report");
 
     }
 

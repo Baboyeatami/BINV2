@@ -48,6 +48,7 @@ public class DBConnection {
             Myconnection = DriverManager.getConnection("jdbc:mysql://" + Ip + ":3306/bin?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false", "root", "root");
         } catch (ClassNotFoundException | SQLException e) {
         } catch (IOException ex) {
+            ex.printStackTrace();
             System.out.println(ex + "wow");
         }
     }

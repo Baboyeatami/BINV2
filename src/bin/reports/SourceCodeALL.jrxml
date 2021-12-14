@@ -8,7 +8,7 @@
         <defaultValueExpression><![CDATA["C:\\Users\\JAMIEXXX3\\Documents\\NetBeansProjects\\BIN\\src\\bin\\"]]></defaultValueExpression>
     </parameter>
     <queryString>
-		<![CDATA[select * from barangaystats]]>
+		<![CDATA[select * from bin.barangaystats]]>
     </queryString>
     <field name="idBarangayStats" class="java.lang.Long">
         <fieldDescription><![CDATA[]]></fieldDescription>
@@ -76,14 +76,14 @@ Sulop,Davao del Sur
         </band>
     </columnHeader>
     <detail>
-        <band height="36" splitType="Stretch">
+        <band height="24" splitType="Stretch">
             <subreport>
-                <reportElement x="3" y="5" width="567" height="28" uuid="50c4da58-362e-4e90-a4d1-cd229db99c2a"/>
+                <reportElement x="0" y="0" width="572" height="23" uuid="8aabd61d-b523-42db-aff6-f0292b8a0a1f"/>
                 <subreportParameter name="ID">
                     <subreportParameterExpression><![CDATA[$F{Name}]]></subreportParameterExpression>
                 </subreportParameter>
                 <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-                <subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SourceOfCodiPerBrgy_subreport1_subreport1.jasper"]]></subreportExpression>
+                <subreportExpression><![CDATA["C:\\Users\\Jamie\\Documents\\NetBeansProjects\\BIN_Version2\\src\\bin\\SourceOfCodiPerBrgy_subreport1_subreport1.jasper"]]></subreportExpression>
             </subreport>
         </band>
     </detail>

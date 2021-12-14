@@ -26,6 +26,7 @@ public class IntelReport extends javax.swing.JFrame {
 
     private int informant_id;
     private String Barangay;
+    int UserID;
 
     /**
      * Creates new form IntelReport
@@ -229,13 +230,17 @@ public class IntelReport extends javax.swing.JFrame {
 
             if (!Status) {
                 JOptionPane.showMessageDialog(this, "Intel Report Added", "New Intel", JOptionPane.INFORMATION_MESSAGE);
+                Log_Encode();
                 int a = JOptionPane.showConfirmDialog(this, "Do you want to add new Intel Report to this Informant? ", "New Intel Report", JOptionPane.YES_NO_OPTION);
                 if (a == 0) {
                     this.IntelReport.setText("");
                     date.setDate(null);
                     subject_combo.setSelectedIndex(0);
                 } else {
-                    this.dispose();
+                    this.IntelReport.setText("");
+                    date.setDate(null);
+                    subject_combo.setSelectedIndex(0);
+                    this.setVisible(false);
                 }
 
             }
@@ -243,6 +248,31 @@ public class IntelReport extends javax.swing.JFrame {
             Logger.getLogger(IntelReport.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void Log_Encode() {
+        try {
+            Calendar cal = Calendar.getInstance();
+            String Time, Date;
+            SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/d");
+            SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
+            Date = date.format(cal.getTime());
+            Time = time.format(cal.getTime());
+
+            DBConnection.init();
+            Connection c = DBConnection.getConnection();
+            PreparedStatement ps;
+            ResultSet rs;
+            //ps=c.prepareStatement("Insert into informant_info (F_Name,M_Name,L_Name,B_Date,Age,Nationality,Religion,Mar_status,Education,Alias,Place_Birth,P_Adrress,Per_Adrress,Zipcode,S_Codification,Status,B_PAdrress,B_PreAdress,SpouseName,Gender,PictureFilePath,EntryTime,EntryDate,D_Recuitment,Provice,Mun_City,BirthCounty,E_Date,E_Time,Mode_Con,Mob_no,Email,P_Con,P_Con_num)values"+"('"+this.f_name.getText()+"','"+this.M_Name.getText()+"','"+this.Lname.getText()+"','"+dateString+"','"+this.age.getText()+"','"+this.nationalilty.getText()+"','"+this.religion.getText()+"','"+this.cb_maritals_status.getSelectedItem().toString()+"','"+this.education.getText()+"','"+this.alias.getText()+"','"+this.place_birth.getText()+"','"+this.presentADD.getText()+"','"+this.PermaentADD.getText()+"','"+this.ZipCode.getText()+"','"+this.S_Codification.getText()+"','"+this.Status_Codification.getSelectedItem().toString()+"','"+this.P_Barangay.getSelectedItem().toString()+"','"+this.Permanet_Barangay.getSelectedItem().toString()+"','"+this.Spouse.getText()+"','"+this.CBgender.getSelectedItem().toString()+"','"+imagePath+"','"+Time+"','"+Date+"','"+dateRec+"','"+Province.getText()+"','"+CbCityMun.getSelectedItem().toString()+"','"+BirthCountry.getText()+"','"+Date+"','"+Time+"','"+Mode_Contanct.getText()+"','"+Mobile_Num.getText()+"','"+Email.getText()+"','"+ContactPersonm.getText()+"','"+Mobile_Num.getText()+"')");
+            ps = c.prepareStatement("Insert into logs(Act,Time,Date)values" + "('Intel Report encoded from Informant ID  " + informant_id + " by user " + UserID + "','" + Time + "','" + Date + "')"
+            );
+            ps.execute();
+
+            System.out.println("");
+            // ps=c.prepareStatement("Select * from  informant_info");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

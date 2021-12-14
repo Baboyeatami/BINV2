@@ -558,13 +558,31 @@ public class BarangayIntelReport extends javax.swing.JFrame {
             JQ.setText(SQL);
             Jd.setQuery(JQ);
             JR = JasperCompileManager.compileReport(Jd);
-            JP = JasperFillManager.fillReport(JR, null, DBConnection.getConnection());
+
+            System.out.println(BarangayName.getText().toString() + dateF + " " + dateT + " hahaa");
+            HashMap m = new HashMap<>();
+
+            m.put("parameter1", BarangayName.getText().toString().toUpperCase());
+            System.out.println(DateTO.getDate());
+            if (DateTO.getDate() == null && dateFrom.getDate() == null) {
+                m.put("parameter2", "All time ");
+                System.out.println("all Time");
+            } else {
+                dateF = String.valueOf(df.format(dateFrom.getDate()));
+                dateT = String.valueOf(df.format(DateTO.getDate()));
+                m.put("parameter2", dateF.toString() + " to " + dateT.toString());
+
+            }
+
+            JP = JasperFillManager.fillReport(JR, m, DBConnection.getConnection());
             // JasperViewer.viewReport(JP, rootPaneCheckingEnabled, Locale.FRENCH);
 
             JasperViewer.viewReport(JP, false, Locale.ENGLISH);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
             System.out.println(e);
+            Logger.getLogger(BarangayIntelReport.class
+                    .getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -573,7 +591,9 @@ public class BarangayIntelReport extends javax.swing.JFrame {
         try {
             JasperReport JR;
             JasperPrint JP;
-
+            dateF = String.valueOf(df.format(dateFrom.getDate()));
+            dateT = String.valueOf(df.format(DateTO.getDate()));
+            System.out.println(BarangayName.getText().toString() + dateF + " " + dateT + "   hahahahaha");
             // String Q="%"+this.txtSearch.getText() +"%";
             // String Source="C:\\Users\\JAMIEXXX3\\Documents\\NetBeansProjects\\Phonelist\\src\\Forms\\report1.jrxml";
             DBConnection.init();
@@ -584,7 +604,16 @@ public class BarangayIntelReport extends javax.swing.JFrame {
             JQ.setText(SQL);
             Jd.setQuery(JQ);
             JR = JasperCompileManager.compileReport(Jd);
-            JP = JasperFillManager.fillReport(JR, null, DBConnection.getConnection());
+            HashMap m = new HashMap<>();
+            m.put("parameter1", BarangayName.getText().toString().toUpperCase());
+            if (dateF == "" && dateT == "") {
+                m.put("parameter2", "All time ");
+                System.out.println("all Time");
+            } else {
+                m.put("parameter2", dateF.toString() + " to " + dateT.toString());
+
+            }
+            JP = JasperFillManager.fillReport(JR, m, DBConnection.getConnection());
             // JasperViewer.viewReport(JP, rootPaneCheckingEnabled, Locale.FRENCH);
 
             JasperViewer.viewReport(JP, false, Locale.ENGLISH);

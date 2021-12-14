@@ -455,7 +455,7 @@ public class Statictics extends javax.swing.JFrame {
         try {
             JasperReport JR;
             JasperPrint JP;
-
+            System.out.println(System.getProperty("user.dir").toString());
             // String Q="%"+this.txtSearch.getText() +"%";
             // String Source="C:\\Users\\JAMIEXXX3\\Documents\\NetBeansProjects\\Phonelist\\src\\Forms\\report1.jrxml";
             System.out.println("ALL Print Source Codification");

@@ -765,7 +765,7 @@ public class BarangayDetails extends javax.swing.JFrame {
             Jd.setQuery(JQ);
             JR = JasperCompileManager.compileReport(Jd);
             HashMap m = new HashMap<>();
-            m.put("Label1", "List of source of codifcation of barangay " + B_name);
+            m.put("Label1", "List of source of codification of barangay " + B_name);
             JP = JasperFillManager.fillReport(JR, m, DBConnection.getConnection());
             // JasperViewer.viewReport(JP, rootPaneCheckingEnabled, Locale.FRENCH);
 

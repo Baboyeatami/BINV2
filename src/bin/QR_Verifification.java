@@ -194,16 +194,19 @@ public class QR_Verifification extends javax.swing.JFrame implements Runnable, T
             rs = ps.executeQuery();
 
             if (rs.next()) {
+                System.out.println(id + "  " + rs.getString(1));
+                if (record.ID == Integer.parseInt(rs.getString(1))) {
 
-                record.validQR(Integer.parseInt(rs.getString(1)));
-                System.out.println(rs.getString(1) + " QR data validated");
-                result_field.setText(null);
-                TreadRunner = false;
-                //webcam.close();
-                this.dispose();
+                    record.validQR(Integer.parseInt(rs.getString(1)));
+                    System.out.println(rs.getString(1) + " QR data validated");
+                    result_field.setText(null);
+                    TreadRunner = false;
+                    //webcam.close();
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, "QR data Invalid");
+                }
 
-            } else {
-                JOptionPane.showMessageDialog(this, "QR data Invalid");
             }
 
         } catch (SQLException ex) {

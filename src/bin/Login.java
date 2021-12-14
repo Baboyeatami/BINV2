@@ -84,13 +84,11 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Username:");
 
         login.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        login.setText("COP Sulop");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Password:");
 
         password.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        password.setText("BSPS2010");
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
@@ -313,6 +311,7 @@ public class Login extends javax.swing.JFrame {
                         main.isUser = false;
                         main.mainForm = mainForm;
                         main.User.setText(login.getText());
+                        main.UserId = Integer.parseInt(rs.getString("idUserAcc"));
                         main.setVisible(true);
                         LogLOGIN();
                         this.setVisible(false);

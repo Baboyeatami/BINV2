@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SourceOfCodiPerBrgy_subreport1_subreport1" pageWidth="612" pageHeight="360" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="29561def-86bf-4e78-a163-d4b431360a77">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SourceOfCodiPerBrgy_subreport1_subreport1" language="groovy" pageWidth="612" pageHeight="360" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="29561def-86bf-4e78-a163-d4b431360a77">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="531"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[Select * from  informant_info where B_PAdrress=$P{ID}]]>
+		<![CDATA[Select * from  bin.informant_info where B_PAdrress=$P{ID}]]>
 	</queryString>
 	<field name="idInformant_info" class="java.math.BigInteger">
 		<fieldDescription><![CDATA[]]></fieldDescription>

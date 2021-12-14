@@ -140,7 +140,8 @@ public class Capture_image extends javax.swing.JFrame implements Runnable, Threa
             }
             JOptionPane.showMessageDialog(this, "Image Capture Complete! ");
             ImageIO.write(webcam.getImage(), "JPG", new File("Jamie.jpg"));
-            this.dispose();
+            webcam.close();
+            this.setVisible(false);
 
         } catch (IOException ex) {
             Logger.getLogger(Capture_image.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,6 +219,7 @@ public class Capture_image extends javax.swing.JFrame implements Runnable, Threa
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
+
             }
 
             LuminanceSource source = new BufferedImageLuminanceSource(image);

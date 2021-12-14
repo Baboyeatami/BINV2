@@ -43,6 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
     Legacy legacy;
     Legacy_Final legacy_Final;
     AdminUpdate adminUpdate;
+    int UserId;
 
     /**
      * Creates new form Main
@@ -417,6 +418,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             if (rec == null || rec.isClosed()) {
                 rec = new Records();
+                rec.UserID = UserId;
                 jDesktopPane1.add(rec);
             }
             if (isUser) {
